@@ -2,24 +2,24 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { UrlBbs } from "url/bbs";
 import { connect } from "react-redux";
-import { getPostList } from "store/module/bbs/list";
+import { getList } from "store/module/bbs/list";
 import GeneralPageNation from "component/bbs/pagination/GeneralPageNation";
 
 class ListPaneContainer extends React.Component {
 
   async componentDidMount() {
-    const { getPostList } = this.props; //stateToProps
+    const { getList } = this.props; //stateToProps
     const { pageNum } = this.props; //parentToProps
 
-    await getPostList(pageNum);
+    await getList(pageNum);
   }
 
   async componentDidUpdate(prevProps, prevState) {
     if (prevProps.pageNum !== this.props.pageNum) {
-      const { getPostList } = this.props; //stateToProps
+      const { getList } = this.props; //stateToProps
       const { pageNum } = this.props; //parentToProps
 
-      await getPostList(pageNum); //action dispatch
+      await getList(pageNum); //action dispatch
     }
   }
 
@@ -55,7 +55,7 @@ class ListPaneContainer extends React.Component {
       );
     }
     let first = (
-      <Link key={"first"} to={UrlBbs.list}>
+      <Link key={"first"} to={UrlBbs.list+1}>
         <button>{"<<"}</button>
       </Link>
     );
@@ -138,7 +138,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    getPostList: (page) => {dispatch(getPostList(page))},
+    getList: (page) => {dispatch(getList(page))},
   };
 };
 

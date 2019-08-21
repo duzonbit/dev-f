@@ -1,81 +1,107 @@
 import React, { Component } from 'react';
-import { AjaxBbs } from "url/bbs";
+import { AjaxBbs,UrlBbs } from "url/bbs";
 import Message from "message";
 import { connect } from "react-redux";
+import { getRead } from "store/module/bbs/read";
+import { getDelete } from "store/module/bbs/delete";
+import { getUpdate } from "store/module/bbs/update";
+import { Link } from "react-router-dom";
+
+
 
 class UpdatePaneContainer extends Component {
 
   state = {
-    res: {},
-    textValue: "",
+    titleValue:this.props.title,
+    textValue: this.props.content,
+    pwValue : ""
   };
 
-  board = {};
-
-  async componentDidMount() {
-    const res = await AjaxBbs.read(this.props.pageNum);
-
-    this.board = res.data;
-    this.setState({
-      res: res,
-      textValue: res.data.content
-    });
+  componentDidMount() {
+    const { getRead } = this.props; //stateToProps
+    const {pageNum} = this.props; //parent To Props
+    getRead(pageNum); //pageNum = 게시글 id
   }
 
-  onSubmit = (event) =>{
-    event.preventDefault();
-    let data = {};
-    const formData = new FormData(event.target);
-    for(let key of formData.keys()){
-      data[key]=formData.get(key);
-    }
+  onTextAreaChange = (event)=>{
+    this.setState({...this.state,textValue: event.target.value});
+  }
+
+  onTitleTextChange = (event)=>{
+    this.setState({...this.state,titleValue: event.target.value});
+  }
+
+  onPwTextChange = (event)=>{
+    this.setState({...this.state,pwValue: event.target.value});
+  }
+
+  delete = ()=>{
+    const {idx, name,getDelete} = this.props; //state To props
+    const {pwValue} = this.state;
     
-    AjaxBbs.update(data).then(({data})=>{
-      console.log(data);
-      if(data.message===Message.success){
-        alert("성공");
-        this.props.history.push('/');
-      }else if(data.message===Message.fail){
-        alert("비밀번호를 다시 넣어주세요!");
-      }
-    }).catch((e)=>{
-      console.log(e);
-    });
+    const data ={
+      idx,
+      name,
+      pw : pwValue,
+    }
+    getDelete(data);
+  }
+
+  update = ()=>{      
+    const {idx, name, getUpdate} = this.props; //state To props
+    const {pwValue, titleValue, textValue} = this.state;
+
+    const data ={
+      idx,
+      name,
+      pw : pwValue,
+      title : titleValue,
+      content : textValue,
+    }
+  
+    getUpdate(data);
+  }
+
+  renderBoard2 = ()=>{
+    const {idx, name, pw, title, content, regdate, modifydate } = this.props; //state To props
+    
+    return(
+      <tbody>
+        <tr>
+          <td>idx</td>
+          <td><input name={'idx'} value={idx} onChange={()=>{}} readOnly={true} disabled={true}/></td>
+        </tr>
+        <tr>
+          <td>name</td>
+          <td><input name={'name'} value={name} onChange={()=>{}} readOnly={true} disabled={true}/></td>
+        </tr>
+        <tr>
+          <td>pw</td>
+          <td><input name={'pw'} value={this.state.pwValue} onChange={this.onPwTextChange}/></td>
+        </tr>
+        <tr>
+          <td>title</td>
+          <td><input name={'title'} value={this.state.titleValue} onChange={this.onTitleTextChange} /></td>
+        </tr>
+        <tr>
+          <td>content</td>
+          <td><textarea name={'content'} value={this.state.textValue} onChange={this.onTextAreaChange} /></td>
+        </tr>
+        <tr>
+          <td>regdate</td>
+          <td><input name={'regdate'} value={regdate} onChange={()=>{}} readOnly={true} disabled={true}/></td>
+        </tr>
+        <tr>
+          <td>modifydate</td>
+          <td><input name={'modifydate'} value={modifydate} onChange={()=>{}} readOnly={true} disabled={true}/></td>
+        </tr>
+      </tbody>        
+    )
+  }
+  onSubmit = (event) =>{
+    event.preventDefault();   
   }
   
-  onTextAreaChange = (event)=>{
-    this.setState({textValue: event.target.value});
-  }
-
-  renderBoard = ({ res } = this.state, { board } = this) => {
-    if (res.status === 200) {
-      let vBoard = [];
-      for (const key in board) {
-        vBoard.push(
-          <tr key={key}>
-            <td>{key}</td>
-            <td>
-              {
-                key==="idx"?
-                  <input name={key} value={board[key]} readOnly={true}></input>
-                :key==="name"?
-                  <input name={key} value={board[key]} readOnly={true}></input>
-                :key==="pw"?
-                  <input name={key} readOnly={false}></input>
-                :key==="content"?
-                  <textarea name={key} value={this.state.textValue} onChange={this.onTextAreaChange} readOnly={false}/>
-                :key==="title"?
-                <input name={key} readOnly={false}></input>
-                :<input value={board[key]} readOnly={true}/>
-              }
-            </td>
-          </tr>
-        );
-      }
-      return vBoard;
-    }
-  };
-
   render() {
     return (
       <div>
@@ -85,10 +111,13 @@ class UpdatePaneContainer extends Component {
         <form onSubmit={this.onSubmit}>
           <article>
             <table>
-              <tbody>{this.renderBoard()}</tbody>
+              {this.renderBoard2()}
             </table>
           </article>
-          <button>글 업데이트</button>
+          <button onClick={this.update}>글 수정</button>
+          
+              <button onClick={this.delete}>글 삭제</button> 
+          
         </form>
         <footer>
           <button onClick={this.props.history.goBack}>뒤로가기</button>
@@ -98,4 +127,43 @@ class UpdatePaneContainer extends Component {
   }
 }
 
-export default connect()(UpdatePaneContainer);
+const mapStateToProps = (state)=>{
+  // console.log('read : state',state);
+  // console.log('read : state.read',state.read);
+  // console.log('read : state.list',state.list);
+  
+  return {
+    loading : state.read.get('loading'),
+    error : state.read.get('error'),
+    status : state.read.get('status'),
+    idx : state.read.getIn(['data','idx']),
+    name : state.read.getIn(['data','name']),
+    pw : state.read.getIn(['data','pw']),
+    title : state.read.getIn(['data','title']),
+    content : state.read.getIn(['data','content']),
+    regdate : state.read.getIn(['data','regdate']),
+    modifydate : state.read.getIn(['data','modifydate']),
+
+    deleteMessage : state.delete.get('message'),
+    deleteLoading : state.delete.get('loading'),
+    deleteError : state.delete.get('error'),
+
+    updateMessage : state.update.get('message'),
+    updateLoading : state.update.get('loading'),
+    updateError : state.update.get('error'),
+
+  }
+}
+
+const mapDispatchToProps = (dispatch)=>{
+  return {
+    getRead : (id)=>{dispatch(getRead(id))},
+    getUpdate : (data)=>{dispatch(getUpdate(data))},
+    getDelete : (data)=>{dispatch(getDelete(data))},    
+  }
+}
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(UpdatePaneContainer);

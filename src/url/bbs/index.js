@@ -27,11 +27,11 @@ export const UrlBbs = {
 };
 
 export const AjaxBbs = {
-  list: (page = 1) => axios.get(`/board/${page}`),
-  read: (board = 0) => axios.get(`/board/read/${board}`),
-  create: (data) => axios.post("/board/",data),
-  update: (data) => axios.put("/board/",data),
-  del: (data) => axios.delete("/board/",{data:data}),
-  register: (data) => axios.post('/user/', data),
-  login: (data) => axios.get('/user/', data),
+  list: async (page = 1) => await axios.get(`/board/${page}`),
+  read: async (board = 0) => await axios.get(`/board/read/${board}`),
+  create: async(data) => await axios.post("/board/",data),
+  update: async (data) => await axios.put("/board/",data),
+  del: async (data) => await axios.delete("/board/",{data:data}),//{data:data}
+  register: async (data) => await axios.post('/user/', data),
+  login: async (data) => await axios.get('/user/', data),
 };

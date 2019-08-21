@@ -1,17 +1,17 @@
 import { handleActions } from "redux-actions";
-import { Map,isMap } from "immutable";
+import { Map } from "immutable";
 import { AjaxBbs } from "url/bbs";
 
 /* action types */
-const GET_POST_READ = "read/GET_POST_READ"; //게시글 불러오기
+const GET_READ = "read/GET_READ"; //게시글 불러오기
 
-const GET_POST_READ_PENDING = `${GET_POST_READ}_PENDING`; //요청시작
-const GET_POST_READ_SUCCESS = `${GET_POST_READ}_SUCCESS`; //요청성공
-const GET_POST_READ_FAILURE = `${GET_POST_READ}_FAILURE`; //요청 실패
+const GET_READ_PENDING = `${GET_READ}_PENDING`; //요청시작
+const GET_READ_SUCCESS = `${GET_READ}_SUCCESS`; //요청성공
+const GET_READ_FAILURE = `${GET_READ}_FAILURE`; //요청 실패
 
 /* action creators */
-export const getPostRead = (idx) => ({
-  type: GET_POST_READ,
+export const getRead = (idx) => ({
+  type: GET_READ,
   payload: AjaxBbs.read(idx)
 });
 
@@ -33,7 +33,7 @@ const initialState = Map({
 
 /* reducer */
 export default handleActions({
-    [GET_POST_READ_PENDING]: (state, action) => {
+    [GET_READ_PENDING]: (state, action) => {
       console.log("리드준비걸림"); 
       // console.log("리드준비걸림 state",typeof(state),state); 
       // console.log("리드준비걸림2 state.init",typeof(state.initialState),state.initialState); 
@@ -50,7 +50,7 @@ export default handleActions({
                             .set("error", false);
       return newState;
     },
-    [GET_POST_READ_SUCCESS]: (state, action) => {
+    [GET_READ_SUCCESS]: (state, action) => {
       console.log("리드성공걸림");
 
       const { data, status } = action.payload;
@@ -67,7 +67,7 @@ export default handleActions({
 
       return newState;
     },
-    [GET_POST_READ_FAILURE]: (state, action) => {
+    [GET_READ_FAILURE]: (state, action) => {
       console.log("리드에러걸림");
 
       const newState = state.set("loading", false)

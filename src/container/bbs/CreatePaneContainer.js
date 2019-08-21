@@ -1,24 +1,42 @@
 import React from 'react';
-import {AjaxBbs} from "url/bbs"
+import {AjaxBbs, UrlBbs } from "url/bbs"
+import { getCreate } from "store/module/bbs/create";
+import { connect } from "react-redux";
+
 
 class CreatePaneContainer extends React.Component {
   onSubmit = (event) => {
+    const { getCreate } = this.props; //dispatch to props
+
     event.preventDefault();
-    let data = {};
     const formData = new FormData(event.target);
+
+    let data={};
     for(let key of formData.keys()){
-      data[key]=formData.get(key);
+      data = {
+        ...data,
+        [key] : formData.get(key),
+      }
     }
-    AjaxBbs.create(data).then((data)=>{
-      console.log(data);  
-      alert("잘 되네");
-      this.props.history.push('/');
-    }).catch((e)=>{
-      console.log(e);
-    });
+    getCreate(data); // dispatch action
+    
+  }
+
+  componentDidUpdate = (prevProps, prevState)=>{
+    const { loading, error,message } = this.props; //state to props
+    console.log('did',message);
+
+    if(!loading && !error && message==='success'){
+      if(!alert("작성 성공")) document.location = '/';     
+      
+    }else if(error || (!loading&&message===undefined)){
+      alert('실패');
+    }
+    
   }
 
   render() {
+    
     return (
       
       <div>
@@ -46,4 +64,23 @@ class CreatePaneContainer extends React.Component {
   }
 }
 
-export default CreatePaneContainer;
+const mapStateToProps = (state)=>{
+  
+  return {
+    loading : state.create.get('loading'),
+    error : state.create.get('error'),
+    message : state.create.get('message'),
+  }
+}
+
+const mapDispatchToProps = (dispatch)=>{
+  return{
+    getCreate : (data)=>{dispatch(getCreate(data))},
+  }
+}
+
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(CreatePaneContainer);

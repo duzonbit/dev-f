@@ -5,19 +5,19 @@ import { stateSelector } from "store/module/bbs";
 
 
 /* action types */
-const GET_POST_LIST = 'list/GET_POST_LIST'; //게시판 불러오기
+const GET_LIST = 'list/GET_LIST'; //게시판 불러오기
 
-const GET_POST_LIST_PENDING = `${GET_POST_LIST}_PENDING`; //요청시작
-const GET_POST_LIST_SUCCESS = `${GET_POST_LIST}_SUCCESS`; //요청성공
-const GET_POST_LIST_FAILURE = `${GET_POST_LIST}_FAILURE`; //요청 실패
+const GET_LIST_PENDING = `${GET_LIST}_PENDING`; //요청시작
+const GET_LIST_SUCCESS = `${GET_LIST}_SUCCESS`; //요청성공
+const GET_LIST_FAILURE = `${GET_LIST}_FAILURE`; //요청 실패
 
 
 /* action creators */
-export const getPostList = (page)=>{
+export const getList = (page)=>{
     console.log('list 액션 날림');
     
     return {
-        type : GET_POST_LIST,
+        type : GET_LIST,
         payload : AjaxBbs.list(page),
     }
 }
@@ -51,7 +51,7 @@ const initialState = Map({
 
 /* reducer */
 export default  handleActions({
-    [GET_POST_LIST_PENDING] : (state,action)=>{
+    [GET_LIST_PENDING] : (state,action)=>{
         console.log('리스트준비걸림');
         // console.log('리스트준비걸림state',state);
         // console.log('리스트준비걸림state.init',state.initialState);
@@ -65,7 +65,7 @@ export default  handleActions({
                               .set('error',false);
         return newState;
     },
-    [GET_POST_LIST_SUCCESS] : (state,action)=>{
+    [GET_LIST_SUCCESS] : (state,action)=>{
         console.log('리스트성공걸림');
 
         const { data, status } = action.payload;
@@ -80,7 +80,7 @@ export default  handleActions({
         return newState
 
     },
-    [GET_POST_LIST_FAILURE] : (state,action)=>{
+    [GET_LIST_FAILURE] : (state,action)=>{
         console.log('리스트에러걸림');
         const newState = state.set('loading',false)
                               .set('error',true);
