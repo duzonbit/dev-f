@@ -26,17 +26,7 @@ const initialState = Map({
 /* reducer */
 export default handleActions({
     [GET_DELETE_PENDING]: (state, action) => {
-      console.log("delete준비걸림"); 
-      // console.log("delete준비걸림 state",typeof(state),state); 
-      // console.log("delete준비걸림2 state.init",typeof(state.initialState),state.initialState); 
-      
-      // let copyState;
-      // if(state.initialState !== undefined){ 
-      //   copyState = state.initialState
-      // }else{
-      //   copyState = state
-      // }
-      
+      console.log("delete 요청 준비"); 
 
       const newState = state.set("loading", true)
                             .set("error", false)
@@ -44,7 +34,7 @@ export default handleActions({
       return newState;
     },
     [GET_DELETE_SUCCESS]: (state, action) => {
-      console.log("delete성공걸림");
+      console.log("delete 요청 성공");
 
       const { data, status } = action.payload;
       console.log(data);
@@ -57,7 +47,7 @@ export default handleActions({
       return newState;
     },
     [GET_DELETE_FAILURE]: (state, action) => {
-      console.log("delete에러걸림");
+      console.log("delete 요청 에러");
 
       const newState = state.set("loading", false)
                             .set("error", true)

@@ -34,24 +34,13 @@ const initialState = Map({
 /* reducer */
 export default handleActions({
     [GET_READ_PENDING]: (state, action) => {
-      console.log("리드준비걸림"); 
-      // console.log("리드준비걸림 state",typeof(state),state); 
-      // console.log("리드준비걸림2 state.init",typeof(state.initialState),state.initialState); 
-      
-      // let copyState;
-      // if(state.initialState !== undefined){ 
-      //   copyState = state.initialState
-      // }else{
-      //   copyState = state
-      // }
-      
-
+      console.log("read 요청 준비"); 
       const newState = state.set("loading", true)
                             .set("error", false);
       return newState;
     },
     [GET_READ_SUCCESS]: (state, action) => {
-      console.log("리드성공걸림");
+      console.log("read 요청 성공");
 
       const { data, status } = action.payload;
       const newState = state.set("loading", false)
@@ -68,7 +57,7 @@ export default handleActions({
       return newState;
     },
     [GET_READ_FAILURE]: (state, action) => {
-      console.log("리드에러걸림");
+      console.log("read 요청 에러");
 
       const newState = state.set("loading", false)
                             .set("error", true);

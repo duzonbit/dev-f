@@ -62,37 +62,8 @@ class ReadPaneContainer extends Component {
     )
   }
 
-  /* onSubmit 에서 업데이트 액션 날릴거 */
   onSubmit = (event) => {
-    event.preventDefault();
-    // let data = {};
-    // console.log('온서브밋');
-    
-    // const formData = new FormData(event.target);
-    // const fromData2 = new FormData(document.querySelector(".test"));
-    // // console.log(event.target);
-    // // console.log(document.querySelector(".test"));
-    // console.log(formData);
-    // console.log(fromData2);
-    
-    // for (let key of formData.keys()) {
-    //   data[key] = formData.get(key);
-    // }
-
-    // AjaxBbs.del(data)
-    //   .then(({ data }) => {
-    //     console.log(data);
-
-    //     if (data.message === Message.success) {
-    //       alert("성공");
-    //       this.props.history.push("/");
-    //     } else if (data.message === Message.fail) {
-    //       alert("비밀번호를 다시 넣어주세요!");
-    //     }
-    //   })
-    //   .catch((e) => {
-    //     console.log(e);
-    //   });
+    event.preventDefault();   
   };
 
   render() {
@@ -118,10 +89,6 @@ class ReadPaneContainer extends Component {
 }
 
 const mapStateToProps = (state)=>{
-  // console.log('read : state',state);
-  // console.log('read : state.read',state.read);
-  // console.log('read : state.list',state.list);
-  
   return {
     loading : state.read.get('loading'),
     error : state.read.get('error'),
@@ -148,4 +115,3 @@ export default connect(
   mapDispatchToProps,
 )(ReadPaneContainer);
 
-// export default ReadPaneContainer;

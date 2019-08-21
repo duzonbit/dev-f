@@ -114,9 +114,8 @@ class UpdatePaneContainer extends Component {
               {this.renderBoard2()}
             </table>
           </article>
-          <button onClick={this.update}>글 수정</button>
-          
-              <button onClick={this.delete}>글 삭제</button> 
+          <button onClick={this.update}>글 수정</button>          
+          <button onClick={this.delete}>글 삭제</button> 
           
         </form>
         <footer>
@@ -128,9 +127,6 @@ class UpdatePaneContainer extends Component {
 }
 
 const mapStateToProps = (state)=>{
-  // console.log('read : state',state);
-  // console.log('read : state.read',state.read);
-  // console.log('read : state.list',state.list);
   
   return {
     loading : state.read.get('loading'),

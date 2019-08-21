@@ -52,21 +52,13 @@ const initialState = Map({
 /* reducer */
 export default  handleActions({
     [GET_LIST_PENDING] : (state,action)=>{
-        console.log('리스트준비걸림');
-        // console.log('리스트준비걸림state',state);
-        // console.log('리스트준비걸림state.init',state.initialState);
-        // console.log('리스트준비걸림state.list',state.list);
-        // console.log('리스트준비걸림state.read',state.read);
-
-        // const copyState = stateSelector(state);
-        // console.log(copyState);
-        
+        console.log('list 요청 준비');
         const newState = state.set('loading',true)
                               .set('error',false);
         return newState;
     },
     [GET_LIST_SUCCESS] : (state,action)=>{
-        console.log('리스트성공걸림');
+        console.log('list 요청 성공');
 
         const { data, status } = action.payload;
         const newState = state.set('loading',false)
@@ -81,7 +73,7 @@ export default  handleActions({
 
     },
     [GET_LIST_FAILURE] : (state,action)=>{
-        console.log('리스트에러걸림');
+        console.log('list 요청 에러');
         const newState = state.set('loading',false)
                               .set('error',true);
 
