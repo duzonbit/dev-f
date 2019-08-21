@@ -1,13 +1,13 @@
-### BOARD
+### bbs
 
-GET http://springboot.zcvfcat.ga/board/read/100
+GET http://localhost:63002/bbs/read/30
 
 ### PAGE
 
-GET http://springboot.zcvfcat.ga/board/1
+GET http://dev-b.zcvfcat.ga/bbs/1
 
 ### INSERT
-POST http://springboot.zcvfcat.ga/board/ HTTP/1.1
+POST http://dev-b.zcvfcat.ga/bbs/ HTTP/1.1
 content-type: application/json
 User-Agent: rest-client
 
@@ -19,7 +19,7 @@ User-Agent: rest-client
 }
 
 ### UPDATE
-PUT  http://springboot.zcvfcat.ga/board/ HTTP/1.1
+PUT  http://dev-b.zcvfcat.ga/bbs/ HTTP/1.1
 content-type: application/json
 User-Agent: rest-client
 
@@ -32,12 +32,14 @@ User-Agent: rest-client
 }
 
 ### DELETE
-DELETE  http://springboot.zcvfcat.ga/board/ HTTP/1.1
+DELETE  http://localhost:63002/bbs/76 HTTP/1.1
 content-type: application/json
 User-Agent: rest-client
 
 {
-    "idx" : "269",
+    "idx" : "76",
     "name" : "13",
     "pw" : "13"
 }
+// "proxy": "http://dev-b.zcvfcat.ga",
+// "proxy": "http://localhost:63002",

@@ -10,6 +10,7 @@ import classNames from "classnames/bind";
 const cx = classNames.bind(styles);
 
 const ListPage = (props) => {
+  let pageNum=typeof props.match.params.num === "undefined"? 1:props.match.params.num;
   return (
     <div>
       <CommonHeader />
@@ -18,7 +19,7 @@ const ListPage = (props) => {
           <CommonAsider />
         </aside>
         <article className={cx("list-content")}>
-          <ListPaneContainer pageNum={props.match.params.num} />
+          <ListPaneContainer pageNum={pageNum} />
         </article>
         <aside className={cx("list-right")}>
           <CommonEmpty />

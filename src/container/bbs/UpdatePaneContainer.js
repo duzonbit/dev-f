@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { AjaxBbs } from "url/bbs";
 import Message from "message";
 import { connect } from "react-redux";
-import { updateBbs } from "store/module/update";
 
 class UpdatePaneContainer extends Component {
 

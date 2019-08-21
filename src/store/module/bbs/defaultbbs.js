@@ -1,18 +1,17 @@
 import { handleActions } from "redux-actions";
-import { Map, List, fromJS, toJS } from "immutable";
 import { AjaxBbs } from "url/bbs";
 
 const LIST = "bbs/LIST";
 const READ = "bbs/READ";
-const CREATE = "bbs/CREATE";
+const INSERT = "bbs/INSERT";
 const UPDATE ="bbs/UPDATE";
-const DELETE = "bbs/DELETE";
+const DEL = "bbs/DEL";
 
 const LIST_SUCCESS = `${LIST}_SUCCESS`;
-const READ_SUCCESS = "bbs/READ_SUCCESS";
-const CREATE_SUCCESS = "bbs/CREATE_SUCCESS";
-const UPDATE_SUCCESS = "bbs/UPDATE_SUCCESS";
-const DELETE_SUCCESS = "bbs/DELETE_SUCCESS";
+const READ_SUCCESS = `${READ}_SUCCESS`;
+const INSERT_SUCCESS = `${INSERT}_SUCCESS`;
+const UPDATE_SUCCESS = `${UPDATE}_SUCCESS`;
+const DEL_SUCCESS = `${DEL}_SUCCESS`;
 
 export const listAction = (page) => ({
   type: LIST,
@@ -24,26 +23,41 @@ export const readAction = (index) => ({
   payload: AjaxBbs.read(index),
 });
 
-export const createAction = () =>({
-  type: CREATE
+export const insertAction = (data) =>({
+  type: INSERT,
+  payload: AjaxBbs.insert(data),
 });
 
-export const updateAction = () =>({
-  type: UPDATE
+export const updateAction = (data) =>({
+  type: UPDATE,
+  payload: AjaxBbs.update(data),
 });
 
-export const deleteAction = () =>({
-  type: DELETE
+export const delAction = (index,data) =>({
+  type: DEL,
+  payload: AjaxBbs.del(index,data),
 });
 
 
 export default handleActions({
     [LIST_SUCCESS]: (state, action) => ({
-      status: action.payload.status,
-      data: action.payload.data
+      action: 'list',
+      contents: action.payload.data,
     }),
     [READ_SUCCESS]:(state,action)=>({
-      status: action.payload.status,
-      data: action.payload.data
+      action: 'read',
+      content: action.payload.data
+    }),
+    [INSERT_SUCCESS]:(state,action)=>({
+      action: 'insert',
+      insert_msg: action.payload.data
+    }),
+    [UPDATE_SUCCESS]:(state,action)=>({
+      action: 'update',
+      update_msg: action.payload.data
+    }),
+    [DEL_SUCCESS]:(state,action)=>({
+      action: 'del',
+      del_msg: action.payload.data
     }),
 },{});

@@ -4,10 +4,11 @@ import CommonHeader from "component/common/header";
 import ReadPaneContainer from "container/bbs/ReadPaneContainer";
 
 const ReadPage = (props) => {
+  let readNum = props.match.params.num;
   return (
     <div>
     <CommonHeader />
-    <ReadPaneContainer pageNum={props.match.params.num} history={props.history}/>
+    <ReadPaneContainer readNum={readNum} history={props.history}/>
     <CommonFooter />
     </div>
   )
