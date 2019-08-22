@@ -26,11 +26,6 @@ class ResultNotifyModal extends Component {
             alert('비번 틀림');
         }
     }
-
-   
-
-    componentDidMount(){
-    }
     render() {
         return (
           

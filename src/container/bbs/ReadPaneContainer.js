@@ -1,18 +1,11 @@
 import React, { Component } from "react";
-import { AjaxBbs ,UrlBbs} from "url/bbs";
-import Message from "message";
 import { connect } from "react-redux";
 import { getRead } from "store/module/bbs/read";
 import { getDelete } from "store/module/bbs/delete";
 import AskModal from "component/bbs/modals/AskModal";
 import Modal from "react-modal";
 
-
-
-
 class ReadPaneContainer extends Component {
- 
-  // board = {};
   state = {
     modalIsOpen: false,
     work:'none',
@@ -54,16 +47,13 @@ class ReadPaneContainer extends Component {
 
     Modal.setAppElement("#readPaneContainer");
 
-    getRead(pageNum); //pageNum = 게시글 id
+    getRead(pageNum);//dispatch action //pageNum = 게시글 id
   }
 
   componentDidUpdate = (prevProps, prevState)=>{
     const { deleteLoading, deleteError,deleteMessage } = this.props; //state to props
-   console.log('디드업데이트 콜');
-   
 
     if(prevProps.deleteMessage !== deleteMessage){
-      console.log('did',deleteMessage);
       if(!deleteLoading && !deleteError && deleteMessage==='success'){
         if(!alert("삭제 성공")) document.location = '/';  
       
@@ -106,13 +96,6 @@ class ReadPaneContainer extends Component {
           <td>modifydate</td>
           <td><input name={'modifydate'} value={modifydate} onChange={()=>{}} readOnly={true} disabled={true}/></td>
         </tr>
-        {/* <tr>
-          <td>
-            <Link to={UrlBbs.update + idx}>            
-              <button>수정</button>
-            </Link>
-          </td>         
-        </tr> */}
       </tbody>        
     )
   }
@@ -146,20 +129,11 @@ class ReadPaneContainer extends Component {
         <Modal
           shouldCloseOnOverlayClick={false}
           isOpen={this.state.modalIsOpen}
-          // onAfterOpen={this.afterOpenModal}
-          // onRequestClose={this.closeModal}
-          // style={customStyles}
-          // className="overlay"
           className='modal'
           overlayClassName="overlay"
-
-          // contentLabel="Example Modal"
-          // setAppElement="#createPaneContainer"
         >
           <AskModal
-          // style={customStyles}
           closeModal={this.closeModal}
-          // style={customStyles}
           idx={this.props.idx}
           pw = {this.props.pw}
           name={this.props.name}

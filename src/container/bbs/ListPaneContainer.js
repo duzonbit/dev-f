@@ -7,34 +7,19 @@ import GeneralPageNation from "component/bbs/pagination/GeneralPageNation";
 
 class ListPaneContainer extends React.Component {
 
-  async componentDidMount() {
+  componentDidMount() {
     const { getList } = this.props; //stateToProps
     const { pageNum } = this.props; //parentToProps
-
-    await getList(pageNum);
+    getList(pageNum);
   }
 
   async componentDidUpdate(prevProps, prevState) {
     if (prevProps.pageNum !== this.props.pageNum) {
       const { getList } = this.props; //stateToProps
       const { pageNum } = this.props; //parentToProps
-
       await getList(pageNum); //action dispatch
     }
   }
-
-  // componentDidUpdate = (prevProps, prevState)=>{
-  //   const { loading, error,message } = this.props; //state to props
-  //   console.log('did',message);
-
-  //   if(!loading && !error && message==='success'){
-  //     if(!alert("작성 성공")) document.location = '/';     
-      
-  //   }else if(error || (!loading&&message===undefined)){
-  //     alert('실패');
-  //   }
-    
-  // }
 
   drawList = () =>
     this.props.content.map((e, i) => {

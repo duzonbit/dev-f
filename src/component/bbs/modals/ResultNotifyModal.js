@@ -1,10 +1,6 @@
 import React, { Component } from 'react';
 
 class ResultNotifyModal extends Component {
-    
-
-    componentDidMount(){
-    }
     render() {
         return (
           
