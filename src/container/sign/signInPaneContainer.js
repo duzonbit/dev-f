@@ -1,22 +1,78 @@
 import React, { Component } from "react";
+import { reqSignIn } from "store/module/sign/signIn";
+import { connect } from "react-redux";
+import LoginComponent from "component/sings/LoginComponent";
+import UserComponent from "component/sings/UserComponent";
+
 
 class SignInPaneContainer extends Component {
+
+onSubmit = (event) => {
+    event.preventDefault();
+    let data = {};
+    const formData = new FormData(event.target);
+    for (let key of formData.keys()) {
+        console.log(key);
+        
+        data[key] = formData.get(key);
+    }
+    // console.log(data);
+
+    // 유효성 검사
+    if (data.user_id === "" && data.pw === "") {
+        alert("공백입니다")
+    } else {
+        this.props.reqSignIn(data);
+    }
+}
+
+componentDidUpdate = (prevProps, prevState) => {
+  const { loading, error, message, user_id } = this.props; //state to props
+  // console.log('콜');
+ 
+  
+  if (prevProps.message !== message) {
+    if (message === 'success' && user_id !== null) {
+      alert('로그인 성공')
+    } else if (!loading && !error &&message === 'fail') {
+      alert("아이디 비번 확인");
+    } else if (error) {
+      alert("에러남");
+    }
+  }
+};
+
+
   render() {
     return (
       <div>
-        <h1> 로그인 </h1>{" "}
-        <form onSubmit>
-          <div>
-            <label> id </label> <input name="user_id" type="text" />
-          </div>{" "}
-          <div>
-            <label> password </label> <input name="pw" type="text" />
-          </div>{" "}
-          <button type="submit"> 로그인 </button>{" "}
-        </form>{" "}
+        {
+          this.props.user_id === null
+        ?(<LoginComponent onSubmit={this.onSubmit}/>)
+        :(<UserComponent user_id={this.props.user_id}/>)
+      }
+
       </div>
     );
   }
 }
 
-export default SignInPaneContainer;
+const mapStateToProps=(state)=>{
+  return{
+    user_id : state.signIn.get('signInId'),
+    message : state.signIn.get('message'),
+    loading : state.signIn.get('loading'),
+    error : state.signIn.get('error'),
+  }
+}
+
+const mapDispatchToProps=(dispatch)=>{
+  return{
+    reqSignIn : (data)=>{dispatch(reqSignIn(data))},
+  }
+}
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(SignInPaneContainer);

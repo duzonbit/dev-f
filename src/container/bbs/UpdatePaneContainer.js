@@ -5,37 +5,45 @@ import { getUpdate } from "store/module/bbs/update";
 import Modal from "react-modal";
 
 class UpdatePaneContainer extends Component {
+ 
   state = {
-    titleValue: this.props.title,
-    textValue: this.props.content,
+    title: this.props.title,
+    content: this.props.content,
     modalIsOpen: false,
-    modalMessage: ""
   };
-
+  
   openModal = () => {
     if (!this.state.modalIsOpen) {
-      this.setState({ modalIsOpen: true });
+      this.setState({ ...this.state, modalIsOpen: true });
     }
   };
 
   closeModal = () => {
     if (this.state.modalIsOpen) {
-      this.setState({ modalIsOpen: false });
+      this.setState({ ...this.state, modalIsOpen: false });
       document.location = "/";
     }
   };
 
+ 
   componentDidMount() {
     Modal.setAppElement("#updatePaneContainer");
 
     const { getRead } = this.props; //stateToProps
     const { pageNum } = this.props; //parent To Props
     getRead(pageNum); //dispatch action //pageNum = 게시글 id
+   
   }
 
   componentDidUpdate = (prevProps, prevState) => {
     const { updateLoading, updateError, updateMessage } = this.props; //state to props
-
+    if(prevProps.title !== this.props.title){
+       this.setState({
+        ...this.state,
+        title:this.props.title,
+        content:this.props.content,
+      })
+    }
     if (prevProps.updateMessage !== updateMessage) {
       console.log("did", updateMessage);
       if (!updateLoading && !updateError && updateMessage === "success") {
@@ -45,33 +53,32 @@ class UpdatePaneContainer extends Component {
       }
     }
   };
-
-  onTextAreaChange = event => {
-    this.setState({ ...this.state, textValue: event.target.value });
-  };
-
-  onTitleTextChange = event => {
-    this.setState({ ...this.state, titleValue: event.target.value });
-  };
+  
+  onTextChange = e => {
+    this.setState({
+      ...this.state,
+      [e.target.name] : e.target.value,
+    })
+  }
 
   update = () => {
     const { idx, name, pw, getUpdate } = this.props; //state To props
-    const { titleValue, textValue } = this.state;
+    const { title, content } = this.state;
 
     const data = {
       idx,
       name,
       pw,
-      title: titleValue,
-      content: textValue
+      title,
+      content
     };
 
     getUpdate(data); //dispatch action
   };
-
+  
   renderBoard2 = () => {
     const { idx, name, pw, title, content, regdate, modifydate } = this.props; //state To props
-
+    
     return (
       <tbody>
         <tr>
@@ -104,8 +111,8 @@ class UpdatePaneContainer extends Component {
           <td>
             <input
               name={"title"}
-              value={this.state.titleValue}
-              onChange={this.onTitleTextChange}
+              value={this.state.title}
+              onChange={this.onTextChange}
             />
           </td>
         </tr>
@@ -114,8 +121,8 @@ class UpdatePaneContainer extends Component {
           <td>
             <textarea
               name={"content"}
-              value={this.state.textValue}
-              onChange={this.onTextAreaChange}
+              value={this.state.content}
+              onChange={this.onTextChange}
             />
           </td>
         </tr>
@@ -151,6 +158,8 @@ class UpdatePaneContainer extends Component {
   };
 
   render() {
+    console.log('title :', this.state.title);
+    console.log('content : ',this.state.content);
     return (
       <div id="updatePaneContainer">
         <header>

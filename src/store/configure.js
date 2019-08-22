@@ -1,13 +1,16 @@
 import { createStore, applyMiddleware, combineReducers } from 'redux';
 import { createPromise } from "redux-promise-middleware";
-import * as modules from 'store/module/bbs';
+import * as bbsModules from 'store/module/bbs';
+import * as signModules from 'store/module/sign';
 
 const reducers = combineReducers({
-    list : modules.list,
-    read : modules.read,
-    create : modules.create,
-    update : modules.update,
-    delete : modules.delete,
+    list : bbsModules.list,
+    read : bbsModules.read,
+    create : bbsModules.create,
+    update : bbsModules.update,
+    delete : bbsModules.delete,
+
+    signIn : signModules.signIn,
 });
 
 const middleware = createPromise({

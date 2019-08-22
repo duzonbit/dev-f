@@ -16,20 +16,14 @@ import axios from "axios";
 //   del: (index,data) => axios.delete(`${UrlBbs.delete}${index}`,{data:data})
 // };
 
-export const UrlBbs = {
-  list: "/list/",
-  read: "/read/",
-  create: "/create/",
-  update:"/update/",
-  delete:"/delete/",
-  
-};
 
-export const AjaxBbs = {
-  list: async (page = 1) => await axios.get(`/board/${page}`),
-  read: async (board = 0) => await axios.get(`/board/read/${board}`),
-  create: async(data) => await axios.post("/board/",data),
-  update: async (data) => await axios.put("/board/",data),
-  del: async (data) => await axios.delete("/board/",{data:data}),//{data:data}
-  
-};
+export const UrlSign={
+  register:"/register/",
+  login:"/login/",
+}
+
+
+export const AjaxSign={
+  register: async (data) => await axios.post('/user/', data),
+  login: async (data) => await axios.post(`/user${UrlSign.login}`, data),
+}

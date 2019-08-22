@@ -4,9 +4,12 @@ import { BrowserRouter } from "react-router-dom";
 import { Provider } from "react-redux";
 import configure from "store/configure";
 
+/*dispatch action test */
 import { getList } from "store/module/bbs/list";
 import { getRead } from "store/module/bbs/read";
 import { getCreate } from "store/module/bbs/create";
+import { reqSignIn } from "store/module/sign/signIn";
+
 
 const store = configure;
 store.subscribe(()=>{console.log('현재상태',store.getState())})
@@ -22,6 +25,11 @@ store.subscribe(()=>{console.log('현재상태',store.getState())})
 //   title:'test',
 //   content:'test',
 // }));
+
+// store.dispatch(reqSignIn({
+//   user_id : "qwer",
+//   pw : "1234",
+// }))
 
 
 
