@@ -1,49 +1,39 @@
-import React from 'react';
-import {AjaxBbs} from "url/bbs"
+import React, { useEffect } from "react";
+import { connect } from "react-redux";
+import GeneralCreateForm from "component/bbs/create/GeneralCreateForm";
+import { insertAction } from "store/module/bbs/defaultbbs";
 
-class CreatePaneContainer extends React.Component {
-  onSubmit = (event) => {
+const CreatePaneContainer = (props) => {
+  console.log(props);
+
+  useEffect(() => {
+    if (props.action === "insert") {
+      alert("글이 등록되엇습니다.");
+      props.history.push("/");
+    }
+  });
+
+  const onSubmit = (event) => {
     event.preventDefault();
     let data = {};
     const formData = new FormData(event.target);
-    for(let key of formData.keys()){
-      data[key]=formData.get(key);
+    for (let key of formData.keys()) {
+      data[key] = formData.get(key);
     }
-    AjaxBbs.create(data).then((data)=>{
-      console.log(data);  
-      alert("잘 되네");
-      this.props.history.push('/');
-    }).catch((e)=>{
-      console.log(e);
-    });
-  }
+    insertAction(data);
+  };
 
-  render() {
-    return (
-      
-      <div>
-        <form onSubmit={this.onSubmit}>
-        <div>
-            <label>name</label>
-            <input name="name" type="text"/>
-        </div>
-        <div>
-            <label>pw</label>
-            <input name="pw" type="text"/>
-        </div>
-        <div>
-            <label>title</label>
-            <input name="title" type="text"/>
-        </div>
-        <div>
-            <label>content</label>
-            <textarea name="content" cols="30" rows="10"></textarea>
-        </div>
-        <button type="submit">확인</button>
-        </form>
-      </div>
-    );
-  }
-}
+  return <GeneralCreateForm onSubmit={onSubmit} />;
+};
 
-export default CreatePaneContainer;
+export default connect(
+  (state) => ({
+    action: state.bbs.action,
+    state: state
+  }),
+  (dispatch) => ({
+    insertAction: (data) => {
+      dispatch(insertAction(data));
+    }
+  })
+)(CreatePaneContainer);

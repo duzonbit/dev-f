@@ -1,0 +1,14 @@
+{
+    "sqltools.connections": [
+        {
+            "connectionTimeout": 30,
+            "database": "mini01",
+            "dialect": "MySQL",
+            "name": "218.39.221.74/mini01",
+            "password": "0000",
+            "port": 3306,
+            "server": "218.39.221.74",
+            "username": "mini01"
+        }
+    ]
+}

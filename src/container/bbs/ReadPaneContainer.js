@@ -1,65 +1,74 @@
-import React,{useEffect} from "react";
+import React from "react";
 import { connect } from "react-redux";
 import GeneralReadData from "component/bbs/read/GeneralReadData";
 import GeneralActionButton from "component/bbs/read/GeneralActionButton";
 import GeneralSubTitle from "component/bbs/general/GeneralSubTitle";
-import { readAction, delAction } from "store/module/bbs/defaultbbs";
+import { getRead} from "store/module/bbs/read";
+import { getDelete } from "store/module/bbs/delete";
 
-const ReadPaneContainer = (props) => {  
-  useEffect(()=>{
-    if(props.action === "del"){
-      alert("글이 삭제 되었습니다.");
-      props.history.push("/");
-    }
-  });
-  
-  
-  if (props.action !== "read") 
-    props.readAction(props.readNum);
-  
-  const onDel = async (e) => {
-    e.preventDefault();
-    let pw = prompt("비밀번호를 입력하세요");
-    props.delAction(props.bbs.idx,{
-      idx: props.bbs.idx,
-      name: props.bbs.name,
-      pw: pw
-    })
+const ReadPaneContainer = (props) => {
+  if(props.deleteMessage==="success"){
+    alert("삭제되었습니다.");
+    props.history.push("/")
+  }else if(props.deleteMessage==="fail"){
+    alert("비밀번호가 틀립니다.");
   }
 
+  if (props.loading === true) 
+    props.getRead(props.readNum);
+
+  const onDel = () => {
+    let pw = prompt("비밀번호를 입력하세요");
+    props.getDelete(props.idx, {
+      idx: props.idx,
+      name: props.name,
+      pw: pw
+    });
+  };
   return (
     <div>
       <GeneralSubTitle subtitle={"글"} />
-      <GeneralReadData content={props.bbs} />
+      <GeneralReadData
+        idx={props.idx}
+        name={props.name}
+        pw={props.pw}
+        title={props.title}
+        content={props.content}
+        regdate={props.regdate}
+        modifydate={props.modifydate}
+      />
       <GeneralActionButton
-        idx={props.bbs.idx}
+        idx={props.idx}
         history={props.history}
-        del={onDel}
+        onDel={onDel}
       />
     </div>
   );
 };
 
 export default connect(
-  (state) =>({
-    action: state.bbs.action,
-    bbs: state.bbs.content === undefined ? {
-      idx : "",
-      name : "",
-      pw : "",
-      title : "",
-      content : "",
-      regdate : "",
-      modifydate : "",
-    } : state.bbs.content,
-    ms:"",
+  (state) => ({
+    loading: state.read.get("loading"),
+    error: state.read.get("error"),
+    status: state.read.get("status"),
+    idx: state.read.getIn(["data", "idx"]),
+    name: state.read.getIn(["data", "name"]),
+    pw: state.read.getIn(["data", "pw"]),
+    title: state.read.getIn(["data", "title"]),
+    content: state.read.getIn(["data", "content"]),
+    regdate: state.read.getIn(["data", "regdate"]),
+    modifydate: state.read.getIn(["data", "modifydate"]),
+
+    deleteMessage: state.delete.get("message"),
+    deleteLoading: state.delete.get("loading"),
+    deleteError: state.delete.get("error")
   }),
   (dispatch) => ({
-    readAction: (idx) => {
-      dispatch(readAction(idx));
+    getRead: (idx) => {
+      dispatch(getRead(idx));
     },
-    delAction: (idx, data) => {
-      dispatch(delAction(idx, data));
+    getDelete: (idx, data) => {
+      dispatch(getDelete(idx, data));
     }
   })
 )(ReadPaneContainer);

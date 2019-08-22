@@ -5,14 +5,17 @@ import { connect } from "react-redux";
 import GeneralPageNation from "component/bbs/list/GeneralPageNation";
 import GeneralListData from "component/bbs/list/GeneralListData";
 import GeneralSubTitle from "component/bbs/general/GeneralSubTitle";
-import { listAction } from "store/module/bbs/defaultbbs";
+import { getList } from "store/module/bbs/list";
 
 const ListPaneContainer = (props) => {
+  console.log(props);
+  
   if(props.pageNumber !== props.pageNum-1)
-    props.listAction(props.pageNum);
+    props.getList(props.pageNum)
+    
   return (
     <div>
-    <GeneralSubTitle subtitle={"게시판"}></GeneralSubTitle>
+    <GeneralSubTitle subtitle={"게시판"}/>
     <GeneralListData content={props.content} />
     <GeneralPageNation pageNumber={props.pageNumber} pageSize={props.pageSize} totalPages={props.totalPages} />
     <Link to={UrlBbs.create}>
@@ -24,14 +27,16 @@ const ListPaneContainer = (props) => {
 
 export default connect(
   (state) => ({
-    action: state.bbs.action,
-    content: state.bbs.contents===undefined?[]:state.bbs.contents.content,
-    pageNumber : state.bbs.contents===undefined?'':state.bbs.contents.pageable.pageNumber,
-    pageSize : state.bbs.contents===undefined?'':state.bbs.contents.pageable.pageSize,
-    totalPages:state.bbs.contents===undefined?'':state.bbs.contents.totalPages,
+    loading: state.list.get("loading"),
+    error: state.list.get("error"),
+    status: state.list.get("status"),
+    content: state.list.getIn(["data", "content"]),
+    pageSize: state.list.getIn(["data", "pageable", "pageSize"]),
+    pageNumber: state.list.getIn(["data", "pageable", "pageNumber"]),
+    totalPages: state.list.getIn(["data", "totalPages"])
   }),
   (dispatch) => ({
-    listAction: (page) => {
-      dispatch(listAction(page));
+    getList: (page) => {
+      dispatch(getList(page));
     }
   }))(ListPaneContainer);

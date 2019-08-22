@@ -1,101 +1,103 @@
-import React, { Component } from 'react';
-import { AjaxBbs } from "url/bbs";
-import Message from "message";
+import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 
-class UpdatePaneContainer extends Component {
 
-  state = {
-    res: {},
-    textValue: "",
-  };
+import GeneralSubTitle from "component/bbs/general/GeneralSubTitle";
+import GeneralUpdateData from "component/bbs/update/GeneralUpdateData";
+import GeneralActionButton from "component/bbs/update/GeneralActionButton";
 
-  board = {};
+import { getRead } from "store/module/bbs/read";
+import { getUpdate,getUpdateInit} from "store/module/bbs/update";
 
-  async componentDidMount() {
-    const res = await AjaxBbs.read(this.props.pageNum);
+const UpdatePaneContainer = (props) => { 
+  let [pw, setPw] = useState('');
+  let [title, setTitle] = useState(props.title);
+  let [content, setContent] = useState(props.content);
 
-    this.board = res.data;
-    this.setState({
-      res: res,
-      textValue: res.data.content
-    });
-  }
+  useEffect(()=>{
+    setTitle(props.title);
+    setContent(props.content);
+  }, [props.title, props.content]);
 
-  onSubmit = (event) =>{
-    event.preventDefault();
-    let data = {};
-    const formData = new FormData(event.target);
-    for(let key of formData.keys()){
-      data[key]=formData.get(key);
-    }
-    
-    AjaxBbs.update(data).then(({data})=>{
-      console.log(data);
-      if(data.message===Message.success){
-        alert("성공");
-        this.props.history.push('/');
-      }else if(data.message===Message.fail){
-        alert("비밀번호를 다시 넣어주세요!");
-      }
-    }).catch((e)=>{
-      console.log(e);
-    });
+  if(props.updateMessage==="success"){
+    alert("업데이트 되었습니다.");
+    props.getUpdateInit();
+    props.history.push(`/bbs/read/${props.pageNum}`);
+  }else if(props.updateMessage==="fail"){
+    alert("비밀번호가 틀립니다.");
+    props.getUpdateInit();
+    props.history.push(`/bbs/read/${props.pageNum}`);
   }
   
-  onTextAreaChange = (event)=>{
-    this.setState({textValue: event.target.value});
+  if (props.loading === true) {
+    props.getRead(props.pageNum);
   }
 
-  renderBoard = ({ res } = this.state, { board } = this) => {
-    if (res.status === 200) {
-      let vBoard = [];
-      for (const key in board) {
-        vBoard.push(
-          <tr key={key}>
-            <td>{key}</td>
-            <td>
-              {
-                key==="idx"?
-                  <input name={key} value={board[key]} readOnly={true}></input>
-                :key==="name"?
-                  <input name={key} value={board[key]} readOnly={true}></input>
-                :key==="pw"?
-                  <input name={key} readOnly={false}></input>
-                :key==="content"?
-                  <textarea name={key} value={this.state.textValue} onChange={this.onTextAreaChange} readOnly={false}/>
-                :key==="title"?
-                <input name={key} readOnly={false}></input>
-                :<input value={board[key]} readOnly={true}/>
-              }
-            </td>
-          </tr>
-        );
-      }
-      return vBoard;
-    }
+  const onChangePw = (e) => {
+    setPw(e.target.value);
+  };
+  const onChangeTitle = (e) => {
+    setTitle(e.target.value);
+  };
+  const onChangeContent = (e) => {
+    setContent(e.target.value);
+  };
+  const update = () => {  
+    props.getUpdate(props.idx,{
+      idx:props.idx,
+      name:props.name,
+      pw:pw,
+      title:title,
+      content:content,
+    });
   };
 
-  render() {
-    return (
-      <div>
-        <header>
-          <h1>Update</h1>
-        </header>
-        <form onSubmit={this.onSubmit}>
-          <article>
-            <table>
-              <tbody>{this.renderBoard()}</tbody>
-            </table>
-          </article>
-          <button>글 업데이트</button>
-        </form>
-        <footer>
-          <button onClick={this.props.history.goBack}>뒤로가기</button>
-        </footer>
-      </div>
-    );
-  }
-}
+  return (
+    <>
+      <GeneralSubTitle subtitle={"업데이트"} />
+      <GeneralUpdateData
+        idx={props.idx}
+        name={props.name}
+        pw={pw}
+        title={title}
+        content={content}
+        regdate={props.regdate}
+        modifydate={props.modifydate}
+        onChangePw={onChangePw}
+        onChangeTitle={onChangeTitle}
+        onChangeContent={onChangeContent}
+      />
+      <GeneralActionButton update={update} history={props.history}/>
+    </>
+  );
+};
 
-export default connect()(UpdatePaneContainer);
+export default connect(
+  (state) => ({
+    loading: state.read.get("loading"),
+    error: state.read.get("error"),
+    status: state.read.get("status"),
+    idx: state.read.getIn(["data", "idx"]),
+    name: state.read.getIn(["data", "name"]),
+    pw: state.read.getIn(["data", "pw"]),
+    title: state.read.getIn(["data", "title"]),
+    content: state.read.getIn(["data", "content"]),
+    regdate: state.read.getIn(["data", "regdate"]),
+    modifydate: state.read.getIn(["data", "modifydate"]),
+
+    updateMessage: state.update.get("message"),
+    updateLoading: state.update.get("loading"),
+    updateError: state.update.get("error")
+  }),
+  (dispatch) => ({
+    getRead: (idx) => {
+      dispatch(getRead(idx));
+    },
+    getUpdate: (idx,data) => {
+      dispatch(getUpdate(idx,data));
+    },
+    getUpdateInit:()=>{
+      dispatch(getUpdateInit());
+    }
+  })
+)(UpdatePaneContainer);
