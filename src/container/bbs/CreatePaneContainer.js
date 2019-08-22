@@ -7,7 +7,11 @@ import { getCreate } from "store/module/bbs/create";
 const CreatePaneContainer = (props) => {
   useEffect(()=>{
     if(props.message==="success"){
+      props.getListInit();
+      alert("생성되었습니다.");
       props.history.push("/");
+    }else if(props.message==="fail"){
+      alert("생성되지 않았습니다.");
     }
   });
   
@@ -16,9 +20,10 @@ const CreatePaneContainer = (props) => {
     let data = {};
     const formData = new FormData(event.target);
     
-    for (let key of formData.keys()) {
-      data[key] = formData.get(key);
+    for(var pair of formData.entries()) {
+      data[pair[0]] = pair[1];
     }
+
     props.getCreate(data);
   };
 
