@@ -5,6 +5,7 @@ import { AjaxBbs } from "url/bbs";
 /* action types */
 const GET_READ = "read/GET_READ"; //게시글 불러오기
 
+const GET_READ_INIT = `${GET_READ}_INIT`; //초기화 요청시작
 const GET_READ_PENDING = `${GET_READ}_PENDING`; //요청시작
 const GET_READ_SUCCESS = `${GET_READ}_SUCCESS`; //요청성공
 const GET_READ_FAILURE = `${GET_READ}_FAILURE`; //요청 실패
@@ -13,6 +14,10 @@ const GET_READ_FAILURE = `${GET_READ}_FAILURE`; //요청 실패
 export const getRead = (idx) => ({
   type: GET_READ,
   payload: AjaxBbs.read(idx)
+});
+
+export const getReadInit = () => ({
+  type: GET_READ_INIT,
 });
 
 /* initial state */
@@ -33,15 +38,15 @@ const initialState = Map({
 
 /* reducer */
 export default handleActions({
+  [GET_READ_INIT]: (state, action) => {
+    return initialState;
+  },
     [GET_READ_PENDING]: (state, action) => {
-      console.log("read 요청 준비"); 
       const newState = state.set("loading", true)
                             .set("error", false);
       return newState;
     },
     [GET_READ_SUCCESS]: (state, action) => {
-      console.log("read 요청 성공");
-
       const { data, status } = action.payload;
       const newState = state.set("loading", false)
                             .set("error", false)
@@ -57,8 +62,6 @@ export default handleActions({
       return newState;
     },
     [GET_READ_FAILURE]: (state, action) => {
-      console.log("read 요청 에러");
-
       const newState = state.set("loading", false)
                             .set("error", true);
       return newState;

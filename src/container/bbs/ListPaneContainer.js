@@ -7,9 +7,7 @@ import GeneralListData from "component/bbs/list/GeneralListData";
 import GeneralSubTitle from "component/bbs/general/GeneralSubTitle";
 import { getList } from "store/module/bbs/list";
 
-const ListPaneContainer = (props) => {
-  console.log(props);
-  
+const ListPaneContainer = (props) => { 
   if(props.pageNumber !== props.pageNum-1)
     props.getList(props.pageNum)
     

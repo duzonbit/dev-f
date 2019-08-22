@@ -1,18 +1,28 @@
-import React from "react";
+import React,{useEffect} from "react";
 import { connect } from "react-redux";
 import GeneralReadData from "component/bbs/read/GeneralReadData";
 import GeneralActionButton from "component/bbs/read/GeneralActionButton";
 import GeneralSubTitle from "component/bbs/general/GeneralSubTitle";
-import { getRead} from "store/module/bbs/read";
-import { getDelete } from "store/module/bbs/delete";
+import { getListInit} from "store/module/bbs/list";
+import { getRead, getReadInit} from "store/module/bbs/read";
+import { getDelete ,getDeleteInit} from "store/module/bbs/delete";
 
 const ReadPaneContainer = (props) => {
-  if(props.deleteMessage==="success"){
-    alert("삭제되었습니다.");
-    props.history.push("/")
-  }else if(props.deleteMessage==="fail"){
-    alert("비밀번호가 틀립니다.");
-  }
+  useEffect(()=>{
+    if(props.deleteMessage==="success"){
+      props.getDeleteInit();
+      props.getReadInit();
+      props.getListInit();
+      props.history.push("/")
+      alert("삭제되었습니다.");
+    }else if(props.deleteMessage==="fail"){
+      props.getDeleteInit();
+      props.getReadInit();
+      props.getListInit();
+      alert("비밀번호가 틀립니다.");
+    }
+  });
+
 
   if (props.loading === true) 
     props.getRead(props.readNum);
@@ -69,6 +79,15 @@ export default connect(
     },
     getDelete: (idx, data) => {
       dispatch(getDelete(idx, data));
+    },
+    getDeleteInit:()=>{
+      dispatch(getDeleteInit());
+    },
+    getReadInit:()=>{
+      dispatch(getReadInit());
+    },
+    getListInit:()=>{
+      dispatch(getListInit());
     }
   })
 )(ReadPaneContainer);

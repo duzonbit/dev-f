@@ -6,7 +6,7 @@ import GeneralSubTitle from "component/bbs/general/GeneralSubTitle";
 import GeneralUpdateData from "component/bbs/update/GeneralUpdateData";
 import GeneralActionButton from "component/bbs/update/GeneralActionButton";
 
-import { getRead } from "store/module/bbs/read";
+import { getRead ,getReadInit} from "store/module/bbs/read";
 import { getUpdate,getUpdateInit} from "store/module/bbs/update";
 
 const UpdatePaneContainer = (props) => { 
@@ -14,20 +14,22 @@ const UpdatePaneContainer = (props) => {
   let [title, setTitle] = useState(props.title);
   let [content, setContent] = useState(props.content);
 
+  //TODO:수정해야할 사항
   useEffect(()=>{
     setTitle(props.title);
     setContent(props.content);
   }, [props.title, props.content]);
-
   if(props.updateMessage==="success"){
     alert("업데이트 되었습니다.");
+    props.getReadInit();
     props.getUpdateInit();
     props.history.push(`/bbs/read/${props.pageNum}`);
   }else if(props.updateMessage==="fail"){
     alert("비밀번호가 틀립니다.");
+    props.getReadInit();
     props.getUpdateInit();
-    props.history.push(`/bbs/read/${props.pageNum}`);
   }
+
   
   if (props.loading === true) {
     props.getRead(props.pageNum);
@@ -98,6 +100,9 @@ export default connect(
     },
     getUpdateInit:()=>{
       dispatch(getUpdateInit());
+    },
+    getReadInit:()=>{
+      dispatch(getReadInit());
     }
   })
 )(UpdatePaneContainer);
