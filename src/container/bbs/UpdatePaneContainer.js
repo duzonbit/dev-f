@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
 import { AjaxBbs,UrlBbs } from "url/bbs";
-import Message from "message";
 import { connect } from "react-redux";
 import { getRead } from "store/module/bbs/read";
-import { getDelete } from "store/module/bbs/delete";
+// import { getDelete } from "store/module/bbs/delete";
 import { getUpdate } from "store/module/bbs/update";
-import { Link } from "react-router-dom";
+import Modal from "react-modal";
 
 
 
@@ -14,13 +13,46 @@ class UpdatePaneContainer extends Component {
   state = {
     titleValue:this.props.title,
     textValue: this.props.content,
-    pwValue : ""
+    modalIsOpen: false,
+    modalMessage:'',
   };
 
+  openModal=()=> {
+    if(!this.state.modalIsOpen){
+      this.setState({modalIsOpen: true});
+    }    
+  }
+ 
+  closeModal=()=> {
+    if(this.state.modalIsOpen){
+      this.setState({modalIsOpen: false});
+      document.location='/';
+    }
+  }
+
   componentDidMount() {
+    Modal.setAppElement("#updatePaneContainer");    
+
     const { getRead } = this.props; //stateToProps
     const {pageNum} = this.props; //parent To Props
     getRead(pageNum); //pageNum = 게시글 id
+  }
+
+  componentDidUpdate = (prevProps, prevState)=>{
+    const { updateLoading, updateError,updateMessage } = this.props; //state to props
+  //  console.log('디드업데이트 콜');
+   
+
+    if(prevProps.updateMessage !== updateMessage){
+      console.log('did',updateMessage);
+      if(!updateLoading && !updateError && updateMessage==='success'){
+        if(!alert("수정 성공")) document.location = '/';  
+      
+      }else if(updateError || (!updateLoading&&updateMessage===undefined)){
+        alert('실패');
+      }
+    }
+    
   }
 
   onTextAreaChange = (event)=>{
@@ -31,9 +63,9 @@ class UpdatePaneContainer extends Component {
     this.setState({...this.state,titleValue: event.target.value});
   }
 
-  onPwTextChange = (event)=>{
-    this.setState({...this.state,pwValue: event.target.value});
-  }
+  // onPwTextChange = (event)=>{
+  //   this.setState({...this.state,pwValue: event.target.value});
+  // }
 
   delete = ()=>{
     const {idx, name,getDelete} = this.props; //state To props
@@ -48,13 +80,13 @@ class UpdatePaneContainer extends Component {
   }
 
   update = ()=>{      
-    const {idx, name, getUpdate} = this.props; //state To props
-    const {pwValue, titleValue, textValue} = this.state;
+    const {idx, name,pw, getUpdate} = this.props; //state To props
+    const { titleValue, textValue} = this.state;
 
     const data ={
       idx,
       name,
-      pw : pwValue,
+      pw,
       title : titleValue,
       content : textValue,
     }
@@ -75,10 +107,10 @@ class UpdatePaneContainer extends Component {
           <td>name</td>
           <td><input name={'name'} value={name} onChange={()=>{}} readOnly={true} disabled={true}/></td>
         </tr>
-        <tr>
+        {/* <tr>
           <td>pw</td>
           <td><input name={'pw'} value={this.state.pwValue} onChange={this.onPwTextChange}/></td>
-        </tr>
+        </tr> */}
         <tr>
           <td>title</td>
           <td><input name={'title'} value={this.state.titleValue} onChange={this.onTitleTextChange} /></td>
@@ -104,7 +136,7 @@ class UpdatePaneContainer extends Component {
   
   render() {
     return (
-      <div>
+      <div  id="updatePaneContainer" >
         <header>
           <h1>Update</h1>
         </header>
@@ -115,7 +147,7 @@ class UpdatePaneContainer extends Component {
             </table>
           </article>
           <button onClick={this.update}>글 수정</button>          
-          <button onClick={this.delete}>글 삭제</button> 
+          {/* <button onClick={this.delete}>글 삭제</button>  */}
           
         </form>
         <footer>
@@ -140,9 +172,9 @@ const mapStateToProps = (state)=>{
     regdate : state.read.getIn(['data','regdate']),
     modifydate : state.read.getIn(['data','modifydate']),
 
-    deleteMessage : state.delete.get('message'),
-    deleteLoading : state.delete.get('loading'),
-    deleteError : state.delete.get('error'),
+    // deleteMessage : state.delete.get('message'),
+    // deleteLoading : state.delete.get('loading'),
+    // deleteError : state.delete.get('error'),
 
     updateMessage : state.update.get('message'),
     updateLoading : state.update.get('loading'),
@@ -155,7 +187,7 @@ const mapDispatchToProps = (dispatch)=>{
   return {
     getRead : (id)=>{dispatch(getRead(id))},
     getUpdate : (data)=>{dispatch(getUpdate(data))},
-    getDelete : (data)=>{dispatch(getDelete(data))},    
+    // getDelete : (data)=>{dispatch(getDelete(data))},    
   }
 }
 

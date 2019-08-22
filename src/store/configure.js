@@ -14,6 +14,6 @@ const middleware = createPromise({
     promiseTypeSuffixes:['PENDING','SUCCESS','FAILURE']
 });
 
-const configure = createStore(reducers, applyMiddleware(middleware));
+const configure = createStore(reducers,  applyMiddleware(middleware));
 
 export default configure;

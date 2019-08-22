@@ -58,3 +58,32 @@ body {
     -webkit-font-smoothing: antialiased;
     background-color: #f7f8fa
 }
+
+
+.modal{
+    position: absolute;
+    top: 30%;
+    left: 30%;
+    right: 30%;
+    bottom: 30%;
+    background-color: white;
+}
+
+.overlay {  
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(245, 245, 245, 0.842);
+}
+
+.resultModal{
+    position:absolute;
+    top:50%; left:50%;
+    transform: translate(-50%, -50%);
+    
+
+    /* background-color :red; */
+}
+

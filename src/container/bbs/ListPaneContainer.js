@@ -23,6 +23,19 @@ class ListPaneContainer extends React.Component {
     }
   }
 
+  // componentDidUpdate = (prevProps, prevState)=>{
+  //   const { loading, error,message } = this.props; //state to props
+  //   console.log('did',message);
+
+  //   if(!loading && !error && message==='success'){
+  //     if(!alert("작성 성공")) document.location = '/';     
+      
+  //   }else if(error || (!loading&&message===undefined)){
+  //     alert('실패');
+  //   }
+    
+  // }
+
   drawList = () =>
     this.props.content.map((e, i) => {
       return (

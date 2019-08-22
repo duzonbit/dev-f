@@ -8,6 +8,7 @@ import ReadPage from "pages/bbs/ReadPage";
 import { UrlBbs } from "url/bbs";
 
 const App = () => {
+  
   return (
       <Switch>
         <Route exact path={`/`} component={ListPage} />
@@ -17,6 +18,8 @@ const App = () => {
         <Route exact path={`${UrlBbs.update}:num`} component={UpdatePage} />
 
       </Switch>
+
+
   );
 };
 

@@ -4,6 +4,7 @@ import CommonAsider from "component/common/asider";
 import CommonFooter from "component/common/footer";
 import CommonEmpty from "component/common/empty";
 import ListPaneContainer from "container/bbs/ListPaneContainer.js";
+import SignInPaneContainer from "container/sign/SignInPaneContainer"
 
 import styles from "./ListPage.scss";
 import classNames from "classnames/bind";
@@ -21,7 +22,7 @@ const ListPage = (props) => {
           <ListPaneContainer pageNum={props.match.params.num} />
         </article>
         <aside className={cx("list-right")}>
-          <CommonEmpty />
+          <SignInPaneContainer/>
         </aside>
       </section>
       <CommonFooter />
