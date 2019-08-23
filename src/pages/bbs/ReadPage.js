@@ -10,9 +10,9 @@ const ReadPage = (props) => {
   return (
     <div>
     <GeneralTemplate>
-      <ReadPaneContainer readNum={readNum} history={props.history} key="section"/>
-      <SignInPaneContainer key="right" />
-      <CommentPaneContainer readNum={readNum} key="bottom"/>
+    <SignInPaneContainer key="left" />
+    <ReadPaneContainer readNum={readNum} history={props.history} key="section"/>
+    <CommentPaneContainer readNum={readNum} key="bottom"/>
     </GeneralTemplate>
     </div>
   )

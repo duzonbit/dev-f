@@ -10,14 +10,15 @@ const GeneralTemplate = (props) => {
   return (
     <div>
       {childrens["top"] ? childrens["top"] : <CommonHeader />}
-      <div style={{ overflow: "hidden"}}>
-        <aside style={{ float: "left",  width:"30%"  }}>
+      <div>
+        <aside>
           {childrens["left"] ? childrens["left"] : <CommonAsider />}
         </aside>
-        <article style={{ float: "left", width:"40%" }}>
+        <article>
           {childrens["section"]}
+
         </article>
-        <aside style={{ float: "left" }}>
+        <aside>
           {childrens["right"] ? childrens["right"] : <CommonAsider />}
         </aside>
       </div>

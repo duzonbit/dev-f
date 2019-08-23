@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 
-
 import GeneralSubTitle from "component/bbs/general/GeneralSubTitle";
 import GeneralUpdateData from "component/bbs/update/GeneralUpdateData";
 import GeneralActionButton from "component/bbs/update/GeneralActionButton";
@@ -56,7 +55,7 @@ const UpdatePaneContainer = (props) => {
 
   return (
     <>
-      <GeneralSubTitle subtitle={"업데이트"} />
+      <GeneralSubTitle subtitle={"글 업데이트"} />
       <GeneralUpdateData
         idx={props.idx}
         name={props.name}

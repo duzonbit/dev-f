@@ -1,6 +1,6 @@
 import React,{useEffect} from "react";
-import { Link } from "react-router-dom";
-import { UrlBbs } from "url/bbs";
+// import { Link } from "react-router-dom";
+// import { UrlBbs } from "url/bbs";
 import { connect } from "react-redux";
 import GeneralPageNation from "component/bbs/list/GeneralPageNation";
 import GeneralListData from "component/bbs/list/GeneralListData";
@@ -18,9 +18,6 @@ const ListPaneContainer = (props) => {
     <GeneralSubTitle subtitle={"게시판"}/>
     <GeneralListData content={props.content} />
     <GeneralPageNation pageNumber={props.pageNumber} pageSize={props.pageSize} totalPages={props.totalPages} />
-    <Link to={UrlBbs.create}>
-      <button>글쓰기</button>
-    </Link>
     </div>
   )
 }
