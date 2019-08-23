@@ -8,18 +8,16 @@ const CommentPaneContainer = (props) => {
   const [commentPageSize, setCommentPageSize] = useState("10");
   const [commentTotal, setCommentTotal] = useState("");
 
-  const onChange = () => {
+  useEffect(() => {
     AjaxComment.read(props.readNum).then((result) => {
       setComments(result.data.content);
       setCommentNum(result.data.pageable.pageNumber);
       setCommentPageSize(result.data.pageable.pageSize);
       setCommentTotal(result.data.totalPages);
     });
-  };
-
-  useEffect(() => {
-    onChange();
   }, [props]);
+
+
 
   const onCreate = () => {};
 
@@ -44,11 +42,12 @@ const CommentPaneContainer = (props) => {
           ? commentTotal
           : initIndex + commentPageSize;
       let paging = [];
-
+      
       console.log(initIndex);
-
+      
       for (let index = initIndex + 1; index <= page_max; index++) {
-        paging.push(<button onClick={onChange}>{index}</button>);
+        
+        paging.push(<button>{index}</button>);
       }
       let first = <button>{"<<"}</button>;
       let last = <button>{">>"}</button>;
