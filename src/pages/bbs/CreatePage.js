@@ -1,16 +1,17 @@
 import React from "react";
-import CommonFooter from "component/common/footer";
-import CommonHeader from "component/common/header";
+
 import CreatePaneContainer from "container/bbs/CreatePaneContainer.js";
+import SignInPaneContainer from "container/sign/SignInPaneContainer";
 
 import GeneralTemplate from "component/template/general/GeneralTemplate";
 
 const CreatePage = (props) => {
   return (
     <div>
-      <CommonHeader />
-      <CreatePaneContainer history={props.history}/>
-      <CommonFooter />
+      <GeneralTemplate>
+        <CreatePaneContainer history={props.history} key="section"/>
+        <SignInPaneContainer key="right" />
+      </GeneralTemplate>
     </div>
   );
 };

@@ -1,4 +1,4 @@
-import React from "react";
+import React,{useEffect} from "react";
 import { Link } from "react-router-dom";
 import { UrlBbs } from "url/bbs";
 import { connect } from "react-redux";
@@ -8,9 +8,10 @@ import GeneralSubTitle from "component/bbs/general/GeneralSubTitle";
 import { getList } from "store/module/bbs/list";
 
 const ListPaneContainer = (props) => { 
-  if(props.pageNumber !== props.pageNum-1)
-    props.getList(props.pageNum)
-    
+  useEffect(() => {
+    props.getList(props.pageNum);
+  }, [props.t,props.pageNum])
+
   return (
     <div>
     <GeneralSubTitle subtitle={"게시판"}/>

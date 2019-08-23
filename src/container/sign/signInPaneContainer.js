@@ -7,16 +7,14 @@ import UserComponent from "component/sign/UserComponent";
 
 class SignInPaneContainer extends Component {
 
-onSubmit = (event) => {
+  onSubmit = (event) => {
     event.preventDefault();
     let data = {};
     const formData = new FormData(event.target);
-    for (let key of formData.keys()) {
-        console.log(key);
-        
-        data[key] = formData.get(key);
+    
+    for(var pair of formData.entries()) {
+      data[pair[0]] = pair[1];
     }
-    // console.log(data);
 
     // 유효성 검사
     if (data.user_id === "" && data.pw === "") {

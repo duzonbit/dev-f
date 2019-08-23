@@ -1,16 +1,17 @@
 import React from 'react'
-import CommonFooter from "component/common/footer";
-import CommonHeader from "component/common/header";
 import UpdatePaneContainer from "container/bbs/UpdatePaneContainer.js";
+import SignInPaneContainer from "container/sign/SignInPaneContainer";
 
 import GeneralTemplate from "component/template/general/GeneralTemplate";
 
 const UpdatePage = (props) => {
   return (
     <div>
-    <CommonHeader />
-    <UpdatePaneContainer pageNum={props.match.params.num} history={props.history}/>
-    <CommonFooter />
+    <GeneralTemplate>
+    <UpdatePaneContainer pageNum={props.match.params.num} history={props.history} key="section"/>
+    <SignInPaneContainer key="right" />
+    </GeneralTemplate>
+
     </div>
   )
 }
