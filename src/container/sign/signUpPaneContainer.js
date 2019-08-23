@@ -3,12 +3,12 @@ import Modal from "react-modal";
 import SignUpModal from "component/modals/SignUpModal";
 import { connect } from "react-redux";
 import { AjaxSign } from "url/sign";
+import { nextTick } from 'q';
+// import { resolve, ADDRGETNETWORKPARAMS } from 'dns';
+// import { reject } from 'q';
 class SignUpPaneContainer extends Component {
   state = {
     modalIsOpen: false,
-    // user_id: '',
-    // pw: '',
-    // name: '',
   };
 
   data={}
@@ -33,7 +33,7 @@ class SignUpPaneContainer extends Component {
     Modal.setAppElement("#signUpComponent");
   }
 
-  onSubmit = event => {
+  onSubmit = async event => {
     event.preventDefault();
     
     const formData = new FormData(event.target);
@@ -48,68 +48,58 @@ class SignUpPaneContainer extends Component {
 
     if (this.data.user_id === "" || this.data.name === "" || this.data.pw === "") {
         alert("공백입니다")
-        // this.setState({
-        //     user_id: '',
-        //      pw: '',
-        //     name: '',
-        // })
     } else if (!regExp.test(this.data.user_id) || !regExp.test(this.data.pw)) {
         alert("형식에 맞지 않습니다")
-        // this.setState({
-        //     user_id: '',
-        //     pw: '',
-        //     name: '',
-        // })
     } else if (this.data.user_id === this.data.pw) {
         alert("비밀번호와 아이디가 같습니다")
-        // this.setState({
-        //     user_id: '',
-        //     pw: '',
-        //     name: '',
-        // })
     } else if (!regName.test(this.data.name)) {
         alert("이름이 이상합니다")
-        // this.setState({
-        //     user_id: '',
-        //     pw: '',
-        //     name: '',
-        // })
     } else {
-        if(this.idCheck(this.data.user_id)){
-            this.loginAjax(this.data)
-        }
-    }
-  };
+      
+        await (this.idCheck(this.data.user_id)).then((result)=>{
+            if(result){
+              this.registerAjax(this.data);
+            }
+            
+        });   
+  }
+}
+  
 
-  idCheck(data) {
-      AjaxSign.idCheck(data).then((data) => {
-          if (data.data.message === 'success') {
-              console.log(data);
+  idCheck=(user_id)=>{
+    // new Promise((res,res)=>{
+
+    // }).the
+    return(
+        AjaxSign.idCheck(user_id)
+        .then((response) => {
+          console.log(response.data.message);
+          
+            if(response.data.message === 'success'){
+              console.log('res message : ',response.data.message);
               alert("사용가능한 아이디입니다");
-              this.props.history.push('/');
-          } else if (data.data.message === 'fail') {
+              return true;
+              
+            }else if (response.data.message === 'fail') {
               alert("아이디 중복 입니다.");
-              this.setState({
-                  user_id: '',
-                  pw: '',
-                  name: '',
-              })
-          }
-      }).catch((e) => {
-          console.log(e);
-      });
-      return true;
+              return false;
+            }
+        }).catch((err)=>{console.log(err)})
+    )
   }
 
 
-  loginAjax(data) {
-      AjaxSign.register(data).then((data) => {
-          console.log(data);
-          alert("회원가입 완료");
-          this.props.history.push('/');
-      }).catch((e) => {
-          console.log(e);
-      });
+  registerAjax = (data) => {
+    console.log('레지스터호출');
+    
+     AjaxSign.register(data)
+        .then((data) => {
+            alert("회원가입 완료");
+            this.closeModal();
+        }).catch((e) => {
+            alert("회원가입 에러");
+            console.log("register Error : ",e);
+        });
   }
 
   render() {
@@ -131,7 +121,7 @@ class SignUpPaneContainer extends Component {
             closeModal={this.closeModal}
             onSubmit={this.onSubmit}
             idCheck={this.idCheck}
-            loginAjax={this.loginAjax}
+            registerAjax={this.registerAjax}
           />
         </Modal>
       </div>
@@ -140,19 +130,13 @@ class SignUpPaneContainer extends Component {
 }
 
 
-const mapStateToProps=(state)=>{
-    return{
-      user_id : state.signIn.get('signInId'),
-    }
-}
-
-const mapDispatchToProps=(dispatch)=>{
-    return{
-    //   reqSignUp : (data)=>{dispatch(reqSignIn(data))}, //사인업 액션
-    }
+const mapStateToProps = (state)=>{
+  return{
+    user_id : state.signIn.get('signInId'),
+  }
 }
 
 export default connect(
-    mapStateToProps,
-    mapDispatchToProps,
+  mapStateToProps,
+  null
 )(SignUpPaneContainer);
