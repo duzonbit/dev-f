@@ -2,32 +2,36 @@ import React from "react";
 import CommonHeader from "component/common/header";
 import CommonAsider from "component/common/asider";
 import CommonFooter from "component/common/footer";
-import CommonEmpty from "component/common/empty";
 import ListPaneContainer from "container/bbs/ListPaneContainer.js";
+import SignInPaneContainer from "container/sign/SignInPaneContainer"
 
-import styles from "./ListPage.scss";
-import classNames from "classnames/bind";
-const cx = classNames.bind(styles);
+import GeneralTemplate from "component/template/general/GeneralTemplate";
 
 const ListPage = (props) => {
   let pageNum=typeof props.match.params.num === "undefined"? 1:props.match.params.num;
   return (
-    <div>
-      <CommonHeader />
-      <section className={cx("list-section")}>
-        <aside className={cx("list-left")}>
-          <CommonAsider />
-        </aside>
-        <article className={cx("list-content")}>
-          <ListPaneContainer pageNum={pageNum} />
-        </article>
-        <aside className={cx("list-right")}>
-          <CommonEmpty />
-        </aside>
-      </section>
-      <CommonFooter />
-    </div>
-  );
-};
+    <GeneralTemplate>
+      <ListPaneContainer pageNum={pageNum} key="aritcle" />
+      <SignInPaneContainer key="right"/>
+    </GeneralTemplate>
 
-export default ListPage;
+    );
+  };
+  
+  export default ListPage;
+  
+  // <div>
+  //   <CommonHeader/>
+  //   <aside>
+  //     <aside>
+  //       <CommonAsider/>
+  //     </aside>
+  //     <article>
+  //       <ListPaneContainer pageNum={pageNum} />
+  //     </article>
+  //     <aside>
+  //       <SignInPaneContainer/>
+  //     </aside>
+  //   </aside>
+  //   <CommonFooter />
+  // </div>
