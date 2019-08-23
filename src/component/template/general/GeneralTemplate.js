@@ -10,7 +10,6 @@ const GeneralTemplate = (props) => {
       const element = props.children[key];
     }
     console.log(key);
-    
   }
   return (
     <div>
