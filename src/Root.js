@@ -5,7 +5,7 @@ import { Provider } from "react-redux";
 import configure  from "store/configure";
 
 const store = configure;
-configure.subscribe(() => console.log("현재상태", store.getState()));
+// configure.subscribe(() => console.log("현재상태", store.getState()));
 const Root = () => (
   <Provider store={store}>
     <BrowserRouter>

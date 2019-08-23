@@ -10,7 +10,8 @@ import { getList } from "store/module/bbs/list";
 const ListPaneContainer = (props) => { 
   useEffect(() => {
     props.getList(props.pageNum);
-  }, [props.t,props.pageNum])
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [props.pageNum])
 
   return (
     <div>

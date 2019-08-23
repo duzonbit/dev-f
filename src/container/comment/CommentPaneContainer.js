@@ -4,28 +4,34 @@ import { AjaxComment } from "url/comment";
 
 const CommentPaneContainer = (props) => {
   const [res, setRes] = useState({});
+  const [comments,setComments] = useState([]);
+
   useEffect(() => {
     AjaxComment.read(props.readNum).then((resolve)=>{
       setRes(resolve);
+      setComments(resolve.data);
       console.log(resolve);
     });
   },[props]);
+  
+  
 
   // const onCreate = ()=>{
 
   // }
-
-  // const onResfresh = () => {
-
-  // }
-
+  
   // const onDelete = (idx)=>{
 
   // }
 
-  // const renderComment = ()=>{
-
-  // }
+  const renderList = ()=>comments.map((v,i)=>(
+    <tr key={i}>
+      <th>{v["name"]}</th>
+      <th>{v["content"]}</th>
+      <th><button>삭제</button></th>
+    </tr>
+  ));
+  // const renderPaging = () => 
 
   return (
     <article>
@@ -33,15 +39,14 @@ const CommentPaneContainer = (props) => {
       <table>
         <thead>
           <tr>
-            <th>idx</th>
-            <th>board_idx</th>
-            <th>user_idx</th>
             <th>name</th>
             <th>content</th>
             <th>delete</th>
           </tr>
         </thead>
-        <tbody />
+        <tbody>
+          {renderList()}
+        </tbody>
       </table>
     </article>
   );

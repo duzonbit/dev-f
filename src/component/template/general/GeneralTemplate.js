@@ -3,29 +3,25 @@ import CommonHeader from "component/common/header";
 import CommonAsider from "component/common/asider";
 import CommonFooter from "component/common/footer";
 const GeneralTemplate = (props) => {
-  console.log(props);
-  let data = {};
-  for (const key in props.children) {
-    if (props.hasOwnProperty(key)) {
-      const element = props.children[key];
-    }
-    console.log(key);
-  }
+  let childrens = [];
+  props.children.forEach((element) => {
+    childrens[element.key] = element;
+  });
   return (
     <div>
-      <CommonHeader />
-      <aside>
-        <aside>
-          <CommonAsider />
+      {childrens["top"] ? childrens["top"] : <CommonHeader />}
+      <div style={{ overflow: "hidden"}}>
+        <aside style={{ float: "left",  width:"30%"  }}>
+          {childrens["left"] ? childrens["left"] : <CommonAsider />}
         </aside>
-        <article>
-          {props.children[0]}
+        <article style={{ float: "left", width:"40%" }}>
+          {childrens["section"]}
         </article>
-        <aside>
-          {props.children[1]}
+        <aside style={{ float: "left" }}>
+          {childrens["right"] ? childrens["right"] : <CommonAsider />}
         </aside>
-      </aside>
-      <CommonFooter />
+      </div>
+      {childrens["bottom"] ? childrens["bottom"] : <CommonFooter />}
     </div>
   );
 };
