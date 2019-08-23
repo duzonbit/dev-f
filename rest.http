@@ -43,3 +43,7 @@ User-Agent: rest-client
 }
 // "proxy": "http://dev-b.zcvfcat.ga",
 // "proxy": "http://localhost:63002",
+
+###
+
+GET http://dev-b.zcvfcat.ga/comment/1
