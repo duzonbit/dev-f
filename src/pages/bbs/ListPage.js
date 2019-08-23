@@ -5,6 +5,7 @@ import CommonFooter from "component/common/footer";
 import CommonEmpty from "component/common/empty";
 import ListPaneContainer from "container/bbs/ListPaneContainer.js";
 import SignInPaneContainer from "container/sign/SignInPaneContainer"
+import SignUpPaneContainer from "container/sign/SignUpPaneContainer"
 
 import styles from "./ListPage.scss";
 import classNames from "classnames/bind";
@@ -23,6 +24,7 @@ const ListPage = (props) => {
         </article>
         <aside className={cx("list-right")}>
           <SignInPaneContainer/>
+          <SignUpPaneContainer/>
         </aside>
       </section>
       <CommonFooter />

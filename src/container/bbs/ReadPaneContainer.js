@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { getRead } from "store/module/bbs/read";
 import { getDelete } from "store/module/bbs/delete";
-import AskModal from "component/bbs/modals/AskModal";
+import AskModal from "component/modals/AskModal";
 import Modal from "react-modal";
 
 class ReadPaneContainer extends Component {

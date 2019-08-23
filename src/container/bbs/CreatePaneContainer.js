@@ -1,7 +1,7 @@
 import React from 'react';
 import { getCreate } from "store/module/bbs/create";
 import { connect } from "react-redux";
-import ResultNotifyModal from "component/bbs/modals/ResultNotifyModal";
+import ResultNotifyModal from "component/modals/ResultNotifyModal";
 import Modal from "react-modal";
 
 class CreatePaneContainer extends React.Component {

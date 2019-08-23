@@ -7,7 +7,7 @@ const UserComponent = (props) => {
             로그아웃 액션 */}
             
             Hello<h3>{props.user_id}</h3>
-            <button>로그아웃</button>
+            <button onClick={props.signOut}>로그아웃</button>
         </div>
     );
 };

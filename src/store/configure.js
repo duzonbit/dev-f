@@ -11,6 +11,7 @@ const reducers = combineReducers({
     delete : bbsModules.delete,
 
     signIn : signModules.signIn,
+    // signOut : signModules.signOut,
 });
 
 const middleware = createPromise({

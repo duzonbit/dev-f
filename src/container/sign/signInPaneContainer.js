@@ -1,9 +1,8 @@
 import React, { Component } from "react";
-import { reqSignIn } from "store/module/sign/signIn";
+import { reqSignIn, reqSignOut } from "store/module/sign/signInOut";
 import { connect } from "react-redux";
 import LoginComponent from "component/sings/LoginComponent";
 import UserComponent from "component/sings/UserComponent";
-
 
 class SignInPaneContainer extends Component {
 
@@ -26,6 +25,12 @@ onSubmit = (event) => {
     }
 }
 
+signOut = ()=>{
+  this.props.reqSignOut();
+  /// 여기서 쿠키 제거 작업
+  alert('로그아웃 됨')
+}
+
 componentDidUpdate = (prevProps, prevState) => {
   const { loading, error, message, user_id } = this.props; //state to props
   // console.log('콜');
@@ -34,6 +39,7 @@ componentDidUpdate = (prevProps, prevState) => {
   if (prevProps.message !== message) {
     if (message === 'success' && user_id !== null) {
       alert('로그인 성공')
+      //쿠키 등록 작업
     } else if (!loading && !error &&message === 'fail') {
       alert("아이디 비번 확인");
     } else if (error) {
@@ -42,16 +48,14 @@ componentDidUpdate = (prevProps, prevState) => {
   }
 };
 
-
   render() {
     return (
       <div>
         {
           this.props.user_id === null
         ?(<LoginComponent onSubmit={this.onSubmit}/>)
-        :(<UserComponent user_id={this.props.user_id}/>)
+        :(<UserComponent user_id={this.props.user_id} signOut={this.signOut}/>)
       }
-
       </div>
     );
   }
@@ -69,6 +73,7 @@ const mapStateToProps=(state)=>{
 const mapDispatchToProps=(dispatch)=>{
   return{
     reqSignIn : (data)=>{dispatch(reqSignIn(data))},
+    reqSignOut : ()=>{dispatch(reqSignOut())},
   }
 }
 

@@ -59,8 +59,11 @@ export default  handleActions({
     },
     [GET_LIST_SUCCESS] : (state,action)=>{
         console.log('list 요청 성공');
-
+        console.log('list.state',state);
+        
         const { data, status } = action.payload;
+        // console.log('ppppp',action.payload);
+        
         const newState = state.set('loading',false)
                               .set('error',false)
                               .set('status',status)
