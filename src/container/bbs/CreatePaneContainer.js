@@ -1,6 +1,7 @@
 import React,{useEffect} from "react";
 import { connect } from "react-redux";
 import GeneralCreateForm from "component/bbs/create/GeneralCreateForm";
+import GeneralSubTitle from "component/bbs/general/GeneralSubTitle";
 import { getListInit } from "store/module/bbs/list";
 import { getCreate } from "store/module/bbs/create";
 
@@ -27,7 +28,11 @@ const CreatePaneContainer = (props) => {
     props.getCreate(data);
   };
 
-  return <GeneralCreateForm onSubmit={onSubmit} />;
+  return (
+    <>
+    <GeneralSubTitle subtitle={"글쓰기"}/>
+  <GeneralCreateForm onSubmit={onSubmit} />
+  </>);
 };
 
 export default connect(

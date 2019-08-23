@@ -37,7 +37,7 @@ const ReadPaneContainer = (props) => {
   };
   return (
     <div>
-      <GeneralSubTitle subtitle={"글"} />
+      <GeneralSubTitle subtitle={"글 상세"} />
       <GeneralReadData
         idx={props.idx}
         name={props.name}

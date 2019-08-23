@@ -9,8 +9,8 @@ const CreatePage = (props) => {
   return (
     <div>
       <GeneralTemplate>
+        <SignInPaneContainer key="left" />
         <CreatePaneContainer history={props.history} key="section"/>
-        <SignInPaneContainer key="right" />
       </GeneralTemplate>
     </div>
   );

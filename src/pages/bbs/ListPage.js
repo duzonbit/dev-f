@@ -9,8 +9,8 @@ const ListPage = (props) => {
     typeof props.match.params.num === "undefined" ? 1 : props.match.params.num;
   return (
     <GeneralTemplate>
+      <SignInPaneContainer key="left" />
       <ListPaneContainer pageNum={pageNum} key="section" />
-      <SignInPaneContainer key="right" />
     </GeneralTemplate>
   );
 };

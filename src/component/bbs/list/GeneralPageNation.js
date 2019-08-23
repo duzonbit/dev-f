@@ -1,6 +1,8 @@
 import React from 'react'
 import { Link } from "react-router-dom";
 import { UrlBbs } from "url/bbs";
+import { Container, Row, Col, Button } from "reactstrap";
+
 
 const GeneralPageNation = ({ pageNumber, pageSize, totalPages }) => {
    const paging = () => {
@@ -12,28 +14,28 @@ const GeneralPageNation = ({ pageNumber, pageSize, totalPages }) => {
     for (let index = initIndex + 1; index <= page_max; index++) {
       paging.push(
         <Link key={index} to={UrlBbs.list + index}>
-          <button>{index}</button>
+          <Button className="btn-1" color="primary" outline type="button">{index}</Button>
         </Link>
       );
     }
     let first = (
       <Link key={"first"} to={UrlBbs.list}>
-        <button>{"<<"}</button>
+        <Button className="btn-1" color="primary" outline type="button">{"<<"}</Button>
       </Link>
     );
     let last = (
       <Link key={"last"} to={UrlBbs.list + totalPages}>
-        <button>{">>"}</button>
+        <Button className="btn-1" color="primary" outline type="button">{">>"}</Button>
       </Link>
     );
     let prev = (
       <Link key={"prev"} to={UrlBbs.list + initIndex}>
-        <button>{"<"}</button>
+        <Button className="btn-1" color="primary" type="button">{"<"}</Button>
       </Link>
     );
     let next = (
       <Link key={"next"} to={UrlBbs.list + (page_max + 1)}>
-        <button>{">"}</button>
+        <Button className="btn-1" color="primary" type="button">{">"}</Button>
       </Link>
     );
 
@@ -51,9 +53,15 @@ const GeneralPageNation = ({ pageNumber, pageSize, totalPages }) => {
 
   return (
     <div>
-      {paging()}
+        <Container align="center">
+            <Row className="justify-content-center">
+              <Col lg="12">
+              {paging()}  
+              </Col>
+              </Row>
+              </Container>
     </div>
   )
 }
 
-export default GeneralPageNation
+export default GeneralPageNation;
