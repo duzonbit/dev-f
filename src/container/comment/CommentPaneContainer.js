@@ -19,7 +19,7 @@ const CommentPaneContainer = (props) => {
   // const onCreate = ()=>{
 
   // }
-  
+
   // const onDelete = (idx)=>{
 
   // }
@@ -34,6 +34,13 @@ const CommentPaneContainer = (props) => {
   // const renderPaging = () => 
 
   return (
+    <>
+    <h3>-------------댓글 쓰기---------</h3>
+    <form>
+      <input value={"유저 아이디"}/>
+      <input/>
+      <button><span>삭제</span></button>
+    </form>
     <article>
       <h3>-----------댓글-----------</h3>
       <table>
@@ -49,6 +56,7 @@ const CommentPaneContainer = (props) => {
         </tbody>
       </table>
     </article>
+    </>
   );
 };
 
