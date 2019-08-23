@@ -1,6 +1,6 @@
 import React from "react";
 import CommonHeader from "component/common/header";
-import CommonAsider from "component/common/asider";
+// import CommonAsider from "component/common/asider";
 import CommonFooter from "component/common/footer";
 const GeneralTemplate = (props) => {
   console.log(props);
@@ -15,9 +15,9 @@ const GeneralTemplate = (props) => {
     <div>
       <CommonHeader />
       <aside>
-        <aside>
+        {/* <aside>
           <CommonAsider />
-        </aside>
+        </aside> */}
         <article>
           {props.children[0]}
         </article>

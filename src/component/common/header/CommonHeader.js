@@ -1,24 +1,30 @@
-import React from "react";
-import styles from "./CommonHeader.scss";
-import classNames from "classnames/bind";
-import logo from "asset/img/logo.png";
+import React, { Component } from 'react';
 
-const cx = classNames.bind(styles);
+import {
+    NavbarBrand,
+    Navbar,
+    Container,
+} from "reactstrap";
 
-const CommonHeader = () => {
-  return (
-    <header className={cx("header")}>
-      <div className={cx("header-left")}>
-        <img className={cx('header-logo-img')} src={logo} alt="logo"></img>
-      </div>
-      <div className={cx("header-content")}>
-        <h1>Header content</h1>
-      </div>
-      <div className={cx("header-right")}>
-        
-      </div>
-    </header>
-  );
-};
+class CommonHeader extends Component {
+    render() {
+        return (
+          <>
+          <section>
+          <Navbar className="navbar-dark bg-default" expand="lg">
+            <Container>
+              <NavbarBrand href="/" onClick={e => e.preventDefault()}>
+                2JO
+              </NavbarBrand>
+              <button className="navbar-toggler" id="navbar-info">
+                <span className="navbar-toggler-icon" />
+              </button>
+            </Container>
+          </Navbar>
+          </section>
+          </>
+        );
+    }
+}
 
 export default CommonHeader;
