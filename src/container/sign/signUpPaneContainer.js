@@ -128,7 +128,7 @@ class SignUpPaneContainer extends Component {
     );
   }
 }
-
+//C
 
 const mapStateToProps = (state)=>{
   return{
