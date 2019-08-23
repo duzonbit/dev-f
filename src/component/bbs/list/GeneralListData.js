@@ -64,7 +64,7 @@ const GeneralListData = ({ content }) => {
                   </Row>
                   <div>
                     <table style={{width:'1000px'}}>
-                        <thead>
+                        <thead align="center">
                             <tr>
                                 <th>글번호</th>
                                 <th>이름</th>
@@ -74,7 +74,7 @@ const GeneralListData = ({ content }) => {
                                 <th>글변경일</th>
                             </tr>
                         </thead>
-                        <tbody>{drawList}</tbody>
+                        <tbody align="center">{drawList}</tbody>
                     </table>
                   </div>
                   <div className="mt-5 py-5 text-center">
