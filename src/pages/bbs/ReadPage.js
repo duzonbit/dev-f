@@ -12,8 +12,8 @@ const ReadPage = (props) => {
     <GeneralTemplate>
     <SignInPaneContainer key="left" />
     <ReadPaneContainer readNum={readNum} history={props.history} key="section"/>
-    <CommentPaneContainer readNum={readNum} key="bottom"/>
-    </GeneralTemplate>
+    <CommentPaneContainer readNum={readNum} history={props.history} key="bottom"/>
+    </GeneralTemplate> 
     </div>
   )
 }
