@@ -1,6 +1,5 @@
 import React from "react";
 import { Route, Switch } from "react-router-dom";
-
 import CreatePage from "pages/bbs/CreatePage";
 import ListPage from "pages/bbs/ListPage";
 import UpdatePage from "pages/bbs/UpdatePage";

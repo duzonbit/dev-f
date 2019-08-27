@@ -1,6 +1,7 @@
 import { handleActions } from 'redux-actions';
 import { Map, List } from 'immutable';
 import { AjaxBbs } from 'url/bbs';
+<<<<<<< HEAD
 
 const GET_LIST = 'list/GET_LIST'; 
 
@@ -10,12 +11,30 @@ const GET_LIST_SUCCESS = `${GET_LIST}_SUCCESS`;
 const GET_LIST_FAILURE = `${GET_LIST}_FAILURE`;
 
 export const getList = (page)=>{
+=======
+import { stateSelector } from "store/module/bbs";
+
+
+/* action types */
+const GET_LIST = 'list/GET_LIST'; //게시판 불러오기
+
+const GET_LIST_PENDING = `${GET_LIST}_PENDING`; //요청시작
+const GET_LIST_SUCCESS = `${GET_LIST}_SUCCESS`; //요청성공
+const GET_LIST_FAILURE = `${GET_LIST}_FAILURE`; //요청 실패
+
+
+/* action creators */
+export const getList = (page)=>{
+    console.log('list 액션 날림');
+    
+>>>>>>> origin/youngwon
     return {
         type : GET_LIST,
         payload : AjaxBbs.list(page),
     }
 }
 
+<<<<<<< HEAD
 export const getListInit = () => ({
     type: GET_LIST_INIT,
   });
@@ -23,6 +42,12 @@ export const getListInit = () => ({
 
 const initialState = Map({
     loading : true,
+=======
+
+/* initial state */
+const initialState = Map({
+    loading : false,
+>>>>>>> origin/youngwon
     error : false,
     status : 0,
     data:Map({
@@ -38,6 +63,7 @@ const initialState = Map({
             })
         ]),
         pageable:Map({
+<<<<<<< HEAD
             pageSize : ``,
             pageNumber : ``,
         }),
@@ -50,12 +76,35 @@ export default  handleActions({
         return initialState;
     },
     [GET_LIST_PENDING] : (state,action)=>{
+=======
+            pageSize : 0,
+            pageNumber : 0,
+        }),
+        totalPages : 0,
+    })
+})
+
+
+/* reducer */
+export default  handleActions({
+    [GET_LIST_PENDING] : (state,action)=>{
+        console.log('list 요청 준비');
+>>>>>>> origin/youngwon
         const newState = state.set('loading',true)
                               .set('error',false);
         return newState;
     },
     [GET_LIST_SUCCESS] : (state,action)=>{
+<<<<<<< HEAD
         const { data, status } = action.payload;
+=======
+        console.log('list 요청 성공');
+        console.log('list.state',state);
+        
+        const { data, status } = action.payload;
+        // console.log('ppppp',action.payload);
+        
+>>>>>>> origin/youngwon
         const newState = state.set('loading',false)
                               .set('error',false)
                               .set('status',status)
@@ -68,6 +117,10 @@ export default  handleActions({
 
     },
     [GET_LIST_FAILURE] : (state,action)=>{
+<<<<<<< HEAD
+=======
+        console.log('list 요청 에러');
+>>>>>>> origin/youngwon
         const newState = state.set('loading',false)
                               .set('error',true);
 
