@@ -1,6 +1,7 @@
 import React from "react";
 import CommonHeader from "component/common/header";
 import CommonFooter from "component/common/footer";
+
 const GeneralTemplate = (props) => {
   let childrens = [];
   props.children.forEach((element) => {
@@ -8,14 +9,20 @@ const GeneralTemplate = (props) => {
   });
   return (
     <div>
-      {childrens["top"] ? childrens["top"] : <CommonHeader />}
-      <div>
-        <article>
-          {childrens["section"]}
-        </article>
-      </div>
-      {childrens["bottom"] ? childrens["bottom"] : <CommonFooter />}
+    {childrens["top"] ? childrens["top"] : <CommonHeader />}
+    <div>
+      <aside>
+        {childrens["left"] ? childrens["left"] : ''}
+      </aside>
+      <article>
+        {childrens["section"]}
+      </article>
+      <aside>
+        {childrens["right"] ? childrens["right"] : ''}
+      </aside>
     </div>
+    {childrens["bottom"] ? childrens["bottom"] : <CommonFooter />}
+  </div>
   );
 };
 
