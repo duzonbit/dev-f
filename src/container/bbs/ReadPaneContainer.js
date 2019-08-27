@@ -31,11 +31,14 @@ const ReadPaneContainer = (props) => {
     props.getRead(props.readNum);
 
   const onDel = () => {
-    let pw = prompt("비밀번호를 입력하세요");
-    props.getDelete(props.idx, {
-      idx: props.idx,
-      name: props.name,
-      pw: pw
+    swal("Write Password", {
+      content: "input",
+    }).then((value) => {
+      props.getDelete(props.idx, {
+        idx: props.idx,
+        name: props.name,
+        pw: value
+      });
     });
   };
   return (
