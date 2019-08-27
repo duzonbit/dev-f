@@ -35,7 +35,7 @@ export default handleActions({
     },
     [GET_UPDATE_SUCCESS]: (state, action) => {
       console.log("update 요청 성공");
-
+      
       const { data, status } = action.payload;
       console.log(data);
       

@@ -23,7 +23,7 @@ const ListPage = (props) => {
           <ListPaneContainer pageNum={props.match.params.num} />
         </article>
         <aside className={cx("list-right")}>
-          <SignInPaneContainer/>
+          <SignInPaneContainer history={props.history}/>
           <SignUpPaneContainer/>
         </aside>
       </section>

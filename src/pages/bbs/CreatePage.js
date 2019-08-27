@@ -4,11 +4,11 @@ import CommonHeader from "component/common/header";
 
 import CreatePaneContainer from "container/bbs/CreatePaneContainer.js";
 
-const CreatePage = () => {
+const CreatePage = (props) => {
   return (
     <div>
       <CommonHeader />
-      <CreatePaneContainer />
+      <CreatePaneContainer history={props.history}/>
       <CommonFooter />
     </div>
   );

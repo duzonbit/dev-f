@@ -13,7 +13,8 @@ class ResultNotifyModal extends Component {
     
     working=()=>{
         if(this.props.work === '수정'){
-            document.location=UrlBbs.update+[this.props.idx];
+            // document.location=UrlBbs.update+[this.props.idx];
+            this.props.history.push(UrlBbs.update+[this.props.idx]);
         }else if(this.props.work === '삭제'){
             this.props.delete();
         }
@@ -27,10 +28,12 @@ class ResultNotifyModal extends Component {
         }
     }
     render() {
+
         return (
           
             <div className='resultModal'>
                 <h5>비밀 번호를 입력하세요</h5>
+               
                 <h5>지울꺼임 : {this.props.pw}</h5>
                 <input value={this.state.input} onChange={this.onTextChange}/>
                 <button onClick={this.pwCheck}>확인</button>

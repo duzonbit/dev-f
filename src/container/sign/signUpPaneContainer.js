@@ -3,9 +3,8 @@ import Modal from "react-modal";
 import SignUpModal from "component/modals/SignUpModal";
 import { connect } from "react-redux";
 import { AjaxSign } from "url/sign";
-import { nextTick } from 'q';
-// import { resolve, ADDRGETNETWORKPARAMS } from 'dns';
-// import { reject } from 'q';
+
+
 class SignUpPaneContainer extends Component {
   state = {
     modalIsOpen: false,
@@ -67,9 +66,6 @@ class SignUpPaneContainer extends Component {
   
 
   idCheck=(user_id)=>{
-    // new Promise((res,res)=>{
-
-    // }).the
     return(
         AjaxSign.idCheck(user_id)
         .then((response) => {
@@ -77,7 +73,7 @@ class SignUpPaneContainer extends Component {
           
             if(response.data.message === 'success'){
               console.log('res message : ',response.data.message);
-              alert("사용가능한 아이디입니다");
+              // alert("사용가능한 아이디입니다");
               return true;
               
             }else if (response.data.message === 'fail') {
@@ -128,7 +124,7 @@ class SignUpPaneContainer extends Component {
     );
   }
 }
-//C
+
 
 const mapStateToProps = (state)=>{
   return{

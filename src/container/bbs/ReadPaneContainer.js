@@ -55,7 +55,7 @@ class ReadPaneContainer extends Component {
 
     if(prevProps.deleteMessage !== deleteMessage){
       if(!deleteLoading && !deleteError && deleteMessage==='success'){
-        if(!alert("삭제 성공")) document.location = '/';  
+        if(!alert("삭제 성공")) /*document.location = '/';  */ this.props.history.push('/');
       
       }else if(deleteError || (!deleteLoading&&deleteMessage===undefined)){
         alert('실패');
@@ -139,6 +139,7 @@ class ReadPaneContainer extends Component {
           name={this.props.name}
           work={this.state.work}
           delete={this.delete}
+          history={this.props.history}
           />
 
         </Modal>

@@ -12,7 +12,7 @@ const LoginComponent = (props) => {
             <label> id </label> <input name="user_id" />
           </div>
           <div>
-            <label> password </label> <input name="pw" />
+            <label> password </label> <input type="password" name="pw" />
           </div>
           <button type="submit"> 로그인 </button>
         </form>

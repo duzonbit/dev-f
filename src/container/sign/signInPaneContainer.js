@@ -3,6 +3,7 @@ import { reqSignIn, reqSignOut } from "store/module/sign/signInOut";
 import { connect } from "react-redux";
 import LoginComponent from "component/sings/LoginComponent";
 import UserComponent from "component/sings/UserComponent";
+import { withCookies } from "react-cookie";
 
 class SignInPaneContainer extends Component {
 
@@ -15,7 +16,6 @@ onSubmit = (event) => {
         
         data[key] = formData.get(key);
     }
-    // console.log(data);
 
     // 유효성 검사
     if (data.user_id === "" && data.pw === "") {
@@ -27,19 +27,18 @@ onSubmit = (event) => {
 
 signOut = ()=>{
   this.props.reqSignOut();
-  /// 여기서 쿠키 제거 작업
+  // this.props.cookies.remove('signedId')// 쿠키 제거
   alert('로그아웃 됨')
+  this.props.history.push('/');
 }
 
 componentDidUpdate = (prevProps, prevState) => {
   const { loading, error, message, user_id } = this.props; //state to props
-  // console.log('콜');
- 
-  
+   
   if (prevProps.message !== message) {
     if (message === 'success' && user_id !== null) {
-      alert('로그인 성공')
-      //쿠키 등록 작업
+      alert('로그인 성공')  
+      // this.props.cookies.set('signedId',user_id);//쿠키 등록
     } else if (!loading && !error &&message === 'fail') {
       alert("아이디 비번 확인");
     } else if (error) {
@@ -49,12 +48,31 @@ componentDidUpdate = (prevProps, prevState) => {
 };
 
   render() {
+    console.log('12321sdfasfw',this.props.cookies.get('signedId'));
+    
     return (
       <div>
-        {
+        {/* {
           this.props.user_id === null
         ?(<LoginComponent onSubmit={this.onSubmit}/>)
         :(<UserComponent user_id={this.props.user_id} signOut={this.signOut}/>)
+      } */}
+       
+       세션아이디: {sessionStorage.getItem('signedId')}<br/>
+       쿠키아이디: {this.props.cookies.get('signedId')}
+      
+      {/* 클라이언트 세션으로 */}
+       {/* {
+          sessionStorage.getItem('signedId') === null
+        ?(<LoginComponent onSubmit={this.onSubmit}/>)
+        :(<UserComponent user_id={sessionStorage.getItem('signedId')} signOut={this.signOut}/>)
+      } */}
+
+      {/* 리액트 쿠키로 */}
+      {
+          this.props.cookies.get('signedId') === undefined
+        ?(<LoginComponent onSubmit={this.onSubmit}/>)
+        :(<UserComponent user_id={this.props.cookies.get('signedId')} signOut={this.signOut}/>)
       }
       </div>
     );
@@ -77,7 +95,7 @@ const mapDispatchToProps=(dispatch)=>{
   }
 }
 
-export default connect(
+export default withCookies(connect(
   mapStateToProps,
   mapDispatchToProps,
-)(SignInPaneContainer);
+)(SignInPaneContainer));

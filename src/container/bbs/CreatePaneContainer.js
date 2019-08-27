@@ -19,7 +19,7 @@ class CreatePaneContainer extends React.Component {
   closeModal = () => {
     if (this.state.modalIsOpen) {
       this.setState({ modalIsOpen: false });
-      document.location = "/";
+      this.props.history.push('/');
     }
   };
 

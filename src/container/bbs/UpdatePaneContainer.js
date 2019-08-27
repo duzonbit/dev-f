@@ -21,7 +21,8 @@ class UpdatePaneContainer extends Component {
   closeModal = () => {
     if (this.state.modalIsOpen) {
       this.setState({ ...this.state, modalIsOpen: false });
-      document.location = "/";
+      // document.location = "/";
+      this.props.history.push('/');
     }
   };
 
@@ -47,7 +48,7 @@ class UpdatePaneContainer extends Component {
     if (prevProps.updateMessage !== updateMessage) {
       console.log("did", updateMessage);
       if (!updateLoading && !updateError && updateMessage === "success") {
-        if (!alert("수정 성공")) document.location = "/";
+        if (!alert("수정 성공")) /*document.location = "/";*/ this.props.history.push('/')
       } else if (updateError || (!updateLoading && updateMessage === undefined)) {
         alert("실패");
       }

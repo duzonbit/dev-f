@@ -4,9 +4,9 @@ import { UrlBbs } from "url/bbs";
 import { connect } from "react-redux";
 import { getList } from "store/module/bbs/list";
 import GeneralPageNation from "component/bbs/pagination/GeneralPageNation";
-
+       
 class ListPaneContainer extends React.Component {
-
+ 
   componentDidMount() {
     const { getList } = this.props; //stateToProps
     const { pageNum } = this.props; //parentToProps
@@ -86,8 +86,9 @@ class ListPaneContainer extends React.Component {
   };
 
   render() {
+    
     return (
-      <div>
+      <div>        
         <article>
           <table>
             <thead>

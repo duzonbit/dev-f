@@ -2,6 +2,7 @@ import { createStore, applyMiddleware, combineReducers } from 'redux';
 import { createPromise } from "redux-promise-middleware";
 import * as bbsModules from 'store/module/bbs';
 import * as signModules from 'store/module/sign';
+import { composeWithDevTools } from 'redux-devtools-extension';
 
 const reducers = combineReducers({
     list : bbsModules.list,
@@ -17,7 +18,6 @@ const reducers = combineReducers({
 const middleware = createPromise({
     promiseTypeSuffixes:['PENDING','SUCCESS','FAILURE']
 });
-
-const configure = createStore(reducers,  applyMiddleware(middleware));
+const configure = createStore(reducers,  composeWithDevTools(applyMiddleware(middleware)));
 
 export default configure;

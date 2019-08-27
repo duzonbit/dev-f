@@ -26,10 +26,21 @@ export const UrlBbs = {
 };
 
 export const AjaxBbs = {
-  list: async (page = 1) => await axios.get(`/board/${page}`),
-  read: async (board = 0) => await axios.get(`/board/read/${board}`),
-  create: async(data) => await axios.post("/board/",data),
-  update: async (data) => await axios.put("/board/",data),
-  del: async (data) => await axios.delete("/board/",{data:data}),//{data:data}
+  list: async (page = 1) => await axios.get(`/bbs/${page}`),
+  read: async (board = 0) => await axios.get(`/bbs/read/${board}`),
+  create: async(data) => await axios.post("/bbs/",data),
+  update: async (data) => await axios.put(`/bbs/${data.idx}`,data), //bbs/index/data index는 글번호 delete도
+  del: async (data) => await axios.delete(`/bbs/${data.idx}`,{data:data})//{data:data}
   
 };
+
+// export const AjaxBbs = {
+//   list: async (page = 1) => await axios.get(`/board/${page}`),
+//   read: async (board = 0) => await axios.get(`/board/read/${board}`),
+//   create: async(data) => await axios.post("/board/",data),
+//   update: async (data) => await axios.put("/board/",data),
+//   del: async (data) => await axios.delete("/board/",{data:data}),//{data:data}
+  
+// };
+
+
