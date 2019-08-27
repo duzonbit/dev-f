@@ -21,6 +21,8 @@ onSubmit = (event) => {
     for(var pair of formData.entries()) {
       data[pair[0]] = pair[1];
     }
+    console.log('dadada',data);
+    
 
     // 유효성 검사
     if (data.user_id === "" && data.pw === "") {

@@ -2,7 +2,11 @@ import React from 'react';
 
 import { Card, Container, Row, Col, Input, Button } from "reactstrap";
 
-const GeneralCreateForm = ({onSubmit}) => {
+const GeneralCreateForm = ({onSubmit,props}) => {
+
+
+
+
     return (
         <>
         <main className="profile-page">

@@ -11,9 +11,10 @@ const GeneralTemplate = (props) => {
     <div>
     {childrens["top"] ? childrens["top"] : <CommonHeader />}
     <div>
-      <aside>
         {childrens["left"] ? childrens["left"] : ''}
-      </aside>
+    
+        {childrens["left2"] ? childrens["left2"] : ''}
+
       <article>
         {childrens["section"]}
       </article>

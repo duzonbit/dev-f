@@ -1,4 +1,6 @@
 import React from 'react';
+import SignUpPaneContainer from "container/sign/SignUpPaneContainer"
+
 import {
   NavbarBrand,
   Navbar,
@@ -27,9 +29,11 @@ const LoginComponent = (props) => {
                   <small className="text-uppercase font-weight-bold">PASSWORD</small> 
                   <Input style={{height:'35px'}} name="pw" placeholder="PASSWORD" />
                   </Col>
-                  <Button className="btn-1 ml-1" color="neutral" type="submit">로그인</Button>
+                  <Button className="btn-1 ml-1" color="neutral" type="submit">로그인</Button>                  
                 </Row>
+               
               </form>
+              <SignUpPaneContainer className="btn-1 ml-1" color="neutral"/>
             </Container>
           </Navbar>
       </>
