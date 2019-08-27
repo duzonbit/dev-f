@@ -1,4 +1,4 @@
-import React,{useEffect} from "react";
+import React,{useEffect, useState} from "react";
 import { connect } from "react-redux";
 import GeneralReadData from "component/bbs/read/GeneralReadData";
 import GeneralActionButton from "component/bbs/read/GeneralActionButton";
@@ -6,10 +6,24 @@ import GeneralSubTitle from "component/bbs/general/GeneralSubTitle";
 import { getListInit} from "store/module/bbs/list";
 import { getRead, getReadInit} from "store/module/bbs/read";
 import { getDelete ,getDeleteInit} from "store/module/bbs/delete";
-// import { Route} from "react-router-dom";
+import AskModal from "component/modals/AskModal";
+import Modal from "react-modal";
+import { modalStyles } from "assets/js/modal";
+          // import { Route} from "react-router-dom";
 // import { UrlBbs } from "url/bbs";
 
 const ReadPaneContainer = (props) => {
+
+  const [modalIsOpen, setModalIsOpen] = useState(false);
+  const [work, setWork] = useState('none');
+
+  const toggleModal=(e)=>{
+    setModalIsOpen(!modalIsOpen);
+    setWork(e.target.innerText);
+    console.log('토글모달 됨',work);
+    
+  }
+
   useEffect(()=>{
     if(props.deleteMessage==="success"){
       props.getDeleteInit();
@@ -31,7 +45,7 @@ const ReadPaneContainer = (props) => {
 
   const onDel = () => {
     let pw = prompt("비밀번호를 입력하세요");
-    props.getDelete(props.idx, {
+    props.getDelete(props.idx,{
       idx: props.idx,
       name: props.name,
       pw: pw
@@ -50,10 +64,34 @@ const ReadPaneContainer = (props) => {
         modifydate={props.modifydate}
       />
         <GeneralActionButton
+          toggleModal={toggleModal}
           idx={props.idx}
           history={props.history}
           onDel={onDel}
         />
+
+
+
+
+        <Modal
+          shouldCloseOnOverlayClick={false}
+          isOpen={modalIsOpen}
+          // className='modal'
+          // overlayClassName="overlay"
+          style={modalStyles}
+
+        >
+          <AskModal
+          toggleModal={toggleModal}
+          idx={props.idx}
+          pw = {props.pw}
+          name={props.name}
+          work={work}
+          // delete={delete}
+          history={props.history}
+          />
+
+        </Modal>
     </div>
   );
 };

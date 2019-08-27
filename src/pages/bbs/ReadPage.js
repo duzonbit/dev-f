@@ -12,7 +12,7 @@ const ReadPage = (props) => {
   return (
     <div>
     <GeneralTemplate>
-    <SignInPaneContainer key="left" />
+    <SignInPaneContainer key="left" history={props.history}/>
     <ReadPaneContainer readNum={readNum} history={props.history} key="section"/>
     <CommentPaneContainer readNum={readNum} comment_page_idx={comment_page_idx} history={props.history} key="bottom"/>
     </GeneralTemplate> 

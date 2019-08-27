@@ -11,7 +11,7 @@ const GeneralReadData = ({ idx, name, pw, title, content, regdate, modifydate })
             </div>
           </section>
           <section className="section">
-            <Container>
+            <Container style={{position:'sticky'}}>
               <Card className="card-profile shadow mt--300">
                 <div className="px-4">
                   <Row className="justify-content-left">

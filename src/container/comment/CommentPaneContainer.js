@@ -108,7 +108,7 @@ const CommentPaneContainer = (props) => {
                 <section className="section-profile-cover section-shaped my-0" style={{ height: '300px' }}>
                 </section>
                 <section className="section">
-                    <Container>
+                    <Container style={{position:'sticky'}}>
                         <Card className="card-profile shadow mt--300">
                             <div className="px-4">
                                 <Row className="justify-content-left">

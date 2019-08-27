@@ -7,7 +7,7 @@ const UpdatePage = (props) => {
   return (
     <div>
     <GeneralTemplate>
-    <SignInPaneContainer key="left" />
+    <SignInPaneContainer key="left" history={props.history}/>
     <UpdatePaneContainer pageNum={props.match.params.num} history={props.history} key="section"/>
     </GeneralTemplate>
     </div>

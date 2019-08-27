@@ -6,28 +6,26 @@ import GeneralSubTitle from "component/bbs/general/GeneralSubTitle"; //component
 import { getCreate } from "store/module/bbs/create";
 // import Modal from "react-modal";
 
-
+let prevMessage='none';
 
 const CreatePaneContainer = (props) => {
 
- 
 
-  // useEffect(() => {
-  //   console.log('마운트 될 때만 실행됩니다.');
-  // }, []);
-
-  useEffect(()=>{
-    if(props.message==="success"){
-      // props.getListInit();
-      alert("생성되었습니다.");
-      props.history.push("/");
-    }else if(props.message==="fail"){
-      alert("생성되지 않았습니다.");
-    }else{
-      alert('오류 발생');
+  useEffect(() => {
+    const {  message } = props;
+    if(prevMessage !== message){
+      if(message==="success"){
+        if(!alert("생성 되었습니다.")) props.history.push("/");  
+      }else if(message==="fail"){
+        alert("생성되지 않았습니다.");
+      }else if(message==='error'){
+        alert('오류 발생');
+      }
+      prevMessage=message;
     }
+    
+  }, [props]);
 
-  });
   
   const onSubmit = (event) => {
     event.preventDefault();

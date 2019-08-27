@@ -4,19 +4,8 @@ import SignUpModal from "component/modals/SignUpModal";
 import { connect } from "react-redux";
 import { AjaxSign } from "url/sign";
 import { Button} from "reactstrap";
+import { modalStyles } from "assets/js/modal";
 
-const modalStyles = {
-  content : {
-    top                   : '50%',
-    left                  : '50%',
-    right                 : 'auto',
-    bottom                : 'auto',
-    marginRight           : '-50%',
-    transform             : 'translate(-50%, -50%)',
-    background            : '',
-    border                : '',
-  }
-};
 
 
 
