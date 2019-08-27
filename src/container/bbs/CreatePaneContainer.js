@@ -4,15 +4,17 @@ import GeneralCreateForm from "component/bbs/create/GeneralCreateForm";
 import GeneralSubTitle from "component/bbs/general/GeneralSubTitle";
 import { getListInit } from "store/module/bbs/list";
 import { getCreate } from "store/module/bbs/create";
+import swal from 'sweetalert';
+
 
 const CreatePaneContainer = (props) => {
   useEffect(()=>{
     if(props.message==="success"){
       props.getListInit();
-      alert("생성되었습니다.");
+      swal("Success!", "", "success");
       props.history.push("/");
     }else if(props.message==="fail"){
-      alert("생성되지 않았습니다.");
+      swal("Error!", "", "error");
     }
   });
   

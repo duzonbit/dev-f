@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { UrlBbs } from "url/bbs";
+import swal from 'sweetalert';
+
 
 class ResultNotifyModal extends Component {
     
@@ -24,7 +26,7 @@ class ResultNotifyModal extends Component {
         if(this.state.input === this.props.pw){
             this.working();
         }else{
-            alert('비번 틀림');
+            swal("Wrong Password!", "", "warning");
         }
     }
     render() {

@@ -6,6 +6,8 @@ import { Card, Container, Row, Col, Button, Input } from "reactstrap";
 import { Link } from "react-router-dom";
 import { UrlBbs } from "url/comment";
 
+import swal from 'sweetalert';
+
 const CommentPaneContainer = (props) => {
     const [comments, setComments] = useState([]);
     const [commentNum, setCommentNum] = useState(0);
@@ -35,7 +37,7 @@ const CommentPaneContainer = (props) => {
 
         AjaxComment.create(data).then((data) => {
             console.log(data);
-            alert("잘 되네");
+            swal("Create Complete!", "", "success");
             props.history.push(`/bbs/read/${props.readNum}`);
         }).catch((e) => {
             console.log(e);
@@ -55,7 +57,7 @@ const CommentPaneContainer = (props) => {
 
         AjaxComment.delete(data).then((data) => {
             console.log(data);
-            alert("삭제 완료");
+            swal("Delete Complete!", "", "success");
             props.history.push(`/bbs/read/${props.readNum}`);
         }).catch((e) => {
             console.log(e);

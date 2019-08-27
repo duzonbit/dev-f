@@ -6,6 +6,7 @@ import GeneralSubTitle from "component/bbs/general/GeneralSubTitle";
 import { getListInit} from "store/module/bbs/list";
 import { getRead, getReadInit} from "store/module/bbs/read";
 import { getDelete ,getDeleteInit} from "store/module/bbs/delete";
+import swal from 'sweetalert';
 // import { Route} from "react-router-dom";
 // import { UrlBbs } from "url/bbs";
 
@@ -16,12 +17,12 @@ const ReadPaneContainer = (props) => {
       props.getReadInit();
       props.getListInit();
       props.history.push("/")
-      alert("삭제되었습니다.");
+      swal("Delete Complete!", "", "success");
     }else if(props.deleteMessage==="fail"){
       props.getDeleteInit();
       props.getReadInit();
       props.getListInit();
-      alert("비밀번호가 틀립니다.");
+      swal("Wrong Password!", "", "warning");
     }
   });
 

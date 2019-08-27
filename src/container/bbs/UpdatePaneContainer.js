@@ -8,6 +8,9 @@ import GeneralActionButton from "component/bbs/update/GeneralActionButton";
 import { getRead ,getReadInit} from "store/module/bbs/read";
 import { getUpdate,getUpdateInit} from "store/module/bbs/update";
 
+import swal from 'sweetalert';
+
+
 const UpdatePaneContainer = (props) => { 
   let [pw, setPw] = useState('');
   let [title, setTitle] = useState(props.title);
@@ -19,12 +22,12 @@ const UpdatePaneContainer = (props) => {
     setContent(props.content);
   }, [props.title, props.content]);
   if(props.updateMessage==="success"){
-    alert("업데이트 되었습니다.");
+    swal("Update Complete!", "", "success");
     props.getReadInit();
     props.getUpdateInit();
     props.history.push(`/bbs/read/${props.pageNum}`);
   }else if(props.updateMessage==="fail"){
-    alert("비밀번호가 틀립니다.");
+    swal("Wrong Password!", "", "warning");
     props.getReadInit();
     props.getUpdateInit();
   }

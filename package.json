@@ -2,7 +2,7 @@
   "name": "mini01f",
   "version": "0.1.0",
   "private": true,
-  "proxy": "http://192.168.0.8:63002/",
+  "proxy": "http://dev-b.zcvfcat.ga/",
   "dependencies": {
     "axios": "^0.19.0",
     "classnames": "^2.2.6",
@@ -25,7 +25,8 @@
     "redux-actions": "^2.6.5",
     "redux-cookie": "^0.5.9",
     "redux-promise-middleware": "^6.1.1",
-    "sass-loader": "^7.2.0"
+    "sass-loader": "^7.2.0",
+    "sweetalert": "^2.1.2"
   },
   "scripts": {
     "start": "cross-env NODE_PATH=src/ react-scripts start",
