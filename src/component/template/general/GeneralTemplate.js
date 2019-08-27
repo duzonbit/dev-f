@@ -1,9 +1,7 @@
 import React from "react";
 import CommonHeader from "component/common/header";
-
 import CommonFooter from "component/common/footer";
 
-import { Row ,Col } from 'reactstrap';
 const GeneralTemplate = (props) => {
   let childrens = [];
   props.children.forEach((element) => {

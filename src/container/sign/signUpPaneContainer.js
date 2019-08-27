@@ -5,7 +5,7 @@ import { connect } from "react-redux";
 import { AjaxSign } from "url/sign";
 import { Button} from "reactstrap";
 import { modalStyles } from "assets/js/modal";
-
+import swal from 'sweetalert';
 
 
 
@@ -50,13 +50,13 @@ class SignUpPaneContainer extends Component {
     const regName = /^[가-힝]{2,}$/; //name
 
     if (this.data.user_id === "" || this.data.name === "" || this.data.pw === "") {
-        alert("공백입니다")
+      swal("Empty!", "", "waring");
     } else if (!regExp.test(this.data.user_id) || !regExp.test(this.data.pw)) {
-        alert("형식에 맞지 않습니다")
+      swal("Not In Form!", "", "waring");
     } else if (this.data.user_id === this.data.pw) {
-        alert("비밀번호와 아이디가 같습니다")
+      swal("ID and Password is Same!", "", "waring");
     } else if (!regName.test(this.data.name)) {
-        alert("이름이 이상합니다")
+      swal("Wrong Name!", "", "waring");
     } else {
       
         await (this.idCheck(this.data.user_id)).then((result)=>{
@@ -77,11 +77,12 @@ class SignUpPaneContainer extends Component {
           
             if(response.data.message === 'success'){
               console.log('res message : ',response.data.message);
-              // alert("사용가능한 아이디입니다");
+              swal("Register Success!", "", "success");
               return true;
               
             }else if (response.data.message === 'fail') {
-              alert("아이디 중복 입니다.");
+              swal("ID is Already Exist!", "", "waring");
+
               return false;
             }
         }).catch((err)=>{console.log(err)})
@@ -94,11 +95,11 @@ class SignUpPaneContainer extends Component {
     
      AjaxSign.register(data)
         .then((data) => {
-            alert("회원가입 완료");
+          // swal("Register Success!", "", "success");
             this.closeModal();
         }).catch((e) => {
-            alert("회원가입 에러");
-            console.log("register Error : ",e);
+          swal("Register Fail!", "", "error");
+          console.log("register Error : ",e);
         });
   }
 
@@ -107,7 +108,9 @@ class SignUpPaneContainer extends Component {
       <div id="signUpComponent">
         {
         this.props.user_id === null
-            ? (<Button className="btn-1 ml-1" color="neutral" onClick={this.openModal}>회원가입</Button>) 
+            ? (<Button className="btn-1 btn-neutral ml-1" color="default" onClick={this.openModal}>
+              회원가입
+              </Button>) 
             : null
         }
 

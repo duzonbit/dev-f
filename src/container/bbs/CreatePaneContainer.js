@@ -4,6 +4,8 @@ import GeneralCreateForm from "component/bbs/create/GeneralCreateForm"; //compon
 import GeneralSubTitle from "component/bbs/general/GeneralSubTitle"; //component
 // import { getListInit } from "store/module/bbs/list";
 import { getCreate } from "store/module/bbs/create";
+import swal from 'sweetalert';
+
 // import Modal from "react-modal";
 
 let prevMessage='none';
@@ -15,11 +17,12 @@ const CreatePaneContainer = (props) => {
     const {  message } = props;
     if(prevMessage !== message){
       if(message==="success"){
-        if(!alert("생성 되었습니다.")) props.history.push("/");  
+        swal("Create Success!", "", "success");
+        props.history.push("/");  
       }else if(message==="fail"){
-        alert("생성되지 않았습니다.");
+        swal("Create Fail!", "", "warning");
       }else if(message==='error'){
-        alert('오류 발생');
+        swal("Create Fail!", "", "warning");
       }
       prevMessage=message;
     }

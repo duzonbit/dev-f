@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import LoginComponent from "component/sign/LoginComponent";
 import UserComponent from "component/sign/UserComponent";
 import { withCookies } from "react-cookie";
-        
+import swal from 'sweetalert';
 
 class SignInPaneContainer extends Component {
 
@@ -26,7 +26,7 @@ onSubmit = (event) => {
 
     // 유효성 검사
     if (data.user_id === "" && data.pw === "") {
-        alert("공백입니다")
+      swal("Empty!", "", "waring");
     } else {
         this.props.reqSignIn(data);
     }
@@ -35,7 +35,7 @@ onSubmit = (event) => {
 signOut = ()=>{
   this.props.reqSignOut();
   // this.props.cookies.remove('signedId')// 쿠키 제거
-  alert('로그아웃 됨')
+  swal("Logout Complete!", "", "success");
   this.props.history.push('/');
 }
 
@@ -44,12 +44,12 @@ componentDidUpdate = (prevProps, prevState) => {
    
   if (prevProps.message !== message) {
     if (message === 'success' && user_id !== null) {
-      alert('로그인 성공')  
+      swal("Login Success!", "", "success");
       // this.props.cookies.set('signedId',user_id);//쿠키 등록
     } else if (!loading && !error &&message === 'fail') {
-      alert("아이디 비번 확인");
+      swal("Check ID & Password!", "", "success");
     } else if (error) {
-      alert("에러남");
+      swal("Error!", "", "error");
     }
   }
 };
