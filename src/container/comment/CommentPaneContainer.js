@@ -81,7 +81,7 @@ const CommentPaneContainer = (props) => {
           let paging = [];
           for (let index = initIndex + 1; index <= page_max; index++) {
             paging.push(<Link key={index} to={UrlBbs.list + props.readNum + '/' + index}>
-                <Button className="btn-1 ml-1" color="info" outline type="button">{index}</Button>
+                <Button className="btn-1 ml-1" color="info" outline type="button" onClick={(e)=>{setCommentNum(index)}}>{index}</Button>
                 </Link>
                 );
           }
