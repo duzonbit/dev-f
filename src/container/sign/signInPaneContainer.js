@@ -13,7 +13,7 @@ onSubmit = (event) => {
     let data = {};
     const formData = new FormData(event.target);
     // for (let key of formData.keys()) {
-    //     console.log(key);
+    //     //console.log(key);
     //     data[key] = formData.get(key);
     // }
     // const formData = new FormData(event.target);
@@ -21,7 +21,7 @@ onSubmit = (event) => {
     for(var pair of formData.entries()) {
       data[pair[0]] = pair[1];
     }
-    console.log('dadada',data);
+    //console.log('dadada',data);
     
 
     // 유효성 검사
@@ -55,7 +55,7 @@ componentDidUpdate = (prevProps, prevState) => {
 };
 
   render() {
-    console.log('12321sdfasfw',this.props.cookies.get('signedId'));
+    //console.log('12321sdfasfw',this.props.cookies.get('signedId'));
     
     return (
       <div>

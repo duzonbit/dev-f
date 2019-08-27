@@ -1,4 +1,4 @@
-import React,{useEffect, useState} from "react";
+import React,{useEffect} from "react";
 import { connect } from "react-redux";
 import GeneralCreateForm from "component/bbs/create/GeneralCreateForm"; //component
 import GeneralSubTitle from "component/bbs/general/GeneralSubTitle"; //component
@@ -38,7 +38,7 @@ const CreatePaneContainer = (props) => {
     for(var pair of formData.entries()) {
       data[pair[0]] = pair[1];
     }
-    console.log('paripari',data);
+    //console.log('paripari',data);
     
     props.getCreate(data);
   };

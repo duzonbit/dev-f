@@ -26,17 +26,17 @@ const initialState = Map({
 /* reducer */
 export default handleActions({
     [GET_CREATE_PENDING]: (state, action) => {
-      console.log("create 요청 준비");      
+      //console.log("create 요청 준비");      
       const newState = state.set("loading", true)
                             .set("error", false)
                             .set("message", "loading");
       return newState;
     },
     [GET_CREATE_SUCCESS]: (state, action) => {
-      console.log("create 요청 성공");
+      //console.log("create 요청 성공");
 
       const { data, status } = action.payload;
-      console.log(data);
+      //console.log(data);
       
       const newState = state.set("loading", false)
                             .set("error", false)
@@ -46,7 +46,7 @@ export default handleActions({
       return newState;
     },
     [GET_CREATE_FAILURE]: (state, action) => {
-      console.log("create 요청 에러");
+      //console.log("create 요청 에러");
 
       const newState = state.set("loading", false)
                             .set("error", true)

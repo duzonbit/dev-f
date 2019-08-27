@@ -17,14 +17,16 @@ import { CookiesProvider} from "react-cookie";
 
 
 const store = configure;
-store.subscribe(()=>{console.log('현재상태',store.getState())})
+store.subscribe(()=>{
+//  console.log('현재상태',store.getState())
+})
 
 // const cookies = new Cookies();
 // cookies.set('ttest','ttttttesttttttt')
 // store.dispatch(getPostList(1));
 
 // store.dispatch(getPostList(2));
-// console.log('현재상태',store.getState());
+// //console.log('현재상태',store.getState());
 // store.dispatch(getPostRead(268));
 // store.dispatch(getCreate({
 //   name : 'test',

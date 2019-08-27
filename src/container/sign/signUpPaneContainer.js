@@ -40,11 +40,12 @@ class SignUpPaneContainer extends Component {
     event.preventDefault();
     
     const formData = new FormData(event.target);
+    // eslint-disable-next-line no-unused-vars
     for (let key of formData.keys()) {
         this.data[key] = formData.get(key);
     }
 
-    console.log(this.data);
+    //console.log(this.data);
 
     const regExp = /^[a-zA-Z0-9]{4,12}$/; //id, password
     const regName = /^[가-힝]{2,}$/; //name
@@ -73,10 +74,10 @@ class SignUpPaneContainer extends Component {
     return(
         AjaxSign.idCheck(user_id)
         .then((response) => {
-          console.log(response.data.message);
+          //console.log(response.data.message);
           
             if(response.data.message === 'success'){
-              console.log('res message : ',response.data.message);
+              //console.log('res message : ',response.data.message);
               swal("Register Success!", "", "success");
               return true;
               
@@ -85,13 +86,15 @@ class SignUpPaneContainer extends Component {
 
               return false;
             }
-        }).catch((err)=>{console.log(err)})
+        }).catch((err)=>{
+          //console.log(err)
+        })
     )
   }
 
 
   registerAjax = (data) => {
-    console.log('레지스터호출');
+    //console.log('레지스터호출');
     
      AjaxSign.register(data)
         .then((data) => {
@@ -99,7 +102,7 @@ class SignUpPaneContainer extends Component {
             this.closeModal();
         }).catch((e) => {
           swal("Register Fail!", "", "error");
-          console.log("register Error : ",e);
+          //console.log("register Error : ",e);
         });
   }
 

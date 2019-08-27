@@ -5,9 +5,13 @@ import ListPage from "pages/bbs/ListPage";
 import UpdatePage from "pages/bbs/UpdatePage";
 import ReadPage from "pages/bbs/ReadPage";
 import { UrlBbs } from "url/bbs";
+// import SignInPaneContainer from "container/sign/SignInPaneContainer";
+    
+
 
 const App = () => {
   return (
+      
       <Switch>
         <Route exact path={`/`} component={ListPage} />
         <Route exact path={[`${UrlBbs.list}:num`,`${UrlBbs.list}`]} component={ListPage} />

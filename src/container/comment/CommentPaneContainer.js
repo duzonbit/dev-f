@@ -21,7 +21,7 @@ const CommentPaneContainer = (props) => {
             setCommentPageSize(data.data.page.size);
             setCommentTotal(data.data.page.maxpage);
         }).catch((e) => {
-            console.log(e)
+            //console.log(e)
         })
     }, [props,commentNum]);
 
@@ -33,14 +33,14 @@ const CommentPaneContainer = (props) => {
         for (let key of formData.keys()) {
             data[key] = formData.get(key);
         }
-        console.log(data);
+        //console.log(data);
 
         AjaxComment.create(data).then((data) => {
-            console.log(data);
+            //console.log(data);
             swal("Create Complete!", "", "success");
             props.history.push(`/bbs/read/${props.readNum}`);
         }).catch((e) => {
-            console.log(e);
+            //console.log(e);
         });
         event.target.content.value = '';
     };
@@ -53,14 +53,14 @@ const CommentPaneContainer = (props) => {
                 data = comments[key];
             }
         }
-        console.log("data", data);
+        //console.log("data", data);
 
         AjaxComment.delete(data).then((data) => {
-            console.log(data);
+            //console.log(data);
             swal("Delete Complete!", "", "success");
             props.history.push(`/bbs/read/${props.readNum}`);
         }).catch((e) => {
-            console.log(e);
+            //console.log(e);
         });
     };
 
