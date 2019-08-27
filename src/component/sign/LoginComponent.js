@@ -19,7 +19,7 @@ const LoginComponent = (props) => {
               <NavbarBrand href="">
                 LOGIN
               </NavbarBrand>
-              <form onSubmit={props.onSubmit}>
+              <form onSubmit={props.onSubmit} style={{paddingLeft:'300px'}}>
                 <Row>
                   <Col>
                   <small className="text-uppercase font-weight-bold">ID</small> 
@@ -27,13 +27,12 @@ const LoginComponent = (props) => {
                   </Col>
                   <Col>
                   <small className="text-uppercase font-weight-bold">PASSWORD</small> 
-                  <Input style={{height:'35px'}} name="pw" placeholder="PASSWORD" />
+                  <Input style={{height:'35px', marginBottom:'20px'}} name="pw" placeholder="PASSWORD" />
                   </Col>
-                  <Button className="btn-1 ml-1" color="neutral" type="submit">로그인</Button>                  
+                  <Button className="btn-1 btn-neutral ml-1" color="default" style={{height:'43.5px', marginTop: '18px'}} type="submit">로그인</Button>                  
                 </Row>
-               
               </form>
-              <SignUpPaneContainer className="btn-1 ml-1" color="neutral"/>
+              <SignUpPaneContainer/>
             </Container>
           </Navbar>
       </>

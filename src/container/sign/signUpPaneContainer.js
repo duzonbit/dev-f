@@ -119,7 +119,9 @@ class SignUpPaneContainer extends Component {
       <div id="signUpComponent">
         {
         this.props.user_id === null
-            ? (<Button className="btn-1 ml-1" color="neutral" onClick={this.openModal}>회원가입</Button>) 
+            ? (<Button className="btn-1 btn-neutral ml-1" color="default" onClick={this.openModal}>
+              회원가입
+              </Button>) 
             : null
         }
 
