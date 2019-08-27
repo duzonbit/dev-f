@@ -46,4 +46,8 @@ User-Agent: rest-client
 
 ###
 
-GET http://dev-b.zcvfcat.ga/comment/1
+GET http://dev-b.zcvfcat.ga/comment/1/1
+
+
+###
+GET http://192.168.0.8:63002/comment/1/2

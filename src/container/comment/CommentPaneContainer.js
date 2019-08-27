@@ -3,31 +3,24 @@ import React, { useState, useEffect } from "react";
 import { AjaxComment } from "url/comment";
 
 import { Card, Container, Row, Col, Button, Input } from "reactstrap";
-// import { Link } from "react-router-dom";
-// import { UrlBbs } from "url/bbs";
+import { Link } from "react-router-dom";
+import { UrlBbs } from "url/comment";
 
 const CommentPaneContainer = (props) => {
-    console.log("props", props);
-
     const [comments, setComments] = useState([]);
-    const [commentNum, setCommentNum] = useState("");
+    const [commentNum, setCommentNum] = useState(0);
     const [commentPageSize, setCommentPageSize] = useState("10");
     const [commentTotal, setCommentTotal] = useState("");
-
-    useEffect(() => {
-        AjaxComment.read(props.readNum, ).then((data) => {
-            setComments(data.data);
-            console.log(1111111, data.data);
-            console.log(2222222, data);
-            //   setCommentNum(result.data.pageable.pageNumber);
-            //   setCommentPageSize(result.data.pageable.pageSize);
-            //   setCommentTotal(result.data.totalPages);
+  
+    useEffect(() => {      
+      AjaxComment.read(props.readNum, commentNum).then((data) => {
+            setComments(data.data.page.list);
+            setCommentNum(data.data.page.currpage);
+            setCommentPageSize(data.data.page.size);
+            setCommentTotal(data.data.page.maxpage);
         });
-    }, [props]);
+    }, [props,commentNum]);
 
-    let state = {
-        content: '',
-    }
 
     const onCreate = (event) => {
         event.preventDefault();
@@ -77,57 +70,37 @@ const CommentPaneContainer = (props) => {
                 </th>
             </tr>
         ));
-
-        const renderPaging = () => {
-            const paging = () => {
-                let paging = [];
-                AjaxComment.maxpage(props.readNum).then((data) => {
-
-                    console.log(data)
-                    for (let i = 0; i <= data.data; i++) {
-                        paging.push(
-                        <Button className="btn-1 ml-1" color="info" outline type="button">{i}</Button>
-                        )
-                    }
-                    console.log(paging)
-                }).catch((e) => {
-                    console.log(e);
-                });
-                return paging;
-            }
-            console.log(paging());
-            
-            return <div>{paging()}</div> 
-    }
-
-    //   const renderPaging = (commentNum, commentPageSize, commentTotal) => {
-    //     const paging = () => {
-    //       let initIndex = Math.floor(commentNum / commentPageSize) * 10;
-    //       let page_max =
-    //         initIndex + commentPageSize > commentTotal
-    //           ? commentTotal
-    //           : initIndex + commentPageSize;
-    //       let paging = [];
-    //       console.log(initIndex);
-    //       for (let index = initIndex + 1; index <= page_max; index++) {
-    //         paging.push(<Button className="btn-1 ml-1" color="info" outline type="button">{index}</Button>);
-    //       }
-    //       let first = <Button className="btn-1 ml-1" color="info" outline type="button">{"<<"}</Button>;
-    //       let last = <Button className="btn-1 ml-1" color="info" outline type="button">{">>"}</Button>;
-    //       let prev = <Button className="btn-1 ml-1" color="info" outline type="button">{"<"}</Button>;
-    //       let next = <Button className="btn-1 ml-1" color="info" outline type="button">{">"}</Button>;
-    //       if (initIndex !== 0) {
-    //         paging.unshift(prev);
-    //       }
-    //       paging.unshift(first);
-    //       if (initIndex + commentPageSize < commentTotal) {
-    //         paging.push(next);
-    //       }
-    //       paging.push(last);
-    //       return paging;
-    //     };
-    //     return <div>{paging()}</div>;
-    //   };
+      
+      const renderPaging = (commentNum, commentPageSize, commentTotal) => {
+        const paging = () => {
+          let initIndex = Math.floor(commentNum / commentPageSize) * 10;
+          let page_max =
+            initIndex + commentPageSize > commentTotal
+              ? commentTotal
+              : initIndex + commentPageSize;
+          let paging = [];
+          for (let index = initIndex + 1; index <= page_max; index++) {
+            paging.push(<Link key={index} to={UrlBbs.list + props.readNum + '/' + index}>
+                <Button className="btn-1 ml-1" color="info" outline type="button">{index}</Button>
+                </Link>
+                );
+          }
+          let first = <Button className="btn-1 ml-1" color="info" outline type="button">{"<<"}</Button>;
+          let last = <Button className="btn-1 ml-1" color="info" outline type="button">{">>"}</Button>;
+          let prev = <Button className="btn-1 ml-1" color="info" outline type="button">{"<"}</Button>;
+          let next = <Button className="btn-1 ml-1" color="info" outline type="button">{">"}</Button>;
+          if (initIndex !== 0) {
+            paging.unshift(prev);
+          }
+          paging.unshift(first);
+          if (initIndex + commentPageSize < commentTotal) {
+            paging.push(next);
+          }
+          paging.push(last);
+          return paging;
+        };
+        return <div>{paging()}</div>;
+      };
 
     return (
         <>
@@ -180,8 +153,7 @@ const CommentPaneContainer = (props) => {
                                         <tbody>{renderList()}</tbody>
                                     </table>
                                     <br />
-                                    {renderPaging()}
-                                    {/* <Button className="btn-1 ml-1" color="info" outline type="button">{">>"}</Button> */}
+                                    {renderPaging(commentNum, commentPageSize, commentTotal)}
                                 </div>
                                 <div className="mt-5 py-5 text-center">
                                 </div>
