@@ -85,10 +85,10 @@ const CommentPaneContainer = (props) => {
                 </Link>
                 );
           }
-          let first = <Button className="btn-1 ml-1" color="info" outline type="button">{"<<"}</Button>;
-          let last = <Button className="btn-1 ml-1" color="info" outline type="button">{">>"}</Button>;
-          let prev = <Button className="btn-1 ml-1" color="info" outline type="button">{"<"}</Button>;
-          let next = <Button className="btn-1 ml-1" color="info" outline type="button">{">"}</Button>;
+          let first = <Button key={"first"}  className="btn-1 ml-1" color="info" outline type="button">{"<<"}</Button>;
+          let last = <Button  key={"last"} className="btn-1 ml-1" color="info" outline type="button">{">>"}</Button>;
+          let prev = <Button  key={"prev"} className="btn-1 ml-1" color="info" outline type="button">{"<"}</Button>;
+          let next = <Button  key={"next"} className="btn-1 ml-1" color="info" outline type="button">{">"}</Button>;
           if (initIndex !== 0) {
             paging.unshift(prev);
           }

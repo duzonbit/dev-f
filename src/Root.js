@@ -7,10 +7,10 @@ import { CookiesProvider} from "react-cookie";
 
 
 /*dispatch action test */
-import { getList } from "store/module/bbs/list";
-import { getRead } from "store/module/bbs/read";
-import { getCreate } from "store/module/bbs/create";
-import { reqSignIn } from "store/module/sign/signInOut";
+// import { getList } from "store/module/bbs/list";
+// import { getRead } from "store/module/bbs/read";
+// import { getCreate } from "store/module/bbs/create";
+// import { reqSignIn } from "store/module/sign/signInOut";
 
 // import { AjaxBbs } from 'url/bbs';
 
