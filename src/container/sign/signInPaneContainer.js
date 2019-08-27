@@ -1,9 +1,10 @@
 import React, { Component } from "react";
 import { reqSignIn, reqSignOut } from "store/module/sign/signInOut";
 import { connect } from "react-redux";
-import LoginComponent from "component/sings/LoginComponent";
-import UserComponent from "component/sings/UserComponent";
+import LoginComponent from "component/sign/LoginComponent";
+import UserComponent from "component/sign/UserComponent";
 import { withCookies } from "react-cookie";
+        
 
 class SignInPaneContainer extends Component {
 
@@ -20,6 +21,8 @@ onSubmit = (event) => {
     for(var pair of formData.entries()) {
       data[pair[0]] = pair[1];
     }
+    console.log('dadada',data);
+    
 
     // 유효성 검사
     if (data.user_id === "" && data.pw === "") {
@@ -62,8 +65,8 @@ componentDidUpdate = (prevProps, prevState) => {
         :(<UserComponent user_id={this.props.user_id} signOut={this.signOut}/>)
       } */}
        
-       세션아이디: {sessionStorage.getItem('signedId')}<br/>
-       쿠키아이디: {this.props.cookies.get('signedId')}
+       {/* 세션아이디: {sessionStorage.getItem('signedId')}<br/>
+       쿠키아이디: {this.props.cookies.get('signedId')} */}
       
       {/* 클라이언트 세션으로 */}
        {/* {

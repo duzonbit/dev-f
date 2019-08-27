@@ -20,9 +20,12 @@ export const reqSignIn = (data) => ({
   payload: AjaxSign.login(data)
 });
 
-export const reqSignOut = () => ({ 
+export const reqSignOut = () => {
+  console.log('로그아웃 액션 객체 생성.');
+  
+  return({ 
   type: REQ_SIGNOUT,  
-});
+})};
 
 
 

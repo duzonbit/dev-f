@@ -2,6 +2,8 @@ import React from "react";
 import CommonHeader from "component/common/header";
 
 import CommonFooter from "component/common/footer";
+
+import { Row ,Col } from 'reactstrap';
 const GeneralTemplate = (props) => {
   let childrens = [];
   props.children.forEach((element) => {
@@ -9,21 +11,21 @@ const GeneralTemplate = (props) => {
   });
   return (
     <div>
-      {childrens["top"] ? childrens["top"] : <CommonHeader />}
-      <div>
-        <aside>
-          {childrens["left"] ? childrens["left"] : ''}
-        </aside>
-        <article>
-          {childrens["section"]}
+    {childrens["top"] ? childrens["top"] : <CommonHeader />}
+    <div>
+        {childrens["left"] ? childrens["left"] : ''}
+    
+        {childrens["left2"] ? childrens["left2"] : ''}
 
-        </article>
-        <aside>
-          {childrens["right"] ? childrens["right"] : ''}
-        </aside>
-      </div>
-      {childrens["bottom"] ? childrens["bottom"] : <CommonFooter />}
+      <article>
+        {childrens["section"]}
+      </article>
+      <aside>
+        {childrens["right"] ? childrens["right"] : ''}
+      </aside>
     </div>
+    {childrens["bottom"] ? childrens["bottom"] : <CommonFooter />}
+  </div>
   );
 };
 

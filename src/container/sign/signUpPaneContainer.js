@@ -3,6 +3,21 @@ import Modal from "react-modal";
 import SignUpModal from "component/modals/SignUpModal";
 import { connect } from "react-redux";
 import { AjaxSign } from "url/sign";
+import { Button} from "reactstrap";
+
+const modalStyles = {
+  content : {
+    top                   : '50%',
+    left                  : '50%',
+    right                 : 'auto',
+    bottom                : 'auto',
+    marginRight           : '-50%',
+    transform             : 'translate(-50%, -50%)',
+    background            : '',
+    border                : '',
+  }
+};
+
 
 
 class SignUpPaneContainer extends Component {
@@ -103,15 +118,20 @@ class SignUpPaneContainer extends Component {
       <div id="signUpComponent">
         {
         this.props.user_id === null
-            ? (<button onClick={this.openModal}>회원가입</button>) 
+            ? (<Button className="btn-1 ml-1" color="neutral" onClick={this.openModal}>회원가입</Button>) 
             : null
         }
 
         <Modal
           shouldCloseOnOverlayClick={false}
           isOpen={this.state.modalIsOpen}
-          className="modal"
-          overlayClassName="overlay"
+          // class="modal"
+          // Style="position: absolute; top: 30%; left: 40px; right: 40px; bottom: 40px; border: 1px solid rgb(204, 204, 204); background: rgb(255, 255, 255); overflow: auto; border-radius: 4px; outline: none; padding: 20px;"
+          // className="modal"
+          // overlayClassName="overlay" 
+          // Style="top:30%"
+          style={modalStyles}
+
         >
           <SignUpModal
             closeModal={this.closeModal}
