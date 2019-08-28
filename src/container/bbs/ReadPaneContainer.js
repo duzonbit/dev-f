@@ -1,22 +1,22 @@
-import React,{useEffect} from "react";
+import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import GeneralReadData from "component/bbs/read/GeneralReadData";
 import GeneralActionButton from "component/bbs/read/GeneralActionButton";
 import GeneralSubTitle from "component/bbs/general/GeneralSubTitle";
-import { getListInit} from "store/module/bbs/list";
-import { getRead, getReadInit} from "store/module/bbs/read";
-import { getDelete ,getDeleteInit} from "store/module/bbs/delete";
+import { getListInit } from "store/module/bbs/list";
+import { getRead, getReadInit } from "store/module/bbs/read";
+import { getDelete, getDeleteInit } from "store/module/bbs/delete";
 import swal from 'sweetalert';
 
 const ReadPaneContainer = (props) => {
-  useEffect(()=>{
-    if(props.deleteMessage==="success"){
+  useEffect(() => {
+    if (props.deleteMessage === "success") {
       props.getDeleteInit();
       props.getReadInit();
       props.getListInit();
       props.history.push("/")
       swal("Delete Complete!", "", "success");
-    }else if(props.deleteMessage==="fail"){
+    } else if (props.deleteMessage === "fail") {
       props.getDeleteInit();
       props.getReadInit();
       props.getListInit();
@@ -24,7 +24,7 @@ const ReadPaneContainer = (props) => {
     }
   });
 
-  if (props.loading === true) 
+  if (props.loading === true)
     props.getRead(props.readNum);
 
   const onDel = () => {
@@ -38,7 +38,7 @@ const ReadPaneContainer = (props) => {
       });
     });
   };
-  
+
   return (
     <div>
       <GeneralSubTitle subtitle={"글 상세"} />
@@ -51,11 +51,11 @@ const ReadPaneContainer = (props) => {
         regdate={props.regdate}
         modifydate={props.modifydate}
       />
-        <GeneralActionButton
-          idx={props.idx}
-          history={props.history}
-          onDel={onDel}
-        />
+      <GeneralActionButton
+        idx={props.idx}
+        history={props.history}
+        onDel={onDel}
+      />
     </div>
   );
 };
@@ -84,13 +84,13 @@ export default connect(
     getDelete: (idx, data) => {
       dispatch(getDelete(idx, data));
     },
-    getDeleteInit:()=>{
+    getDeleteInit: () => {
       dispatch(getDeleteInit());
     },
-    getReadInit:()=>{
+    getReadInit: () => {
       dispatch(getReadInit());
     },
-    getListInit:()=>{
+    getListInit: () => {
       dispatch(getListInit());
     }
   })

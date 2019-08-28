@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import { NavItem, NavLink, Nav, Container, Row, Col } from "reactstrap";
 
 class CommonFooter extends Component {
-    render() {
-        return (
-            <>
+  render() {
+    return (
+      <>
         <footer className="footer has-cards">
           <Container>
             <Row className="row-grid align-items-center my-md">
@@ -61,8 +61,8 @@ class CommonFooter extends Component {
           </Container>
         </footer>
       </>
-        );
-    }
+    );
+  }
 }
 
 export default CommonFooter;

@@ -13,9 +13,9 @@ const CommentPaneContainer = (props) => {
     const [commentNum, setCommentNum] = useState(0);
     const [commentPageSize, setCommentPageSize] = useState("10");
     const [commentTotal, setCommentTotal] = useState("");
-  
-    useEffect(() => {      
-      AjaxComment.read(props.readNum, commentNum).then((data) => {
+
+    useEffect(() => {
+        AjaxComment.read(props.readNum, commentNum).then((data) => {
             setComments(data.data.page.list);
             setCommentNum(data.data.page.currpage);
             setCommentPageSize(data.data.page.size);
@@ -23,7 +23,7 @@ const CommentPaneContainer = (props) => {
         }).catch((e) => {
             console.log(e)
         })
-    }, [props,commentNum]);
+    }, [props, commentNum]);
 
 
     const onCreate = (event) => {
@@ -70,46 +70,46 @@ const CommentPaneContainer = (props) => {
                 </th>
             </tr>
         ));
-      
-      const renderPaging = (commentNum, commentPageSize, commentTotal) => {
+
+    const renderPaging = (commentNum, commentPageSize, commentTotal) => {
         const paging = () => {
-          let initIndex = Math.floor(commentNum / commentPageSize) * 10;
-          let page_max = initIndex + commentPageSize > commentTotal ? commentTotal : initIndex + commentPageSize;
-          let paging = [];
-          for (let index = initIndex + 1; index <= page_max+1; index++) {
-            paging.push(<Link key={index} to={UrlBbs.list + props.readNum + '/' + index}>
-                <Button className="btn-1 ml-1" color="info" outline type="button" onClick={(e)=>{setCommentNum(index-1)}}>{index}</Button>
+            let initIndex = Math.floor(commentNum / commentPageSize) * 10;
+            let page_max = initIndex + commentPageSize > commentTotal ? commentTotal : initIndex + commentPageSize;
+            let paging = [];
+            for (let index = initIndex + 1; index <= page_max + 1; index++) {
+                paging.push(<Link key={index} to={UrlBbs.list + props.readNum + '/' + index}>
+                    <Button className="btn-1 ml-1" color="info" outline type="button" onClick={(e) => { setCommentNum(index - 1) }}>{index}</Button>
                 </Link>
                 );
             }
             let first = (<Link key={"first"} to={UrlBbs.list + props.readNum + '/' + 1}>
-              <Button className="btn-1 ml-1" color="info" outline type="button" onClick={(e)=>{setCommentNum(0)}}>{"<<"}</Button>
-              </Link>)
-              let last = ( <Link key={"last"} to={UrlBbs.list + props.readNum + '/' + commentTotal}>
-          <Button className="btn-1 ml-1" color="info" outline type="button" onClick={(e)=>{setCommentNum(commentTotal)}}>{">>"}</Button>
-          </Link>)
-          
-          let prev = ( <Link key={"prev"} to={UrlBbs.list + props.readNum + '/' + initIndex}>
-          <Button className="btn-1 ml-1" color="info" outline type="button" onClick={(e)=>{setCommentNum(initIndex)}}>{"<"}</Button>
-          </Link>)
-          
-          let next = ( <Link key={"next"} to={UrlBbs.list + props.readNum + '/' + (page_max+1)}>
-              <Button className="btn-1 ml-1" color="info" outline type="button" onClick={(e)=>{setCommentNum(page_max+1)}}>{">"}</Button>
-              </Link>)
-          
-          if (initIndex !== 0) {
-            paging.unshift(prev);
-          }
-          paging.unshift(first);
+                <Button className="btn-1 ml-1" color="info" outline type="button" onClick={(e) => { setCommentNum(0) }}>{"<<"}</Button>
+            </Link>)
+            let last = (<Link key={"last"} to={UrlBbs.list + props.readNum + '/' + commentTotal}>
+                <Button className="btn-1 ml-1" color="info" outline type="button" onClick={(e) => { setCommentNum(commentTotal) }}>{">>"}</Button>
+            </Link>)
 
-          if (initIndex + commentPageSize < commentTotal) {
-            paging.push(next);
-          }
-          paging.push(last);
-          return paging;
+            let prev = (<Link key={"prev"} to={UrlBbs.list + props.readNum + '/' + initIndex}>
+                <Button className="btn-1 ml-1" color="info" outline type="button" onClick={(e) => { setCommentNum(initIndex) }}>{"<"}</Button>
+            </Link>)
+
+            let next = (<Link key={"next"} to={UrlBbs.list + props.readNum + '/' + (page_max + 1)}>
+                <Button className="btn-1 ml-1" color="info" outline type="button" onClick={(e) => { setCommentNum(page_max + 1) }}>{">"}</Button>
+            </Link>)
+
+            if (initIndex !== 0) {
+                paging.unshift(prev);
+            }
+            paging.unshift(first);
+
+            if (initIndex + commentPageSize < commentTotal) {
+                paging.push(next);
+            }
+            paging.push(last);
+            return paging;
         };
         return paging();
-      };
+    };
 
     return (
         <>

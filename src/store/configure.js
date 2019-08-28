@@ -5,19 +5,19 @@ import * as signModules from 'store/module/sign';
 import { composeWithDevTools } from 'redux-devtools-extension';
 
 const reducers = combineReducers({
-    list : bbsModules.list,
-    read : bbsModules.read,
-    create : bbsModules.create,
-    update : bbsModules.update,
-    delete : bbsModules.delete,
+    list: bbsModules.list,
+    read: bbsModules.read,
+    create: bbsModules.create,
+    update: bbsModules.update,
+    delete: bbsModules.delete,
 
-    signIn : signModules.signIn,
+    signIn: signModules.signIn,
     // signOut : signModules.signOut,
 });
 
 const middleware = createPromise({
-    promiseTypeSuffixes:['PENDING','SUCCESS','FAILURE']
+    promiseTypeSuffixes: ['PENDING', 'SUCCESS', 'FAILURE']
 });
-const configure = createStore(reducers,  composeWithDevTools(applyMiddleware(middleware)));
+const configure = createStore(reducers, composeWithDevTools(applyMiddleware(middleware)));
 
 export default configure;

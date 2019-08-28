@@ -3,19 +3,19 @@ import Modal from "react-modal";
 import SignUpModal from "component/modals/SignUpModal";
 import { connect } from "react-redux";
 import { AjaxSign } from "url/sign";
-import { Button} from "reactstrap";
+import { Button } from "reactstrap";
 import swal from 'sweetalert';
 
 const modalStyles = {
-  content : {
-    top                   : '50%',
-    left                  : '50%',
-    right                 : 'auto',
-    bottom                : 'auto',
-    marginRight           : '-50%',
-    transform             : 'translate(-50%, -50%)',
-    background            : '',
-    border                : '',
+  content: {
+    top: '50%',
+    left: '50%',
+    right: 'auto',
+    bottom: 'auto',
+    marginRight: '-50%',
+    transform: 'translate(-50%, -50%)',
+    background: '',
+    border: '',
   }
 };
 
@@ -25,7 +25,7 @@ class SignUpPaneContainer extends Component {
     modalIsOpen: false,
   };
 
-  data={}
+  data = {}
 
   openModal = e => {
     if (!this.state.modalIsOpen) {
@@ -49,10 +49,10 @@ class SignUpPaneContainer extends Component {
 
   onSubmit = async event => {
     event.preventDefault();
-    
+
     const formData = new FormData(event.target);
 
-    for(var pair of formData.keys()) {
+    for (var pair of formData.keys()) {
       this.data[pair] = formData.get(pair);
     }
 
@@ -68,29 +68,29 @@ class SignUpPaneContainer extends Component {
     } else if (!regName.test(this.data.name)) {
       swal("Wrong Name!", "", "waring");
     } else {
-      
-        await (this.idCheck(this.data.user_id)).then((result)=>{
-            if(result){
-              this.registerAjax(this.data);
-            }
-            
-        });   
-  }
-}
-  
 
-  idCheck=(user_id)=>{
-    return(
-        AjaxSign.idCheck(user_id)
+      await (this.idCheck(this.data.user_id)).then((result) => {
+        if (result) {
+          this.registerAjax(this.data);
+        }
+
+      });
+    }
+  }
+
+
+  idCheck = (user_id) => {
+    return (
+      AjaxSign.idCheck(user_id)
         .then((response) => {
-            if(response.data.message === 'success'){
-              swal("Register Success!", "", "success");
-              return true;
-            }else if (response.data.message === 'fail') {
-              swal("ID is Already Exist!", "", "waring");
-              return false;
-            }
-        }).catch((err)=>{
+          if (response.data.message === 'success') {
+            swal("Register Success!", "", "success");
+            return true;
+          } else if (response.data.message === 'fail') {
+            swal("ID is Already Exist!", "", "waring");
+            return false;
+          }
+        }).catch((err) => {
           console.log(err)
         })
     )
@@ -98,24 +98,24 @@ class SignUpPaneContainer extends Component {
 
 
   registerAjax = (data) => {
-     AjaxSign.register(data)
-        .then((data) => {
-          // swal("Register Success!", "", "success");
-            this.closeModal();
-        }).catch((e) => {
-          swal("Register Fail!", "", "error");
-          console.log(e);
-        });
+    AjaxSign.register(data)
+      .then((data) => {
+        // swal("Register Success!", "", "success");
+        this.closeModal();
+      }).catch((e) => {
+        swal("Register Fail!", "", "error");
+        console.log(e);
+      });
   }
 
   render() {
     return (
       <div id="signUpComponent">
         {
-        this.props.user_id === null
+          this.props.user_id === null
             ? (<Button className="btn-1 btn-neutral ml-1" color="default" onClick={this.openModal}>
               회원가입
-              </Button>) 
+              </Button>)
             : null
         }
 
@@ -138,9 +138,9 @@ class SignUpPaneContainer extends Component {
 }
 
 
-const mapStateToProps = (state)=>{
-  return{
-    user_id : state.signIn.get('signInId'),
+const mapStateToProps = (state) => {
+  return {
+    user_id: state.signIn.get('signInId'),
   }
 }
 

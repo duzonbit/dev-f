@@ -55,4 +55,4 @@ export default handleActions({
       .set("message", "error");
     return newState;
   }
-},initialState);
+}, initialState);

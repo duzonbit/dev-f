@@ -5,26 +5,26 @@ import GeneralSubTitle from "component/bbs/general/GeneralSubTitle";
 import GeneralUpdateData from "component/bbs/update/GeneralUpdateData";
 import GeneralActionButton from "component/bbs/update/GeneralActionButton";
 
-import { getRead ,getReadInit} from "store/module/bbs/read";
-import { getUpdate,getUpdateInit} from "store/module/bbs/update";
+import { getRead, getReadInit } from "store/module/bbs/read";
+import { getUpdate, getUpdateInit } from "store/module/bbs/update";
 
 import swal from 'sweetalert';
 
-const UpdatePaneContainer = (props) => { 
+const UpdatePaneContainer = (props) => {
   let [pw, setPw] = useState('');
   let [title, setTitle] = useState(props.title);
   let [content, setContent] = useState(props.content);
 
-  useEffect(()=>{
+  useEffect(() => {
     setTitle(props.title);
     setContent(props.content);
   }, [props.title, props.content]);
-  if(props.updateMessage==="success"){
+  if (props.updateMessage === "success") {
     swal("Update Complete!", "", "success");
     props.getReadInit();
     props.getUpdateInit();
     props.history.push(`/bbs/read/${props.pageNum}`);
-  } else if(props.updateMessage==="fail"){
+  } else if (props.updateMessage === "fail") {
     swal("Wrong Password!", "", "warning");
     props.getReadInit();
     props.getUpdateInit();
@@ -43,13 +43,13 @@ const UpdatePaneContainer = (props) => {
   const onChangeContent = (e) => {
     setContent(e.target.value);
   };
-  const update = () => {  
-    props.getUpdate(props.idx,{
-      idx:props.idx,
-      name:props.name,
-      pw:pw,
-      title:title,
-      content:content,
+  const update = () => {
+    props.getUpdate(props.idx, {
+      idx: props.idx,
+      name: props.name,
+      pw: pw,
+      title: title,
+      content: content,
     });
   };
 
@@ -68,7 +68,7 @@ const UpdatePaneContainer = (props) => {
         onChangeTitle={onChangeTitle}
         onChangeContent={onChangeContent}
       />
-      <GeneralActionButton update={update} history={props.history}/>
+      <GeneralActionButton update={update} history={props.history} />
     </>
   );
 };
@@ -94,13 +94,13 @@ export default connect(
     getRead: (idx) => {
       dispatch(getRead(idx));
     },
-    getUpdate: (idx,data) => {
-      dispatch(getUpdate(idx,data));
+    getUpdate: (idx, data) => {
+      dispatch(getUpdate(idx, data));
     },
-    getUpdateInit:()=>{
+    getUpdateInit: () => {
       dispatch(getUpdateInit());
     },
-    getReadInit:()=>{
+    getReadInit: () => {
       dispatch(getReadInit());
     }
   })

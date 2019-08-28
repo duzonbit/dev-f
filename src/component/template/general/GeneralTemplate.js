@@ -9,21 +9,21 @@ const GeneralTemplate = (props) => {
   });
   return (
     <div>
-    {childrens["top"] ? childrens["top"] : <CommonHeader />}
-    <div>
+      {childrens["top"] ? childrens["top"] : <CommonHeader />}
+      <div>
         {childrens["left"] ? childrens["left"] : ''}
-    
+
         {childrens["left2"] ? childrens["left2"] : ''}
 
-      <article>
-        {childrens["section"]}
-      </article>
-      <aside>
-        {childrens["right"] ? childrens["right"] : ''}
-      </aside>
+        <article>
+          {childrens["section"]}
+        </article>
+        <aside>
+          {childrens["right"] ? childrens["right"] : ''}
+        </aside>
+      </div>
+      {childrens["bottom"] ? childrens["bottom"] : <CommonFooter />}
     </div>
-    {childrens["bottom"] ? childrens["bottom"] : <CommonFooter />}
-  </div>
   );
 };
 

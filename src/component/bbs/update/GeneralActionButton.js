@@ -1,7 +1,7 @@
 import React from "react";
 import { Button, Container } from "reactstrap";
 
-const GeneralActionButton = ({ update, history}) => {
+const GeneralActionButton = ({ update, history }) => {
   return (
     <>
       <Container align="center">

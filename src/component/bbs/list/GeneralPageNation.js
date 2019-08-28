@@ -4,7 +4,7 @@ import { UrlBbs } from "url/bbs";
 import { Container, Row, Col, Button } from "reactstrap";
 
 const GeneralPageNation = ({ pageNumber, pageSize, totalPages }) => {
-   const paging = () => {
+  const paging = () => {
     let initIndex = Math.floor(pageNumber / pageSize) * 10;
     let page_max =
       initIndex + pageSize > totalPages ? totalPages : initIndex + pageSize;
@@ -52,13 +52,13 @@ const GeneralPageNation = ({ pageNumber, pageSize, totalPages }) => {
 
   return (
     <div>
-        <Container align="center">
-          <Row className="justify-content-center">
-            <Col lg="12">
-              {paging()}  
-            </Col>
-          </Row>
-        </Container>
+      <Container align="center">
+        <Row className="justify-content-center">
+          <Col lg="12">
+            {paging()}
+          </Col>
+        </Row>
+      </Container>
     </div>
   )
 }

@@ -1,4 +1,4 @@
-export {default as signIn } from 'store/module/sign/signInOut'
+export { default as signIn } from 'store/module/sign/signInOut'
 
 
 /* state Selector */

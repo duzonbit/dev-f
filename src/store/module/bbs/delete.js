@@ -11,9 +11,9 @@ const GET_DELETE_SUCCESS = `${GET_DELETE}_SUCCESS`; //요청성공
 const GET_DELETE_FAILURE = `${GET_DELETE}_FAILURE`; //요청 실패
 
 /* action creators */
-export const getDelete = (idx,data) => ({
+export const getDelete = (idx, data) => ({
   type: GET_DELETE,
-  payload: AjaxBbs.del(idx,data)
+  payload: AjaxBbs.del(idx, data)
 });
 
 export const getDeleteInit = () => ({
@@ -25,33 +25,33 @@ const initialState = Map({
   loading: true,
   error: false,
   status: 0,
-  message:"",
+  message: "",
 });
 
 /* reducer */
 export default handleActions({
-    [GET_DELETE_INIT]: (state, action) => {
-      return initialState;
-    },
-    [GET_DELETE_PENDING]: (state, action) => {
-      const newState = state.set("loading", true)
-                            .set("error", false)
-                            .set("message", "loading");
-      return newState;
-    },
-    [GET_DELETE_SUCCESS]: (state, action) => {
-      const { data, status } = action.payload;
-      const newState = state.set("loading", false)
-                            .set("error", false)
-                            .set("status", status)
-                            .set("message", data.message);
+  [GET_DELETE_INIT]: (state, action) => {
+    return initialState;
+  },
+  [GET_DELETE_PENDING]: (state, action) => {
+    const newState = state.set("loading", true)
+      .set("error", false)
+      .set("message", "loading");
+    return newState;
+  },
+  [GET_DELETE_SUCCESS]: (state, action) => {
+    const { data, status } = action.payload;
+    const newState = state.set("loading", false)
+      .set("error", false)
+      .set("status", status)
+      .set("message", data.message);
 
-      return newState;
-    },
-    [GET_DELETE_FAILURE]: (state, action) => {
-      const newState = state.set("loading", false)
-                            .set("error", true)
-                            .set("message", "error");
-      return newState;
-    }
-  },initialState);
+    return newState;
+  },
+  [GET_DELETE_FAILURE]: (state, action) => {
+    const newState = state.set("loading", false)
+      .set("error", true)
+      .set("message", "error");
+    return newState;
+  }
+}, initialState);

@@ -39,7 +39,7 @@ export const delAction = (index, data) => ({
 });
 
 export default handleActions({
-  [INSERT_SUCCESS]: (state, action) =>({
+  [INSERT_SUCCESS]: (state, action) => ({
     action: "insert",
     insert_msg: action.payload.data
   }),
@@ -59,4 +59,4 @@ export default handleActions({
     action: "del",
     del_msg: action.payload.data
   }),
-},{});
+}, {});

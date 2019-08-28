@@ -41,29 +41,29 @@ export default handleActions({
   [GET_READ_INIT]: (state, action) => {
     return initialState;
   },
-    [GET_READ_PENDING]: (state, action) => {
-      const newState = state.set("loading", true)
-                            .set("error", false);
-      return newState;
-    },
-    [GET_READ_SUCCESS]: (state, action) => {
-      const { data, status } = action.payload;
-      const newState = state.set("loading", false)
-                            .set("error", false)
-                            .set("status", status)
-                            .setIn(["data", "idx"], data.idx)
-                            .setIn(["data", "name"], data.name)
-                            .setIn(["data", "pw"], data.pw)
-                            .setIn(["data", "title"], data.title)
-                            .setIn(["data", "content"], data.content)
-                            .setIn(["data", "regdate"], data.regdate)
-                            .setIn(["data", "modifydate"], data.modifydate);
+  [GET_READ_PENDING]: (state, action) => {
+    const newState = state.set("loading", true)
+      .set("error", false);
+    return newState;
+  },
+  [GET_READ_SUCCESS]: (state, action) => {
+    const { data, status } = action.payload;
+    const newState = state.set("loading", false)
+      .set("error", false)
+      .set("status", status)
+      .setIn(["data", "idx"], data.idx)
+      .setIn(["data", "name"], data.name)
+      .setIn(["data", "pw"], data.pw)
+      .setIn(["data", "title"], data.title)
+      .setIn(["data", "content"], data.content)
+      .setIn(["data", "regdate"], data.regdate)
+      .setIn(["data", "modifydate"], data.modifydate);
 
-      return newState;
-    },
-    [GET_READ_FAILURE]: (state, action) => {
-      const newState = state.set("loading", false)
-                            .set("error", true);
-      return newState;
-    }
-  },initialState);
+    return newState;
+  },
+  [GET_READ_FAILURE]: (state, action) => {
+    const newState = state.set("loading", false)
+      .set("error", true);
+    return newState;
+  }
+}, initialState);

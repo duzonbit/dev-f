@@ -6,10 +6,10 @@ import GeneralTemplate from "component/template/general/GeneralTemplate";
 const UpdatePage = (props) => {
   return (
     <div>
-    <GeneralTemplate>
-    <SignInPaneContainer key="left" />
-    <UpdatePaneContainer pageNum={props.match.params.num} history={props.history} key="section"/>
-    </GeneralTemplate>
+      <GeneralTemplate>
+        <SignInPaneContainer key="left" />
+        <UpdatePaneContainer pageNum={props.match.params.num} history={props.history} key="section" />
+      </GeneralTemplate>
     </div>
   )
 }

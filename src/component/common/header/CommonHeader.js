@@ -2,10 +2,10 @@ import React, { Component } from 'react';
 import { NavbarBrand, Navbar, Container } from "reactstrap";
 
 class CommonHeader extends Component {
-    render() {
-        return (
-          <>
-          <section>
+  render() {
+    return (
+      <>
+        <section>
           <Navbar className="navbar-dark bg-default" expand="lg">
             <Container>
               <NavbarBrand href="/" onClick={e => e.preventDefault()}>
@@ -16,10 +16,10 @@ class CommonHeader extends Component {
               </button>
             </Container>
           </Navbar>
-          </section>
-          </>
-        );
-    }
+        </section>
+      </>
+    );
+  }
 }
 
 export default CommonHeader;

@@ -1,21 +1,21 @@
-import React,{useEffect} from "react";
+import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import GeneralPageNation from "component/bbs/list/GeneralPageNation";
 import GeneralListData from "component/bbs/list/GeneralListData";
 import GeneralSubTitle from "component/bbs/general/GeneralSubTitle";
 import { getList } from "store/module/bbs/list";
 
-const ListPaneContainer = (props) => { 
+const ListPaneContainer = (props) => {
   useEffect(() => {
     props.getList(props.pageNum);
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [props.pageNum])
 
   return (
     <div>
-    <GeneralSubTitle subtitle={"게시판"}/>
-    <GeneralListData content={props.content} />
-    <GeneralPageNation pageNumber={props.pageNumber} pageSize={props.pageSize} totalPages={props.totalPages} />
+      <GeneralSubTitle subtitle={"게시판"} />
+      <GeneralListData content={props.content} />
+      <GeneralPageNation pageNumber={props.pageNumber} pageSize={props.pageSize} totalPages={props.totalPages} />
     </div>
   )
 }
