@@ -5,18 +5,23 @@ import GeneralSubTitle from "component/bbs/general/GeneralSubTitle"; //component
 import { getCreate } from "store/module/bbs/create";
 import swal from 'sweetalert';
 
+let prevMessage='none';
+
 const CreatePaneContainer = (props) => {
   useEffect(() => {
-    if (props.message === "success") {
-      swal("Create Success!", "", "success");
-      props.history.push("/");
-    } else if (props.message === "fail") {
-      swal("Create Fail!", "", "warning");
+    const { message } = props;
+    if (prevMessage !== message) {
+      if (message === "success") {
+        swal("Create Success!", "", "success");
+        props.history.push("/");
+      } else if (message === "fail") {
+        swal("Create Fail!", "", "warning");
+      } else if (message === 'error') {
+        swal("Create Fail!", "", "warning");
+      }
+      prevMessage = message;
     }
-    // else{
-    //   swal("Create Error!", "", "error");
-    // }
-  });
+  }, [props]);
 
   const onSubmit = (event) => {
     event.preventDefault();
@@ -27,7 +32,11 @@ const CreatePaneContainer = (props) => {
       data[pair[0]] = pair[1];
     }
 
-    props.getCreate(data);
+    if (data.name === "" || data.title === "" || data.pw === "" || data.content === "") {
+      swal("Empty!", "", "warning");
+    } else {
+      props.getCreate(data);
+    }
   };
 
   return (

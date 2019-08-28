@@ -68,16 +68,13 @@ class SignUpPaneContainer extends Component {
     } else if (!regName.test(this.data.name)) {
       swal("Wrong Name!", "", "waring");
     } else {
-
       await (this.idCheck(this.data.user_id)).then((result) => {
         if (result) {
           this.registerAjax(this.data);
         }
-
       });
     }
   }
-
 
   idCheck = (user_id) => {
     return (
