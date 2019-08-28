@@ -6,6 +6,8 @@ import { Card, Container, Row, Col, Button, Input } from "reactstrap";
 import { Link } from "react-router-dom";
 import { UrlBbs } from "url/comment";
 
+import { withCookies } from "react-cookie";
+
 import swal from 'sweetalert';
 
 const CommentPaneContainer = (props) => {
@@ -15,6 +17,7 @@ const CommentPaneContainer = (props) => {
     const [commentTotal, setCommentTotal] = useState("");
 
     useEffect(() => {
+        console.log(props.cookies.get('signedId'))
         AjaxComment.read(props.readNum, commentNum).then((data) => {
             setComments(data.data.page.list);
             setCommentNum(data.data.page.currpage);
@@ -141,7 +144,7 @@ const CommentPaneContainer = (props) => {
                                             <Input name="name" value={"김홍일"} readOnly />
                                         </Col>
                                         <Col>
-                                            <Input name="user_idx" value={48} readOnly />
+                                            <Input name="user_idx" value={84} readOnly />
                                         </Col>
                                         <Col>
                                             <Input name="content" placeholder="COMMENT" />
@@ -175,4 +178,4 @@ const CommentPaneContainer = (props) => {
     );
 };
 
-export default CommentPaneContainer;
+export default withCookies(CommentPaneContainer);
