@@ -16,7 +16,6 @@ onSubmit = (event) => {
     for(var pair of formData.entries()) {
       data[pair[0]] = pair[1];
     }
-    console.log('dadada',data);
     
     if (data.user_id === "" && data.pw === "") {
       swal("Empty!", "", "warning");
@@ -46,8 +45,6 @@ componentDidUpdate = (prevProps, prevState) => {
 };
 
   render() {
-    console.log('12321sdfasfw',this.props.cookies.get('signedId'));
-    
     return (
       <div>
       {

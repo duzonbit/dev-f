@@ -41,8 +41,6 @@ export default handleActions({
     },
     [GET_DELETE_SUCCESS]: (state, action) => {
       const { data, status } = action.payload;
-      console.log(data);
-      
       const newState = state.set("loading", false)
                             .set("error", false)
                             .set("status", status)

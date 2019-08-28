@@ -21,8 +21,6 @@ export const reqSignIn = (data) => ({
 });
 
 export const reqSignOut = () => {
-  console.log('로그아웃 액션 객체 생성.');
-  
   return({ 
   type: REQ_SIGNOUT,  
 })};
@@ -42,7 +40,6 @@ const initialState = Map({
 /* reducer */
 export default handleActions({
     [REQ_SIGNIN_PENDING]: (state, action) => {
-      console.log("req_signin 요청 준비"); 
       const newState = state.set("loading", true)
                             .set("error", false)
                             .set("status", 0)
@@ -54,11 +51,7 @@ export default handleActions({
       return newState;
     },
     [REQ_SIGNIN_SUCCESS]: (state, action) => {
-      console.log("req_signin 요청 성공");
       const { data, status, config } = action.payload;
-      
-      console.log(JSON.parse(config.data).user_id);
-      
       const newState = state.set("loading", false)
                             .set("error", false)
                             .set("status", status)
@@ -72,8 +65,6 @@ export default handleActions({
       return newState;
     },
     [REQ_SIGNIN_FAILURE]: (state, action) => {
-      console.log("req_signin 요청 에러");
-
       const newState = state.set("loading", false)
                             .set("error", true)
                             .set("status", 0)
@@ -84,7 +75,6 @@ export default handleActions({
       return newState;
     },
     [REQ_SIGNOUT]: (state, action) => {
-      console.log("req_signOut 요청 성공");
       sessionStorage.removeItem("signedId");
       cookies.remove('signedId');//쿠키 제거
       
