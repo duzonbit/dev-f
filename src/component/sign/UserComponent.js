@@ -1,11 +1,5 @@
 import React from 'react';
-import {
-    NavbarBrand,
-    Navbar,
-    Container,
-    Row,
-    Button
-  } from "reactstrap";
+import { NavbarBrand, Navbar, Container, Row, Button } from "reactstrap";
 
 const UserComponent = (props) => {
 

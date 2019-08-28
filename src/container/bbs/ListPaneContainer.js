@@ -1,6 +1,4 @@
 import React,{useEffect} from "react";
-// import { Link } from "react-router-dom";
-// import { UrlBbs } from "url/bbs";
 import { connect } from "react-redux";
 import GeneralPageNation from "component/bbs/list/GeneralPageNation";
 import GeneralListData from "component/bbs/list/GeneralListData";

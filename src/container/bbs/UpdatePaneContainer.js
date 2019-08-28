@@ -10,13 +10,11 @@ import { getUpdate,getUpdateInit} from "store/module/bbs/update";
 
 import swal from 'sweetalert';
 
-
 const UpdatePaneContainer = (props) => { 
   let [pw, setPw] = useState('');
   let [title, setTitle] = useState(props.title);
   let [content, setContent] = useState(props.content);
 
-  //TODO:수정해야할 사항
   useEffect(()=>{
     setTitle(props.title);
     setContent(props.content);
@@ -26,13 +24,12 @@ const UpdatePaneContainer = (props) => {
     props.getReadInit();
     props.getUpdateInit();
     props.history.push(`/bbs/read/${props.pageNum}`);
-  }else if(props.updateMessage==="fail"){
+  } else if(props.updateMessage==="fail"){
     swal("Wrong Password!", "", "warning");
     props.getReadInit();
     props.getUpdateInit();
   }
 
-  
   if (props.loading === true) {
     props.getRead(props.pageNum);
   }

@@ -4,7 +4,6 @@ import SignInPaneContainer from "container/sign/SignInPaneContainer";
 
 import GeneralTemplate from "component/template/general/GeneralTemplate";
 
-
 const ListPage = (props) => {
   let pageNum =
     typeof props.match.params.num === "undefined" ? 1 : props.match.params.num;

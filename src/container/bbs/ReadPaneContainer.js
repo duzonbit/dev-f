@@ -7,8 +7,6 @@ import { getListInit} from "store/module/bbs/list";
 import { getRead, getReadInit} from "store/module/bbs/read";
 import { getDelete ,getDeleteInit} from "store/module/bbs/delete";
 import swal from 'sweetalert';
-// import { Route} from "react-router-dom";
-// import { UrlBbs } from "url/bbs";
 
 const ReadPaneContainer = (props) => {
   useEffect(()=>{
@@ -26,7 +24,6 @@ const ReadPaneContainer = (props) => {
     }
   });
 
-
   if (props.loading === true) 
     props.getRead(props.readNum);
 
@@ -41,6 +38,7 @@ const ReadPaneContainer = (props) => {
       });
     });
   };
+  
   return (
     <div>
       <GeneralSubTitle subtitle={"글 상세"} />

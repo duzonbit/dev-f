@@ -1,10 +1,5 @@
 import React, { Component } from 'react';
-
-import {
-    NavbarBrand,
-    Navbar,
-    Container,
-} from "reactstrap";
+import { NavbarBrand, Navbar, Container } from "reactstrap";
 
 class CommonHeader extends Component {
     render() {

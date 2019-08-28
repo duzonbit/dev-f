@@ -1,15 +1,7 @@
 import React from 'react';
 import SignUpPaneContainer from "container/sign/SignUpPaneContainer"
 
-import {
-  NavbarBrand,
-  Navbar,
-  Container,
-  Row,
-  Col,
-  Input,
-  Button
-} from "reactstrap";
+import { NavbarBrand, Navbar, Container, Row, Col, Input, Button } from "reactstrap";
 
 const LoginComponent = (props) => {
     return (

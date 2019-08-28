@@ -1,7 +1,7 @@
 import React from "react";
 import { Card, Container, Row, Col, Input } from "reactstrap";
 
-const GeneralReadData = ({ idx, name, pw, title, content, regdate, modifydate }) => {
+const GeneralReadData = ({ idx, name, title, content, regdate, modifydate }) => {
   return (
     <>
         <main className="profile-page">
@@ -47,13 +47,6 @@ const GeneralReadData = ({ idx, name, pw, title, content, regdate, modifydate })
                             <tr>
                                 <td></td>
                             </tr>
-                            {/* <tr>
-                            <td><h5 className="mb-0">비밀번호</h5></td>
-                            <td><Input style={{width:'300px', height:'35px'}}className="form-control-alternative" type="text" value={content["pw"]} readOnly /></td>
-                            </tr>
-                            <tr>
-                                <td></td>
-                            </tr> */}
                             <tr>
                             <td><h5 className="mb-0">제목</h5></td>
                             <td><Input style={{width:'300px', height:'35px'}}className="form-control-alternative" type="text" value={title} readOnly /></td>

@@ -128,11 +128,6 @@ class SignUpPaneContainer extends Component {
         <Modal
           shouldCloseOnOverlayClick={false}
           isOpen={this.state.modalIsOpen}
-          // class="modal"
-          // Style="position: absolute; top: 30%; left: 40px; right: 40px; bottom: 40px; border: 1px solid rgb(204, 204, 204); background: rgb(255, 255, 255); overflow: auto; border-radius: 4px; outline: none; padding: 20px;"
-          // className="modal"
-          // overlayClassName="overlay" 
-          // Style="top:30%"
           style={modalStyles}
 
         >

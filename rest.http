@@ -19,11 +19,7 @@ User-Agent: rest-client
 }
 
 ### UPDATE
-<<<<<<< HEAD
-PUT  http://dev-b.zcvfcat.ga/bbs/ HTTP/1.1
-=======
 PUT  http://springboot.zcvfcat.ga/board/ HTTP/1.1
->>>>>>> origin/youngwon
 content-type: application/json
 User-Agent: rest-client
 
@@ -36,33 +32,12 @@ User-Agent: rest-client
 }
 
 ### DELETE
-<<<<<<< HEAD
-DELETE  http://localhost:63002/bbs/76 HTTP/1.1
-=======
 DELETE  http://springboot.zcvfcat.ga/board/ HTTP/1.1
->>>>>>> origin/youngwon
 content-type: application/json
 User-Agent: rest-client
 
 {
-<<<<<<< HEAD
-    "idx" : "76",
-    "name" : "13",
-    "pw" : "13"
-}
-// "proxy": "http://dev-b.zcvfcat.ga",
-// "proxy": "http://localhost:63002",
-
-###
-
-GET http://dev-b.zcvfcat.ga/comment/1/1
-
-
-###
-GET http://192.168.0.8:63002/comment/1/2
-=======
     "idx" : "269",
     "name" : "13",
     "pw" : "13"
 }
->>>>>>> origin/youngwon

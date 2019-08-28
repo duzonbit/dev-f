@@ -1,18 +1,11 @@
-import React,{useEffect, useState} from "react";
+import React,{ useEffect } from "react";
 import { connect } from "react-redux";
 import GeneralCreateForm from "component/bbs/create/GeneralCreateForm"; //component
 import GeneralSubTitle from "component/bbs/general/GeneralSubTitle"; //component
-// import { getListInit } from "store/module/bbs/list";
 import { getCreate } from "store/module/bbs/create";
 import swal from 'sweetalert';
 
-
 const CreatePaneContainer = (props) => {
-
-  // useEffect(() => {
-  //   console.log('마운트 될 때만 실행됩니다.');
-  // }, []);
-
   useEffect(()=>{
     if(props.message==="success"){
       swal("Create Success!", "", "success");
@@ -23,7 +16,6 @@ const CreatePaneContainer = (props) => {
     // else{
     //   swal("Create Error!", "", "error");
     // }
-
   });
   
   const onSubmit = (event) => {
@@ -34,7 +26,6 @@ const CreatePaneContainer = (props) => {
     for(var pair of formData.entries()) {
       data[pair[0]] = pair[1];
     }
-    console.log('paripari',data);
     
     props.getCreate(data);
   };
@@ -56,9 +47,6 @@ export default connect(
     getCreate: (data) => {
       dispatch(getCreate(data));
     },
-    // getListInit:()=>{
-    //   dispatch(getListInit());
-    // }
   })
 )(CreatePaneContainer);
 

@@ -1,12 +1,5 @@
 import React, { Component } from 'react';
-import {
-  NavItem,
-  NavLink,
-  Nav,
-  Container,
-  Row,
-  Col,
-} from "reactstrap";
+import { NavItem, NavLink, Nav, Container, Row, Col } from "reactstrap";
 
 class CommonFooter extends Component {
     render() {

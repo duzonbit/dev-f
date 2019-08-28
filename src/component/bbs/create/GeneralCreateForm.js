@@ -1,17 +1,12 @@
 import React from 'react';
-
 import { Card, Container, Row, Col, Input, Button } from "reactstrap";
 
-const GeneralCreateForm = ({onSubmit,props}) => {
-
-
-
+const GeneralCreateForm = ({onSubmit}) => {
 
     return (
         <>
         <main className="profile-page">
           <section className="section-profile-cover section-shaped my-0" style={{height:'350px'}}>
-            {/* Circles background */}
             <div className="shape shape-style-1 shape-default alpha-4">
             </div>
           </section>
@@ -107,7 +102,6 @@ const GeneralCreateForm = ({onSubmit,props}) => {
         </main>
       </>
     );
-
 }
 
 export default GeneralCreateForm;

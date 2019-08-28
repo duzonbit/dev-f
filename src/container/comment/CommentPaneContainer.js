@@ -33,10 +33,8 @@ const CommentPaneContainer = (props) => {
         for (let key of formData.keys()) {
             data[key] = formData.get(key);
         }
-        console.log(data);
 
         AjaxComment.create(data).then((data) => {
-            console.log(data);
             swal("Create Complete!", "", "success");
             props.history.push(`/bbs/read/${props.readNum}`);
         }).catch((e) => {
@@ -53,10 +51,8 @@ const CommentPaneContainer = (props) => {
                 data = comments[key];
             }
         }
-        console.log("data", data);
 
         AjaxComment.delete(data).then((data) => {
-            console.log(data);
             swal("Delete Complete!", "", "success");
             props.history.push(`/bbs/read/${props.readNum}`);
         }).catch((e) => {

@@ -1,9 +1,5 @@
 import React from 'react'
-import {
-  NavbarBrand,
-  Navbar,
-  Container,
-} from "reactstrap";
+import { NavbarBrand, Navbar, Container } from "reactstrap";
 
 const GeneralSubTitle = ({subtitle}) => {
   return (
@@ -19,4 +15,4 @@ const GeneralSubTitle = ({subtitle}) => {
   )
 }
 
-export default GeneralSubTitle
+export default GeneralSubTitle;

@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 import { UrlBbs } from "url/bbs";
 import { Container, Row, Col, Button } from "reactstrap";
 
-
 const GeneralPageNation = ({ pageNumber, pageSize, totalPages }) => {
    const paging = () => {
     let initIndex = Math.floor(pageNumber / pageSize) * 10;
@@ -54,12 +53,12 @@ const GeneralPageNation = ({ pageNumber, pageSize, totalPages }) => {
   return (
     <div>
         <Container align="center">
-            <Row className="justify-content-center">
-              <Col lg="12">
+          <Row className="justify-content-center">
+            <Col lg="12">
               {paging()}  
-              </Col>
-              </Row>
-              </Container>
+            </Col>
+          </Row>
+        </Container>
     </div>
   )
 }
