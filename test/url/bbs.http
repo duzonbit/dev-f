@@ -1,0 +1,41 @@
+### PAGE
+GET http://dev-b.zcvfcat.ga/bbs/1
+
+###READ
+GET http://dev-bzcvfcat.ga/bbs/read/30
+
+### INSERT
+POST http://dev-b.zcvfcat.ga/bbs/ HTTP/1.1
+content-type: application/json
+User-Agent: rest-client
+
+{
+    "name" : "1",
+    "pw" : "1",
+    "title" : "1",
+    "content" : "1"
+}
+
+### UPDATE
+PUT  http://dev-b.zcvfcat.ga/bbs/1026 HTTP/1.1
+content-type: application/json
+User-Agent: rest-client
+
+{
+    "idx" : "1026",
+    "name" : "Amal",
+    "pw" : "ZIV83WLO6GZ",
+    "title" : "Curabitur ",
+    "content" : "Curabitur "
+}
+
+### DELETE
+DELETE  http://dev-b.zcvfcat.ga/bbs/ HTTP/1.1
+content-type: application/json
+User-Agent: rest-client
+
+{
+    "idx" : "269",
+    "name" : "13",
+    "pw" : "13"
+}

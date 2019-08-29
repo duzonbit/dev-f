@@ -1,0 +1,25 @@
+###PAGE
+GET http://dev-b.zcvfcat.ga/comment/1
+
+### INSERT
+POST http://dev-b.zcvfcat.ga/comment/ HTTP/1.1
+content-type: application/json
+User-Agent: rest-client
+
+{
+    "idx":"74",
+    "pw" : "1",
+    "user_idx":"1",
+    "bbs_idx" : "1",
+    "title" : "1",
+    "content" : "1"
+}
+
+### DELETE
+DELETE  http://dev-b.zcvfcat.ga/comment/ HTTP/1.1
+content-type: application/json
+User-Agent: rest-client
+
+{
+    "idx" : "75"
+}
