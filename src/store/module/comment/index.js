@@ -1,0 +1,1 @@
+export { default as comment } from 'store/module/comment/comment'

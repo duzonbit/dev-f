@@ -3,6 +3,7 @@ import { createPromise } from "redux-promise-middleware";
 import * as bbsModules from 'store/module/bbs';
 import * as signModules from 'store/module/sign';
 import { composeWithDevTools } from 'redux-devtools-extension';
+import * as commentModules from 'store/module/comment'
 
 const reducers = combineReducers({
     list: bbsModules.list,
@@ -13,6 +14,8 @@ const reducers = combineReducers({
 
     signIn: signModules.signIn,
     // signOut : signModules.signOut,
+
+    comment: commentModules.comment,
 });
 
 const middleware = createPromise({

@@ -1,33 +1,33 @@
 /* eslint-disable no-unused-vars */
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
+import { connect } from "react-redux";
 import { AjaxComment } from "url/comment";
-
 import { Card, Container, Row, Col, Button, Input } from "reactstrap";
 import { Link } from "react-router-dom";
 import { UrlBbs } from "url/comment";
-
 import { withCookies } from "react-cookie";
-
 import swal from 'sweetalert';
+import { getCommentRead } from "store/module/comment/comment";
 
-const CommentPaneContainer = (props) => {
-    const [comments, setComments] = useState([]);
-    const [commentNum, setCommentNum] = useState(0);
-    const [commentPageSize, setCommentPageSize] = useState("10");
-    const [commentTotal, setCommentTotal] = useState("");
+let prevSize = 0;
+
+const CommentPaneContainer = ({ commentPage, getCommentRead, readNum, history, props }) => {
+    const { list } = commentPage;
+    const prevCommentPage = useRef(commentPage);
+
+
+    // useEffect(() => {
+    //     if (prevCommentPage !== commentPage)
+    //         getCommentRead(readNum);
+    // }, [commentPage, getCommentRead, readNum]);
 
     useEffect(() => {
-        console.log(props.cookies.get('signedId'))
-        AjaxComment.read(props.readNum, commentNum).then((data) => {
-            setComments(data.data.page.list);
-            setCommentNum(data.data.page.currpage);
-            setCommentPageSize(data.data.page.size);
-            setCommentTotal(data.data.page.maxpage);
-        }).catch((e) => {
-            console.log(e)
-        })
-    }, [props, commentNum]);
+        if (prevSize !== commentPage.page.list.length) {
+            getCommentRead(readNum);
+            prevSize = commentPage.page.list.length;
+        }
 
+    }, [commentPage, getCommentRead, readNum, history]);
 
     const onCreate = (event) => {
         event.preventDefault();
@@ -38,8 +38,11 @@ const CommentPaneContainer = (props) => {
         }
 
         AjaxComment.create(data).then((data) => {
-            swal("Create Complete!", "", "success");
-            props.history.push(`/bbs/read/${props.readNum}`);
+            swal("Create Complete!", "", "success").then((msg) => {
+                if (msg) {
+                    getCommentRead(readNum);
+                }
+            });
         }).catch((e) => {
             console.log(e);
         });
@@ -49,22 +52,22 @@ const CommentPaneContainer = (props) => {
     const onDelete = (idx) => {
         idx = Number(idx);
         let data;
-        for (const key in comments) {
-            if (comments[key].idx === idx) {
-                data = comments[key];
+        for (const key in commentPage) {
+            if (commentPage[key].idx === idx) {
+                data = commentPage[key];
             }
         }
 
         AjaxComment.delete(data).then((data) => {
             swal("Delete Complete!", "", "success");
-            props.history.push(`/bbs/read/${props.readNum}`);
+            history.push(`/bbs/read/${readNum}`);
         }).catch((e) => {
             console.log(e);
         });
     };
 
     const renderList = () =>
-        comments.map((v, i) => (
+        commentPage.page.list.map((v, i) => (
             <tr key={i}>
                 <th>{v["name"]}</th>
                 <th>{v["content"]}</th>
@@ -80,24 +83,24 @@ const CommentPaneContainer = (props) => {
             let page_max = initIndex + commentPageSize > commentTotal ? commentTotal : initIndex + commentPageSize;
             let paging = [];
             for (let index = initIndex + 1; index <= page_max + 1; index++) {
-                paging.push(<Link key={index} to={UrlBbs.list + props.readNum + '/' + index}>
-                    <Button className="btn-1 ml-1" color="info" outline type="button" onClick={(e) => { setCommentNum(index - 1) }}>{index}</Button>
+                paging.push(<Link key={index} to={UrlBbs.list + readNum + '/' + index}>
+                    <Button className="btn-1 ml-1" color="info" outline type="button" onClick={(e) => { }}>{index}</Button>
                 </Link>
                 );
             }
-            let first = (<Link key={"first"} to={UrlBbs.list + props.readNum + '/' + 1}>
-                <Button className="btn-1 ml-1" color="info" outline type="button" onClick={(e) => { setCommentNum(0) }}>{"<<"}</Button>
+            let first = (<Link key={"first"} to={UrlBbs.list + readNum + '/' + 1}>
+                <Button className="btn-1 ml-1" color="info" outline type="button" onClick={(e) => { }}>{"<<"}</Button>
             </Link>)
-            let last = (<Link key={"last"} to={UrlBbs.list + props.readNum + '/' + commentTotal}>
-                <Button className="btn-1 ml-1" color="info" outline type="button" onClick={(e) => { setCommentNum(commentTotal) }}>{">>"}</Button>
-            </Link>)
-
-            let prev = (<Link key={"prev"} to={UrlBbs.list + props.readNum + '/' + initIndex}>
-                <Button className="btn-1 ml-1" color="info" outline type="button" onClick={(e) => { setCommentNum(initIndex) }}>{"<"}</Button>
+            let last = (<Link key={"last"} to={UrlBbs.list + readNum + '/' + commentTotal}>
+                <Button className="btn-1 ml-1" color="info" outline type="button" onClick={(e) => { }}>{">>"}</Button>
             </Link>)
 
-            let next = (<Link key={"next"} to={UrlBbs.list + props.readNum + '/' + (page_max + 1)}>
-                <Button className="btn-1 ml-1" color="info" outline type="button" onClick={(e) => { setCommentNum(page_max + 1) }}>{">"}</Button>
+            let prev = (<Link key={"prev"} to={UrlBbs.list + readNum + '/' + initIndex}>
+                <Button className="btn-1 ml-1" color="info" outline type="button" onClick={(e) => { }}>{"<"}</Button>
+            </Link>)
+
+            let next = (<Link key={"next"} to={UrlBbs.list + readNum + '/' + (page_max + 1)}>
+                <Button className="btn-1 ml-1" color="info" outline type="button" onClick={(e) => { }}>{">"}</Button>
             </Link>)
 
             if (initIndex !== 0) {
@@ -149,7 +152,7 @@ const CommentPaneContainer = (props) => {
                                         <Col>
                                             <Input name="content" placeholder="COMMENT" />
                                         </Col>
-                                        <Input name="bbs_idx" value={props.readNum} readOnly hidden />
+                                        <Input name="bbs_idx" value={readNum} readOnly hidden />
                                         <Button className="btn-1 ml-1" outline color="info" type="sumbit">확인</Button>
                                     </Row>
                                 </form>
@@ -165,7 +168,7 @@ const CommentPaneContainer = (props) => {
                                         <tbody>{renderList()}</tbody>
                                     </table>
                                     <br />
-                                    {renderPaging(commentNum, commentPageSize, commentTotal)}
+                                    {renderPaging()}
                                 </div>
                                 <div className="mt-5 py-5 text-center">
                                 </div>
@@ -178,4 +181,11 @@ const CommentPaneContainer = (props) => {
     );
 };
 
-export default withCookies(CommentPaneContainer);
+export default withCookies(connect(
+    (state) => ({
+        commentPage: state.comment.get("data").toJS(),
+    }),
+    (dispatch) => ({
+        getCommentRead: (readNum, commentNum) => { dispatch(getCommentRead(readNum, commentNum)) },
+    })
+)(CommentPaneContainer));

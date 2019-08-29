@@ -62,7 +62,7 @@ const GeneralListData = ({ content }) => {
                   </Col>
                 </Row>
                 <div>
-                  <table style={{ width: '1000px' }}>
+                  <table>
                     <thead align="center">
                       <tr>
                         <th>글번호</th>
