@@ -19,7 +19,7 @@ const CommentPaneContainer = (props) => {
   const [commentTotal, setCommentTotal] = useState("")
 
   useEffect(() => {
-    console.log(props.cookies.get("signedId"))
+    console.log(props.cookies.get("signIdx"))
     AjaxComment.read(props.readNum, commentNum)
       .then((data) => {
         setComments(data.data.page.list)
@@ -200,7 +200,7 @@ const CommentPaneContainer = (props) => {
               <div className="px-4">
                 <Row className="justify-content-left">
                   <Col className="order-lg-2" lg="3">
-                    <div className="card-profile-image">{/* <a href="#pablo" onClick={(e) => e.preventDefault()}></a> */}</div>
+                    <div className="card-profile-image"></div>
                   </Col>
                   <Col className="order-lg-1" lg="4">
                     <div className="card-profile-stats d-flex justify-content-left">
@@ -210,10 +210,12 @@ const CommentPaneContainer = (props) => {
                     </div>
                   </Col>
                 </Row>
+                {
+                  props.cookies.get("signIdx")?               
                 <form onSubmit={onCreate}>
                   <Row>
                     <Col>
-                      <Input name="name" value={props.cookies.get("signName")} readOnly />
+                    <Input name="name" value={props.cookies.get("signName")} readOnly />
                     </Col>
                     <Col>
                       <Input name="user_idx" value={props.cookies.get("signIdx")} readOnly />
@@ -222,11 +224,11 @@ const CommentPaneContainer = (props) => {
                       <Input name="content" placeholder="COMMENT" />
                     </Col>
                     <Input name="bbs_idx" value={props.readNum} readOnly hidden />
-                    <Button className="btn-1 ml-1" outline color="info" type="sumbit">
-                      확인
-                    </Button>
+                    <Button className="btn-1 ml-1" outline color="info" type="sumbit">확인</Button>
                   </Row>
                 </form>
+                : <div></div>
+                }
                 <div className="text-center mt-5">
                   <table style={{margin:'auto', width:'80%'}}>
                     <thead>

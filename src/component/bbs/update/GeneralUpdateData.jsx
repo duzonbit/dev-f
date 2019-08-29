@@ -25,12 +25,6 @@ const GeneralUpdateData = ({
             <Card className="card-profile shadow mt--300">
               <div className="px-4">
                 <Row className="justify-content-left">
-                  <Col className="order-lg-2" lg="3">
-                    <div className="card-profile-image">
-                      <a href="#pablo" onClick={e => e.preventDefault()}>
-                      </a>
-                    </div>
-                  </Col>
                   <Col className="order-lg-1" lg="4">
                     <div className="card-profile-stats d-flex justify-content-left">
                       <div>

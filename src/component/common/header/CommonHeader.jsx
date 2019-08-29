@@ -8,7 +8,7 @@ class CommonHeader extends Component {
         <section>
           <Navbar className="navbar-dark bg-default" expand="lg">
             <Container>
-              <NavbarBrand href="/" onClick={e => e.preventDefault()}>
+              <NavbarBrand href="/" onClick={e => e.href}>
                 2JO
               </NavbarBrand>
               <button className="navbar-toggler" id="navbar-info">
