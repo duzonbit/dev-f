@@ -22,79 +22,79 @@ SPA 게시판
   - 버전 관리 : `git`
   - 협업 도구 : `slack`, `Trello`
 
-
 # 디렉토리 구조
+
+$tree-extended -max=5 -ignore="node_module",".git","assets","public","build",".vscode"
 
     ├───src/
     │   ├───component/
     │   │   ├───bbs/
     │   │   │   ├───create/
-    │   │   │   │   └───GeneralCreateForm.js  
+    │   │   │   │   └───GeneralCreateForm.jsx
     │   │   │   ├───general/
-    │   │   │   │   └───GeneralSubTitle.js    
+    │   │   │   │   └───GeneralSubTitle.jsx
     │   │   │   ├───list/
-    │   │   │   │   ├───GeneralListData.js    
-    │   │   │   │   └───GeneralPageNation.js  
+    │   │   │   │   ├───GeneralListData.jsx
+    │   │   │   │   └───GeneralPageNation.jsx
     │   │   │   ├───pagination/
-    │   │   │   │   └───GeneralPageNation.js  
+    │   │   │   │   └───GeneralPageNation.jsx
     │   │   │   ├───read/
-    │   │   │   │   ├───GeneralActionButton.js
-    │   │   │   │   └───GeneralReadData.js    
-    │   │   │   ├───update/
-    │   │   │   │   ├───GeneralActionButton.js
-    │   │   │   │   └───GeneralUpdateData.js  
-    │   │   │   ├───ListPaneComponent.js      
-    │   │   │   └───PagingPaneComponent.js    
+    │   │   │   │   ├───GeneralActionButton.jsx
+    │   │   │   │   └───GeneralReadData.jsx
+    │   │   │   └───update/
+    │   │   │       ├───GeneralActionButton.jsx
+    │   │   │       └───GeneralUpdateData.jsx
     │   │   ├───common/
-    │   │   │   ├───empty/
-    │   │   │   │   ├───CommonEmpty.js        
-    │   │   │   │   └───index.js
+    │   │   │   ├───aside/
+    │   │   │   │   ├───CommonAside.jsx
+    │   │   │   │   └───index.jsx
     │   │   │   ├───footer/
-    │   │   │   │   ├───CommonFooter.js       
-    │   │   │   │   └───index.js
-    │   │   │   ├───header/
-    │   │   │   │   ├───CommonHeader.js
-    │   │   │   │   └───index.js
-    │   │   │   └───nav/
-    │   │   │       ├───CommonNav.js
-    │   │   │       └───index.js
+    │   │   │   │   ├───CommonFooter.jsx
+    │   │   │   │   └───index.jsx
+    │   │   │   └───header/
+    │   │   │       ├───CommonHeader.jsx
+    │   │   │       └───index.jsx
     │   │   ├───modals/
-    │   │   │   ├───AskModal.js
-    │   │   │   ├───ResultNotifyModal.js
-    │   │   │   └───SignUpModal.js
+    │   │   │   └───SignUpModal.jsx
     │   │   ├───sign/
-    │   │   │   ├───LoginComponent.js
-    │   │   │   └───UserComponent.js
+    │   │   │   ├───LoginComponent.jsx
+    │   │   │   └───UserComponent.jsx
     │   │   ├───template/
     │   │   │   └───general/
-    │   │   │       └───GeneralTemplate.js
-    │   │   └───App.js
+    │   │   │       └───GeneralTemplate.jsx
+    │   │   └───App.jsx
     │   ├───container/
     │   │   ├───bbs/
-    │   │   │   ├───CreatePaneContainer.js
-    │   │   │   ├───ListPaneContainer.js
-    │   │   │   ├───ReadPaneContainer.js
-    │   │   │   └───UpdatePaneContainer.js
+    │   │   │   ├───CreatePaneContainer.jsx
+    │   │   │   ├───ListPaneContainer.jsx
+    │   │   │   ├───ReadPaneContainer.jsx
+    │   │   │   └───UpdatePaneContainer.jsx
     │   │   ├───comment/
-    │   │   │   └───CommentPaneContainer.js
+    │   │   │   └───CommentPaneContainer.jsx
     │   │   └───sign/
-    │   │       ├───SignInPaneContainer.js
-    │   │       └───SignUpPaneContainer.js
-    │   ├───message/
-    │   │   └───index.js
+    │   │       ├───SignInPaneContainer.jsx
+    │   │       └───SignUpPaneContainer.jsx
+    │   ├───lib/
+    │   │   └───url/
+    │   │       ├───bbs/
+    │   │       │   ├───default.js
+    │   │       │   └───index.js
+    │   │       ├───comment/
+    │   │       │   ├───default.js
+    │   │       │   └───index.js
+    │   │       └───sign/
+    │   │           ├───default.js
+    │   │           └───index.js
     │   ├───pages/
-    │   │   ├───bbs/
-    │   │   │   ├───CreatePage.js
-    │   │   │   ├───ListPage.js
-    │   │   │   ├───ReadPage.js
-    │   │   │   └───UpdatePage.js
-    │   │   └───common/
-    │   │       └───NotFounPage.js
+    │   │   └───bbs/
+    │   │       ├───CreatePage.jsx
+    │   │       ├───ListPage.jsx
+    │   │       ├───ReadPage.jsx
+    │   │       └───UpdatePage.jsx
     │   ├───store/
     │   │   ├───module/
     │   │   │   ├───bbs/
     │   │   │   │   ├───create.js
-    │   │   │   │   ├───defaultbbs.js
     │   │   │   │   ├───delete.js
     │   │   │   │   ├───index.js
     │   │   │   │   ├───list.js
@@ -105,24 +105,19 @@ SPA 게시판
     │   │   │   │   └───signInOut.js
     │   │   │   └───index.js
     │   │   └───configure.js
-    │   ├───url/
-    │   │   ├───bbs/
-    │   │   │   └───index.js
-    │   │   ├───comment/
-    │   │   │   └───index.js
-    │   │   └───sign/
-    │   │       └───index.js
-    │   ├───index.css
-    │   ├───index.js
-    │   └───Root.js
+    │   ├───index.jsx
+    │   └───Root.jsx
+    ├───test/
+    │   └───url/
+    │       ├───bbs.http
+    │       ├───comment.http
+    │       └───sign.http
     ├───.env
     ├───.eslintrc.js
-    ├───comment.http
     ├───package-lock.json
     ├───package.json
-    ├───README.md
-    └───rest.http
-
+    └───README.md
+    
 # 기술 설명
 
 >### redux-promise-middleware
