@@ -42,12 +42,12 @@ const GeneralUpdateData = ({
                 <Col className="order-lg-1" lg="4">
                   <div>
                     <form align="center">
-                      <table style={{ width: '600px' }}>
+                      <table style={{margin:'auto', width:'300%'}}>
                         <tbody>
                           <tr>
-                            <td>idx</td>
+                            <td>글번호</td>
                             <td>
-                              <Input style={{ width: '300px', height: '35px' }} className="form-control-alternative is-valid" type="text"
+                              <Input style={{width:'50%'}} className="form-control-alternative is-valid" type="text"
                                 name={"idx"} value={idx} readOnly={true} disabled={true}></Input>
                             </td>
                           </tr>
@@ -55,9 +55,9 @@ const GeneralUpdateData = ({
                             <td></td>
                           </tr>
                           <tr>
-                            <td>name</td>
+                            <td>이름</td>
                             <td>
-                              <Input style={{ width: '300px', height: '35px' }} className="form-control-alternative is-valid" type="text"
+                              <Input style={{width:'50%'}} className="form-control-alternative is-valid" type="text"
                                 name={"name"} value={name} readOnly={true} disabled={true}></Input>
                             </td>
                           </tr>
@@ -65,9 +65,9 @@ const GeneralUpdateData = ({
                             <td></td>
                           </tr>
                           <tr>
-                            <td>pw</td>
+                            <td>비밀번호</td>
                             <td>
-                              <Input style={{ width: '300px', height: '35px' }} className="form-control-alternative is-valid" type="password"
+                              <Input style={{width:'50%'}} className="form-control-alternative is-valid" type="password"
                                 autoComplete={"true"} name={"pw"} onChange={onChangePw} value={pw}></Input>
                             </td>
                           </tr>
@@ -75,9 +75,9 @@ const GeneralUpdateData = ({
                             <td></td>
                           </tr>
                           <tr>
-                            <td>title</td>
+                            <td>제목</td>
                             <td>
-                              <Input style={{ width: '300px', height: '35px' }} className="form-control-alternative is-valid" type="text"
+                              <Input style={{width:'50%'}} className="form-control-alternative is-valid" type="text"
                                 name={"title"} onChange={onChangeTitle} value={title}></Input>
                             </td>
                           </tr>
@@ -85,9 +85,9 @@ const GeneralUpdateData = ({
                             <td></td>
                           </tr>
                           <tr>
-                            <td>content</td>
+                            <td>내용</td>
                             <td>
-                              <Input style={{ width: '300px', height: '100px' }} className="form-control-alternative is-valid" type="textarea"
+                              <Input style={{width:'50%'}} className="form-control-alternative is-valid" type="textarea"
                                 name={"content"} onChange={onChangeContent} value={content}></Input>
                             </td>
                           </tr>
@@ -95,9 +95,9 @@ const GeneralUpdateData = ({
                             <td></td>
                           </tr>
                           <tr>
-                            <td>regdate</td>
+                            <td>등록일</td>
                             <td>
-                              <Input style={{ width: '300px', height: '35px' }} className="form-control-alternative is-valid" type="text"
+                              <Input style={{width:'50%'}} className="form-control-alternative is-valid" type="text"
                                 name={"regdate"} readOnly={true} disabled={true} value={new Date(regdate).toUTCString().substring(0, 10)}></Input>
                             </td>
                           </tr>
@@ -106,9 +106,9 @@ const GeneralUpdateData = ({
                           </tr>
                           <tr></tr>
                           <tr>
-                            <td>modifydate</td>
+                            <td>변경일</td>
                             <td>
-                              <Input style={{ width: '300px', height: '35px' }} className="form-control-alternative is-valid" type="text"
+                              <Input style={{width:'50%'}} className="form-control-alternative is-valid" type="text"
                                 name={"modifydate"} readOnly={true} disabled={true} value={new Date(modifydate).toUTCString().substring(0, 10)}></Input>
                             </td>
                           </tr>

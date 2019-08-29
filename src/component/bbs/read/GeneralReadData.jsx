@@ -1,4 +1,4 @@
-import React from "react"
+import React from "react";
 import { Card, Container, Row, Col, Input } from "reactstrap"
 
 const GeneralReadData = ({ bbs }) => {
@@ -28,69 +28,57 @@ const GeneralReadData = ({ bbs }) => {
                 </Row>
                 <Col className="order-lg-1" lg="4">
                   <div>
-                    <table style={{ width: "1000px" }}>
+                    <table style={{ margin:'auto', width: '300%' }}>
                       <tbody>
                         <tr>
+                          <td>글번호</td>
                           <td>
-                            <h5 className="mb-0">글 번호</h5>
-                          </td>
-                          <td>
-                            <Input style={{ width: "300px", height: "35px" }} className="form-control-alternative" type="text" value={idx} readOnly />
+                            <Input style={{width:'50%'}} className="form-control-alternative" type="text" value={idx} readOnly />
                           </td>
                         </tr>
                         <tr>
                           <td></td>
                         </tr>
                         <tr>
+                          <td>이름</td>
                           <td>
-                            <h5 className="mb-0">글쓴이</h5>
-                          </td>
-                          <td>
-                            <Input style={{ width: "300px", height: "35px" }} className="form-control-alternative" type="text" value={name} readOnly />
+                            <Input style={{width:'50%'}} className="form-control-alternative" type="text" value={name} readOnly />
                           </td>
                         </tr>
                         <tr>
                           <td></td>
                         </tr>
                         <tr>
+                          <td>제목</td>
                           <td>
-                            <h5 className="mb-0">제목</h5>
-                          </td>
-                          <td>
-                            <Input style={{ width: "300px", height: "35px" }} className="form-control-alternative" type="text" value={title} readOnly />
+                            <Input style={{width:'50%'}} className="form-control-alternative" type="text" value={title} readOnly />
                           </td>
                         </tr>
                         <tr>
                           <td></td>
                         </tr>
                         <tr>
+                          <td>내용</td>
                           <td>
-                            <h5 className="mb-0">내용</h5>
-                          </td>
-                          <td>
-                            <Input style={{ width: "300px", height: "100px" }} className="form-control-alternative" type="text" value={content} readOnly />
+                            <Input style={{width:'50%'}} className="form-control-alternative" type="text" value={content} readOnly />
                           </td>
                         </tr>
                         <tr>
                           <td></td>
                         </tr>
                         <tr>
+                          <td>등록일</td>
                           <td>
-                            <h5 className="mb-0">등록일</h5>
-                          </td>
-                          <td>
-                            <Input style={{ width: "300px", height: "35px" }} className="form-control-alternative" type="text" value={new Date(regdate).toUTCString().substring(0, 10)} readOnly />
+                            <Input style={{width:'50%'}} className="form-control-alternative" type="text" value={new Date(regdate).toUTCString().substring(0, 10)} readOnly />
                           </td>
                         </tr>
                         <tr>
                           <td></td>
                         </tr>
                         <tr>
+                          <td>변경일</td>
                           <td>
-                            <h5 className="mb-0">변경일</h5>
-                          </td>
-                          <td>
-                            <Input style={{ width: "300px", height: "35px" }} className="form-control-alternative" type="text" value={new Date(modifydate).toUTCString().substring(0, 10)} readOnly />
+                            <Input style={{width:'50%'}} className="form-control-alternative" type="text" value={new Date(modifydate).toUTCString().substring(0, 10)} readOnly />
                           </td>
                         </tr>
                       </tbody>
@@ -107,4 +95,5 @@ const GeneralReadData = ({ bbs }) => {
   )
 }
 
-export default GeneralReadData
+
+export default GeneralReadData;

@@ -213,10 +213,10 @@ const CommentPaneContainer = (props) => {
                 <form onSubmit={onCreate}>
                   <Row>
                     <Col>
-                      <Input name="name" value={"김홍일"} readOnly />
+                      <Input name="name" value={props.cookies.get("signName")} readOnly />
                     </Col>
                     <Col>
-                      <Input name="user_idx" value={84} readOnly />
+                      <Input name="user_idx" value={props.cookies.get("signIdx")} readOnly />
                     </Col>
                     <Col>
                       <Input name="content" placeholder="COMMENT" />
@@ -228,7 +228,7 @@ const CommentPaneContainer = (props) => {
                   </Row>
                 </form>
                 <div className="text-center mt-5">
-                  <table style={{ width: "700px" }} align="center">
+                  <table style={{margin:'auto', width:'80%'}}>
                     <thead>
                       <tr>
                         <th>이름</th>

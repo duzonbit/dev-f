@@ -26,6 +26,7 @@ const initialState = Map({
   error: false,
   message: "",
   signInId: null,
+  signName: null,
 })
 
 export default handleActions(
@@ -38,10 +39,16 @@ export default handleActions(
         .set("error", false)
         .set("message", data.message)
         .set("signInId", data.message === "success" ? JSON.parse(config.data).user_id : null)
+        .set("signName", data.message === "success" ? data.name : null)
+        .set("signIdx", data.message === "success" ? data.idx : null)
 
       if (newState.get("message") === "success") {
         sessionStorage.setItem("signedId", newState.get("signInId"))
+        sessionStorage.setItem("signName", newState.get("signName"))
+        sessionStorage.setItem("signIdx", newState.get("signIdx"))
         cookies.set("signedId", newState.get("signInId"), { path: "/" })
+        cookies.set('signName', newState.get("signName"), { path: "/" })
+        cookies.set('signIdx', newState.get("signIdx"), { path: "/" })
       }
       return newState
     },

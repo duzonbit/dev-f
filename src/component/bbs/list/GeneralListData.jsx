@@ -55,7 +55,7 @@ const GeneralListData = ({ content }) => {
                   </Col>
                 </Row>
                 <div>
-                  <table style={{ width: "1000px" }}>
+                  <table style={{margin:'auto', width:'80%'}}>
                     <thead align="center">
                       <tr>
                         <th>글번호</th>
@@ -63,7 +63,7 @@ const GeneralListData = ({ content }) => {
                         <th>제목</th>
                         <th>내용</th>
                         <th>등록일</th>
-                        <th>글변경일</th>
+                        <th>변경일</th>
                       </tr>
                     </thead>
                     <tbody align="center">{drawList}</tbody>
