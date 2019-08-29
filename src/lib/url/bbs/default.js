@@ -8,10 +8,11 @@ export const UrlBbs = {
   delete: "/bbs/delete/",
 }
 
+
 export const AjaxBbs = {
-  list: (page = 1) => axios.get(`/bbs/${page}`),
-  read: (board = 0) => axios.get(`/bbs/read/${board}`),
-  create: (data) => axios.post(`/bbs/`, data),
-  update: (index, data) => axios.put(`/bbs/${index}`, data),
-  del: (index, data) => axios.delete(`/bbs/${index}`, { data: data }),
+  list: (page = 1) => axios.get(`/api/bbs/${page}`),
+  read: (board = 0) => axios.get(`/api/bbs/read/${board}`),
+  create: (data) => axios.post(`/api/bbs/`, data),
+  update: (index, data) => axios.put(`/api/bbs/${index}`, data),
+  del: (index, data) => axios.delete(`/api/bbs/${index}`, { data: data }),
 }
