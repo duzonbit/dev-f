@@ -76,7 +76,9 @@ const CommentPaneContainer = (props) => {
         <th>{v["name"]}</th>
         <th>{v["content"]}</th>
         <th>
-          <Button
+          {
+            props.cookies.get("signIdx")?
+            <Button
             className="btn-1 ml-1"
             color="warning"
             outline
@@ -84,9 +86,11 @@ const CommentPaneContainer = (props) => {
             onClick={(e) => {
               onDelete(v["idx"])
             }}
-          >
+            >
             삭제
           </Button>
+          : <div></div>
+          }
         </th>
       </tr>
     ))
@@ -235,7 +239,7 @@ const CommentPaneContainer = (props) => {
                       <tr>
                         <th>이름</th>
                         <th>내용</th>
-                        <th>삭제</th>
+                        {/* <th>삭제</th> */}
                       </tr>
                     </thead>
                     <tbody>{renderList()}</tbody>
